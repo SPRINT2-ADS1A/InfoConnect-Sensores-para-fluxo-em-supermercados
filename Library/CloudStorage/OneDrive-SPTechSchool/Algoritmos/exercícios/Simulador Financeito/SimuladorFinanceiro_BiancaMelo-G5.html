@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ptBR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador Financeiro</title>
+</head>
+<body bgcolor="#EAEDE2">
+
+<div style="background-color: #8ACE00;">
+<h2 style="background-color: #8ACE00; Color: black">Simulador Financeiro </h2>
+<h4 style="background-color: #C5DF95; Color: black">Estime o investimento e o potencial de retorno da solução para o seu negócio.</h4>
+</div>
+    
+<span>Quantidade de Sensores</span>
+<input type="text" id="input_sensor">
+<button onclick="sensor()">Calcular</button>
+<span>| PREÇO UNITÁRIO: R$ 15,50</span>
+<div id="div_sensor"></div>
+
+<br>
+
+<span>Site Institucional com Dashboards</span>
+<input type="text" id="input_site">
+<button onclick="site()">Calcular</button>
+<span>| COBRANÇA ÚNICA (UNIDADE): R$ 1.200,00</span>
+<div id="div_site"></div>
+
+<br>
+
+<span>(Opcional) Máquina Virtual</span>
+<input type="text" id="input_maquina">
+<button onclick="maquina()">Calcular</button>
+<span>| ACESSO VITALÍCIO: R$ 800,00</span>
+<div id="div_maquina"></div>
+
+<br>
+
+<button onclick="compra()">Calcular Investimento</button>
+<span style="background-color: #C5DF95; Color: black"><i>10% de desconto para compras acima de R$ 3.000,00</i></span>
+<div id="div_compra"></div>
+
+<h2 style="background-color: #8ACE00; Color: black">Veja o potencial financeiro da nossa solução.</h2>
+<span>Cálculo de ROI -> </span>
+<button onclick="roi()">Calcular</button>
+<br>
+<br>
+<div id="div_roi"></div>
+
+<p style="background-color: #99D83F; Color: black">Estimativa baseada na aplicação de decisões assertivas a partir dos dados coletados pelo sistema.</p>
+</body>
+</html>
+<script>
+    function sensor(){
+        let sensor = Number(input_sensor.value)
+        let valor = 15.50
+        let totalSensor = sensor * valor
+
+        if (sensor == 1)
+        div_sensor.innerHTML = `<i style="Color: green">Total Sensor: R$${totalSensor.toFixed(2)}</i>`
+        else
+        div_sensor.innerHTML = `<i style="Color: green">Total Sensores: R$${totalSensor.toFixed(2)}</i>`
+    }
+    function site(){
+        let site = Number(input_site.value)
+        let valor = 1200.00
+        let totalSite = site * valor
+
+        if (site == 1)
+        div_site.innerHTML = `<i style="Color: #B10702">Garante 1 mês de suporte após implantação</i><br>
+                             <i style="Color: green">Total Site: R$${totalSite.toFixed(2)}</i>`
+        else
+        div_site.innerHTML = `<i style="Color: #B10702">Garante 1 mês de suporte após implantação</i><br>
+                             <i style="Color: green">Total Sites: R$${totalSite.toFixed(2)}</i>`
+    }
+    function maquina(){
+        let maquina = Number(input_maquina.value)
+        let valor = 800.00
+        let totalMaq = maquina * valor
+
+        if (maquina == 1)
+        div_maquina.innerHTML = `<i style="Color: green">Total Máquina Virtual: R$${totalMaq.toFixed(2)}</i>`
+        else
+        div_maquina.innerHTML = `<i style="Color: green">Total Máquinas Virtuais: R$${totalMaq.toFixed(2)}</i>`
+    }
+    function compra(){
+        let compra = (Number(input_sensor.value) * 15.50) + (Number(input_maquina.value) * 800.00) + (Number(input_site.value) * 1200.00)
+        let desconto = compra * 0.90
+
+        if (compra > 3000.00)
+        div_compra.innerHTML = `<h3 style="background-color: #94A770; Color: white">Total: R$ ${desconto.toFixed(2)}</h3>`
+        else
+        div_compra.innerHTML = `<h3 style="background-color: #94A770; Color: white">Total: R$ ${compra.toFixed(2)}</h3>`
+    }
+    function roi(){
+        let compra = (Number(input_sensor.value) * 15.50) + (Number(input_maquina.value) * 800.00) + (Number(input_site.value) * 1200.00)
+        let ganho = compra * 1.30
+        let lucro = ganho - compra
+
+        if (compra > 3000.00)
+        compra = compra * 0.90
+
+        div_roi.innerHTML = `Investimento total: <b>R$ ${compra.toFixed(2)}</b><br>
+                            Ganho Estimado: <b style="Color: green">R$ ${ganho.toFixed(2)}</b> <i style="Color: green">(+R$ ${lucro.toFixed(2)})</i><br>
+                            <i><u>(estimativa de 30% sobre o investimento)</u><i><br>
+                            <img src="https://cdn-icons-png.flaticon.com/512/7132/7132303.png" width="150" alt="roi">`
+  
+    }
+</script>
