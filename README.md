@@ -45,7 +45,7 @@ flowchart LR
 
 | Documento | Link |
 |---|---|
-| Documentação | [Word](#) |
+| Documentação | [Word](https://bandteccom-my.sharepoint.com/:w:/g/personal/fabricio_lima_sptech_school/IQC7hGp78pN3TYyNU8hrE9kaAbKvKtQYfQrLgdurBTe0jkU?e=JYOZTm) |
 | Backlog | [Excel](#) |
 | Tarefas | [Trello](https://trello.com/b/v9FwPukY/grupo-1-sprint-2) |
 | Slides | [Apresentação](https://www.canva.com/design/DAHUdNX9vuU/XfZ0nVdsGCjIKe2flIXiyQ/edit) |
