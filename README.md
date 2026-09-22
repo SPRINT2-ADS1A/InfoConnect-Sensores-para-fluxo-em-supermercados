@@ -30,6 +30,8 @@ flowchart LR
 ```
 
 
+<div align="center">
+
 ![Arduino](https://img.shields.io/badge/Arduino-UNO-387D2D?style=flat-square&logo=arduino&logoColor=white&labelColor=21491B)
 ![MySQL](https://img.shields.io/badge/MySQL-387D2D?style=flat-square&logo=mysql&logoColor=white&labelColor=21491B)
 ![HTML5](https://img.shields.io/badge/HTML5-387D2D?style=flat-square&logo=html5&logoColor=white&labelColor=21491B)
@@ -38,10 +40,11 @@ flowchart LR
 
 </div>
 
-
 ## 🔗 Links
 
 <!-- 🔧 Substitua os "#" pelos links reais do grupo -->
+
+<div align="center">
 
 | Documento | Link |
 |---|---|
@@ -51,13 +54,15 @@ flowchart LR
 | Slides | [Apresentação](https://www.canva.com/design/DAHUdNX9vuU/XfZ0nVdsGCjIKe2flIXiyQ/edit) |
 | Site Institucional | [Protótipo](https://www.figma.com/design/Xz9QYHZSdUI4lJbNYHU61Y/Prototipo-site---PI-Sprint-1?node-id=12-313&t=FWtlz2715xGLkSUN-0) |
 
+</div>
+
 ## 👥 Equipe
 
 <div align="center">
 
 **Turma 1 ADS A** · SPTech School
 
-Bianca Melo · Fabricio Lima · 
+Bianca Melo · Fabricio Lima · Alexandre Estiven · Patrick Scaglia · Thiago prado · Manoel Alves · Vitor Dias
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:387D2D,100:21491B&height=110&section=footer" alt="" width="100%" />
 
