@@ -6,7 +6,7 @@ CREATE DATABASE infoconnect;
 
 USE infoconnect;
 
-CREATE TABLE cliente (
+CREATE TABLE Empresa (
 idCliente INT PRIMARY KEY AUTO_INCREMENT,
 nomeFantasia VARCHAR(50) NOT NULL,
 CNPJ CHAR(18) UNIQUE NOT NULL,
