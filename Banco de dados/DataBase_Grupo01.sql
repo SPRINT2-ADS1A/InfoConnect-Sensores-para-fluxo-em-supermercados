@@ -93,16 +93,16 @@ INSERT INTO sensor (tipoSensor, dtInstalacao, corredor, statuss, ultimaManutenca
 ('HC-SR04', '2025-08-03', 7, 'Em manutenção', '2025-09-03', 10, 10);
 
 INSERT INTO usuario VALUES
-(default, 'Carlos Almeida', 'Gerente', NULL),
+(default, 'Carlos Almeida', 'Gestor', NULL),
 (default, 'Mariana Souza', 'Supervisora', 1),
-(default, 'Rafael Costa', 'Analista', 1),
-(default, 'Fernanda Lima', 'Operadora', 2),
-(default, 'Lucas Mendes', 'Operador', 2),
+(default, 'Rafael Costa', 'Supervisor', 1),
+(default, 'Fernanda Lima', 'Gerente', 2),
+(default, 'Lucas Mendes', 'Gerente', 2),
 (default, 'Juliana Rocha', 'Analista', 3),
 (default, 'André Martins', 'Técnico', 3),
 (default, 'Patrícia Gomes', 'Supervisora', 1),
-(default, 'Bruno Oliveira', 'Operador', 8),
-(default, 'Camila Ferreira', 'Operadora', 8);
+(default, 'Bruno Oliveira', 'Analista', 8),
+(default, 'Camila Ferreira', 'Marketing', 8);
 
 
 -- SELECTS TABELA CLIENTE --
