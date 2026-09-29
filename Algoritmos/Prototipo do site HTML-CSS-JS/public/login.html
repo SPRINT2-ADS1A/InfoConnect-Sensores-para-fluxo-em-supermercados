@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - InfoConnect</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="pagina_login">
+
+    <!-- Topo -->
+    <div class="topo">
+
+        <a href="index.html" class="logo">
+            <span>Info</span><b>Connect</b>
+        </a>
+
+        <div class="menu">
+
+            <a href="index.html">Início</a>
+            <a href="sobre.html">Sobre</a>
+            <a href="servicos.html">Serviços</a>
+            <a href="simulador.html">Simulador</a>
+            <a href="suporte.html">Suporte</a>
+
+        </div>
+
+        <div class="acoes">
+
+            <button class="icone_usuario" onclick="irParaLogin()">
+
+                <div class="cabeca_usuario"></div>
+
+                <div class="corpo_usuario"></div>
+
+            </button>
+
+            <button class="botao_login" onclick="irParaLogin()">
+                Entrar
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- Area do login -->
+    <div class="area_login">
+
+        <!-- Caixa -->
+        <div class="caixa_login">
+
+            <!-- Esquerda -->
+            <div class="login_esquerda">
+
+                <div class="logo logo_login">
+                    <span>Info</span><b>Connect</b>
+                </div>
+
+                <h1>
+                    Transforme dados<br>
+                    em <i>decisões.</i>
+                </h1>
+
+                <p>Entre na sua conta para acessar as informações da sua empresa e acompanhar os dados do InfoConnect.</p>
+
+            </div>
+
+
+            <!-- Direita -->
+            <div class="login_direita">
+
+                <h2>Entrar</h2>
+
+                <p class="texto_login">Acesse sua conta para continuar.</p>
+
+
+                <!-- Email -->
+                <div class="campo_login">
+
+                    <label>E-mail</label>
+
+                    <input type="email" id="ipt_email_login" placeholder="Digite seu e-mail">
+
+                </div>
+
+
+                <!-- Senha -->
+                <div class="campo_login">
+
+                    <label>Senha</label>
+
+                    <input type="password" id="ipt_senha_login" placeholder="Digite sua senha">
+
+                </div>
+
+
+                <!-- Mostrar senha -->
+                <div class="mostrar_senha">
+
+                    <input type="checkbox" onclick="mostrarSenhaLogin()">
+
+                    <span>Mostrar senha</span>
+
+                </div>
+
+
+                <!-- Botao -->
+                <button onclick="entrar()">
+                    Entrar
+                </button>
+
+
+                <!-- Resultado -->
+                <div id="div_login">
+
+                </div>
+
+
+                <!-- Links -->
+                <div class="links_login">
+
+                    <a href="#" onclick="mostrarRecuperacao(); return false;">
+                        Esqueci minha senha
+                    </a>
+
+                    <span>
+                        Ainda não tem uma conta?
+                        <a href="cadastro.html">Cadastre-se</a>
+                    </span>
+
+                </div>
+
+
+                <!-- Recuperar senha -->
+                <div class="recuperar_senha" id="div_recuperar_senha">
+
+                    <h3>Recuperar senha</h3>
+
+                    <p>Informe o e-mail da sua conta.</p>
+
+                    <input type="email" id="ipt_email_recuperar" placeholder="Digite seu e-mail">
+
+                    <button onclick="enviarRecuperacao()">
+                        Enviar
+                    </button>
+
+                    <div id="div_recuperacao">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

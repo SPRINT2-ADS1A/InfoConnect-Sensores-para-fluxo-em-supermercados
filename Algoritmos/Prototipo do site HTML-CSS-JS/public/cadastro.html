@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cadastro - InfoConnect</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="pagina_cadastro">
+
+    <!-- Topo -->
+    <div class="topo">
+
+        <a href="index.html" class="logo">
+            <span>Info</span><b>Connect</b>
+        </a>
+
+        <div class="menu">
+
+            <a href="index.html">Início</a>
+            <a href="sobre.html">Sobre</a>
+            <a href="servicos.html">Serviços</a>
+            <a href="simulador.html">Simulador</a>
+            <a href="suporte.html">Suporte</a>
+
+        </div>
+
+        <div class="acoes">
+
+            <button class="icone_usuario" onclick="irParaLogin()">
+
+                <div class="cabeca_usuario"></div>
+
+                <div class="corpo_usuario"></div>
+
+            </button>
+
+            <button class="botao_login" onclick="irParaLogin()">
+                Entrar
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- Area do cadastro -->
+    <div class="area_cadastro">
+
+        <!-- Caixa -->
+        <div class="caixa_cadastro">
+
+            <!-- Esquerda -->
+            <div class="cadastro_esquerda">
+
+                <div class="logo logo_cadastro">
+                    <span>Info</span><b>Connect</b>
+                </div>
+
+                <h1>
+                    Comece a entender<br>
+                    melhor sua <i>loja.</i>
+                </h1>
+
+                <p>Crie sua conta para acessar as soluções do InfoConnect e acompanhar os dados da sua empresa.</p>
+
+            </div>
+
+
+            <!-- Direita -->
+            <div class="cadastro_direita">
+
+                <h2>Criar conta</h2>
+
+                <p class="texto_cadastro">Preencha seus dados para realizar o cadastro.</p>
+
+
+                <!-- Nome -->
+                <div class="campo_cadastro">
+
+                    <label>Nome</label>
+
+                    <input type="text" id="ipt_nome" placeholder="Digite seu nome">
+
+                </div>
+
+
+                <!-- Empresa -->
+                <div class="campo_cadastro">
+
+                    <label>Empresa</label>
+
+                    <input type="text" id="ipt_empresa" placeholder="Nome da empresa">
+
+                </div>
+
+
+                <!-- Email -->
+                <div class="campo_cadastro">
+
+                    <label>E-mail</label>
+
+                    <input type="email" id="ipt_email" placeholder="Digite seu e-mail">
+
+                </div>
+
+
+                <!-- Senhas -->
+                <div class="campos_senha">
+
+                    <div class="campo_cadastro">
+
+                        <label>Senha</label>
+
+                        <input type="password" id="ipt_senha" placeholder="Digite sua senha">
+
+                    </div>
+
+                    <div class="campo_cadastro">
+
+                        <label>Confirmar senha</label>
+
+                        <input type="password" id="ipt_confirmar_senha" placeholder="Digite novamente">
+
+                    </div>
+
+                </div>
+
+
+                <!-- Mostrar senha -->
+                <div class="mostrar_senha">
+
+                    <input type="checkbox" onclick="mostrarSenhaCadastro()">
+
+                    <span>Mostrar senhas</span>
+
+                </div>
+
+
+                <!-- Botao -->
+                <button onclick="cadastrar()">
+                    Criar conta
+                </button>
+
+
+                <!-- Resultado -->
+                <div id="div_cadastro">
+
+                </div>
+
+
+                <!-- Login -->
+                <div class="link_cadastro">
+
+                    <span>
+                        Já possui uma conta?
+                        <a href="login.html">Entrar</a>
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
