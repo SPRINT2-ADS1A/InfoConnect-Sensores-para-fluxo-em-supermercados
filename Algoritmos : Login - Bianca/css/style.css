@@ -1,0 +1,109 @@
+body {
+    background-image: url("../img/fundo.jpg");
+    background-size: cover;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: white;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    color: #222222;
+}
+
+main {
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+nav {
+    display: flex;
+    gap: 30px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.icones {
+    display: flex;
+    gap: 30px;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.caixa-login {
+    width: 800px;
+    height: 400px;
+    background-color: white;
+    display: flex;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.esquerda {
+    width: 50%;
+    padding: 50px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.esquerda h1 {
+    font-size: 34px;
+    color: #222222;
+}
+
+.esquerda p {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.direita {
+    width: 50%;
+    background-color: #6fa382;
+    padding: 50px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.campo input {
+    height: 40px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    padding: 0 12px;
+    box-sizing: border-box;
+}
+
+.btn-entrar {
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    background-color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-senha {
+    background: none;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+}
