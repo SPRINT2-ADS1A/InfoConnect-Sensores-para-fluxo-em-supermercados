@@ -46,39 +46,22 @@ function irParaLogin() {
 
 
 
-// função para mostrar ou esconder a senha
+// função para validar o login
 
-function mostrarSenhaLogin() {
+function login() {
 
-    if (ipt_senha_login.type == "password") {
+    let email = input_email.value;
 
-        ipt_senha_login.type = "text";
-
-    } else {
-
-        ipt_senha_login.type = "password";
-
-    }
-
-}
+    let senhaDigitada = input_senha.value;
 
 
+    if (email != '' && senhaDigitada != '') {
 
-// função para validar os campos do login
-
-function entrar() {
-
-    let email = ipt_email_login.value;
-    let senha = ipt_senha_login.value;
-
-
-    if (email != '' && senha != '') {
-
-        div_login.innerHTML = `<span style="color:green;">Login realizado com sucesso.</span>`;
+        div_login_bianca.innerHTML = `<span style="color:green;">Login realizado com sucesso.</span>`;
 
     } else {
 
-        div_login.innerHTML = `<span style="color:red;">Preencha o e-mail e a senha.</span>`;
+        div_login_bianca.innerHTML = `<span style="color:red;">Preencha o e-mail e a senha.</span>`;
 
     }
 
@@ -90,11 +73,11 @@ function entrar() {
 
 
 
-// mostra a caixa para recuperar a senha
+// mostra a parte para recuperar a senha
 
-function mostrarRecuperacao() {
+function senha() {
 
-    div_recuperar_senha.style.display = "block";
+    div_recuperacao_bianca.style.display = "block";
 
 }
 
@@ -102,18 +85,18 @@ function mostrarRecuperacao() {
 
 // valida o email para recuperar a senha
 
-function enviarRecuperacao() {
+function recuperarSenha() {
 
-    let email = ipt_email_recuperar.value;
+    let email = input_email_recuperar.value;
 
 
     if (email != '') {
 
-        div_recuperacao.innerHTML = `<span style="color:green;">Instruções de recuperação enviadas para ${email}.</span>`;
+        div_resultado_recuperacao.innerHTML = `<span style="color:green;">Instruções enviadas para ${email}.</span>`;
 
     } else {
 
-        div_recuperacao.innerHTML = `<span style="color:red;">Informe seu e-mail.</span>`;
+        div_resultado_recuperacao.innerHTML = `<span style="color:red;">Informe seu e-mail.</span>`;
 
     }
 
