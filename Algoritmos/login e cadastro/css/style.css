@@ -17,7 +17,7 @@ header {
 }
 
 main {
-    min-height: calc(100vh - 80px);
+    min-height: 600px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -32,9 +32,17 @@ nav {
     font-weight: bold;
 }
 
+.nav-bar:hover {
+    cursor: pointer;
+}
+
 .icones {
     display: flex;
     gap: 30px;
+}
+
+.icones:hover {
+    cursor: pointer;
 }
 
 .logo {
@@ -42,10 +50,13 @@ nav {
     font-weight: bold;
 }
 
-/* Estrutura do Login (Bianca) */
+.logo:hover {
+    cursor: pointer;
+}
+
 .caixa-login {
     width: 800px;
-    height: 500px; /* Ajustado para 500px conforme solicitado */
+    height: 450px; 
     background-color: white;
     display: flex;
     border-radius: 30px;
@@ -63,7 +74,13 @@ nav {
 
 .esquerda h1 {
     font-size: 34px;
+    font-weight: 700;
     color: #222222;
+    margin: 0 0 15px 0;
+}
+
+.esquerda h1 span {
+    color: #6fa382;
 }
 
 .esquerda p {
@@ -94,6 +111,8 @@ nav {
     border-radius: 8px;
     padding: 0 12px;
     box-sizing: border-box;
+    font-size: 14px;
+    color: #222222;
 }
 
 .btn-entrar {
@@ -124,7 +143,29 @@ nav {
     color: #222222;
 }
 
-/* Estrutura do Cadastro (Seu Código) */
+.loginvalido {
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    font-style: italic;
+}
+
+.login_sucesso {
+    color: lightgreen;
+}
+
+.login_erro {
+    color: red;
+}
+
+.ou {
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+}
+
+/* css cadastro */
+
 .card {
     background: white;
     width: 100%;
@@ -137,7 +178,7 @@ nav {
 .cabecalho_card {
     text-align: center;
     margin-bottom: 20px;
-    border-bottom: 4px solid #265022;
+    border-bottom: 4px solid #6fa382;
     padding-bottom: 10px;
 }
 
@@ -151,7 +192,7 @@ nav {
 }
 
 .secao_formulario {
-    border-bottom: 4px solid #265022;
+    border-bottom: 4px solid #6fa382;
     padding-bottom: 15px;
     margin-bottom: 15px;
 }
@@ -212,7 +253,7 @@ nav {
 .botao_cadastrar {
     width: 100%;
     padding: 10px;
-    background-color: #457704;
+    background-color: #6fa382;
     color: white;
     border: none;
     border-radius: 10px;

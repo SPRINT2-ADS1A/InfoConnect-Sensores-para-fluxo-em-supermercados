@@ -5,27 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InfoConnect - Login</title>
     <link rel="stylesheet" href="./css/style.css" />
+
+    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
     <header>
         <span class="logo">InfoConnect</span>
 
-        <nav>
+        <nav class="nav-bar">
             <span>Sobre</span>
             <span>Serviços</span>
             <span>Suporte</span>
         </nav>
 
         <div class="icones">
-            <span>🔍</span>
-            <span>👤</span>
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <i class="fa-regular fa-user"></i>
         </div>
     </header>
 
     <main>
         <div class="caixa-login">
             <div class="esquerda">
-                <h1>Conheça o <br> InfoConnect</h1>
+                <h1>
+                    Conheça o <br>
+                    <span>InfoConnect</span>
+                </h1>
+
                 <p>Explore, conecte, transforme!</p>
             </div>
 
@@ -41,12 +47,36 @@
                 </div>   
 
                 <button class="btn-entrar" onclick="login()">Entrar</button>
+                
+                <div class="loginvalido login_sucesso" id="div_mensagem"></div>
+
+                <div class="loginvalido login_erro" id="div_mensagem2"></div>
+
+                <button class="btn-senha" onclick="senha()">Esqueci minha senha</button> 
+                
+                <span class="ou">ou</span>
 
                 <button class="btn-cadastrar-login" onclick="window.location.href='cadastro.html'">Criar Conta</button>
-
-                <button class="btn-senha" onclick="senha()">Esqueci minha senha</button>
             </div>
         </div>
     </main>    
 </body>
 </html>
+<script>
+    let email = 'supermercado@email.com'
+    let senha = 'Market123'
+    
+    function login() {
+        let entradaSenha = input_senha.value
+        let entradaEmail = input_email.value
+
+        if (senha == entradaSenha && email == entradaEmail) {
+            div_mensagem.innerHTML = `Login válido!`
+            div_mensagem2.innerHTML = ``
+        } else {
+            div_mensagem2.innerHTML = `E-mail ou senha inválidos!`
+            div_mensagem.innerHTML = ``
+        }
+    }
+    
+</script>
