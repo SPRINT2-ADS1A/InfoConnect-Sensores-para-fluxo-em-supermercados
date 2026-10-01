@@ -1,0 +1,258 @@
+body {
+    background-image: url("../img/fundo.jpg");
+    background-size: cover;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #265022;
+}
+
+header {
+    background-color: white;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    color: #222222;
+}
+
+main {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+nav {
+    display: flex;
+    gap: 30px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.icones {
+    display: flex;
+    gap: 30px;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+/* Estrutura do Login (Bianca) */
+.caixa-login {
+    width: 800px;
+    height: 500px; /* Ajustado para 500px conforme solicitado */
+    background-color: white;
+    display: flex;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.esquerda {
+    width: 50%;
+    padding: 50px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.esquerda h1 {
+    font-size: 34px;
+    color: #222222;
+}
+
+.esquerda p {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.direita {
+    width: 50%;
+    background-color: #6fa382;
+    padding: 50px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.campo input {
+    height: 40px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    padding: 0 12px;
+    box-sizing: border-box;
+}
+
+.btn-entrar {
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    background-color: white;
+    font-weight: bold;
+    cursor: pointer;
+    color: #222222;
+}
+
+.btn-cadastrar-login {
+    height: 40px;
+    border: 2px solid white;
+    border-radius: 8px;
+    background-color: transparent;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-senha {
+    background: none;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    color: #222222;
+}
+
+/* Estrutura do Cadastro (Seu Código) */
+.card {
+    background: white;
+    width: 100%;
+    max-width: 900px;
+    padding: 25px;
+    border-radius: 20px;
+    color: #387D2D;
+}
+
+.cabecalho_card {
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 4px solid #265022;
+    padding-bottom: 10px;
+}
+
+.titulo_card {
+    color: darkgreen;
+    margin-bottom: 10px;
+}
+
+.subtitulo_card {
+    color: grey;
+}
+
+.secao_formulario {
+    border-bottom: 4px solid #265022;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.titulo_secao {
+    font-weight: bold;
+    font-size: 18px;
+    color: #05691e;
+    margin-bottom: 12px;
+}
+
+.grupo_input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.grupo_input label {
+    font-size: 15px;
+    font-weight: bold;
+    color: #034207;
+}
+
+.grupo_input input {
+    padding: 8px 10px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    font-size: 13px;
+}
+
+.linha_dupla {
+    display: flex;
+    justify-content: space-between;
+}
+
+.linha_dupla .grupo_input {
+    width: 48%;
+}
+
+.linha_tripla {
+    display: flex;
+    justify-content: space-between;
+}
+
+.linha_uf {
+    width: 15%;
+}
+
+.linha_cidade {
+    width: 40%;
+}
+
+.linha_logradouro {
+    width: 40%;
+}
+
+.botao_cadastrar {
+    width: 100%;
+    padding: 10px;
+    background-color: #457704;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+.btn-voltar-login {
+    width: 100%;
+    padding: 10px;
+    background-color: transparent;
+    color: #05691e;
+    border: 1px solid #05691e;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+.msg_erro {
+    background-color: #ffe6e6;
+    color: #d93025;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    margin-top: 12px;
+    border: 1px solid #f5c6cb;
+    display: none;
+}
+
+.msg_sucesso {
+    background-color: white;
+    color: #2b007a;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 13.6px;
+    margin-top: 12px;
+    border: 1px solid #b2f5ea;
+    display: none;
+}

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InfoConnect - Cadastro</title>
+    <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+    <header>
+        <span class="logo">InfoConnect</span>
+
+        <nav>
+            <span>Sobre</span>
+            <span>Serviços</span>
+            <span>Suporte</span>
+        </nav>
+
+        <div class="icones">
+            <span>🔍</span>
+            <span>👤</span>
+        </div>
+    </header>
+
+    <main>
+        <div class="card">
+            <div class="cabecalho_card">
+                <h2 class="titulo_card">Cadastrar Estabelecimento</h2>
+                <p class="subtitulo_card">Cadastre a empresa e o usuário administrador</p>
+            </div>
+
+            <form id="form_cadastro">
+                <!-- Dados da Empresa -->
+                <div class="secao_formulario">
+                    <h3 class="titulo_secao">Dados da Empresa (Supermercado)</h3>
+                    
+                    <div class="linha_dupla">
+                        <div class="grupo_input">
+                            <label for="input_nomeFantasia">Nome Fantasia</label>
+                            <input type="text" id="input_nomeFantasia" placeholder="Ex: Mercado São José">
+                        </div>
+                        <div class="grupo_input">
+                            <label for="input_cnpj">CNPJ</label>
+                            <input type="text" id="input_cnpj" placeholder="00.000.000/0001-00">
+                        </div>
+                    </div>
+
+                    <div class="linha_dupla">
+                        <div class="grupo_input">
+                            <label for="input_responsavel">Responsável Técnico/Gestor</label>
+                            <input type="text" id="input_responsavel" placeholder="Nome completo">
+                        </div>
+                        <div class="grupo_input">
+                            <label for="input_telefone">Telefone (com DDD)</label>
+                            <input type="text" id="input_telefone" placeholder="11987654321">
+                        </div>
+                    </div>
+
+                    <div class="grupo_input">
+                        <label for="input_emailEmpresa">E-mail Institucional</label>
+                        <input type="text" id="input_emailEmpresa" placeholder="contato@empresa.com">
+                    </div>
+
+                    <div class="linha_tripla">
+                        <div class="grupo_input linha_uf">
+                            <label for="input_uf">UF</label>
+                            <input type="text" id="input_uf" placeholder="SP" maxlength="2">
+                        </div>
+                        <div class="grupo_input linha_cidade">
+                            <label for="input_cidade">Cidade</label>
+                            <input type="text" id="input_cidade" placeholder="São Paulo">
+                        </div>
+                        <div class="grupo_input linha_logradouro">
+                            <label for="input_logradouro">Logradouro</label>
+                            <input type="text" id="input_logradouro" placeholder="Rua / Av">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dados do Usuário -->
+                <div class="secao_formulario">
+                    <h3 class="titulo_secao">Dados do Usuário Administrador</h3>
+                    
+                    <div class="linha_dupla">
+                        <div class="grupo_input">
+                            <label for="input_nomeUsuario">Nome de Usuário</label>
+                            <input type="text" id="input_nomeUsuario" placeholder="Ex: gestor.saojose">
+                        </div>
+                        <div class="grupo_input">
+                            <label for="input_cargo">Cargo</label>
+                            <input type="text" id="input_cargo" placeholder="Ex: Gerente">
+                        </div>
+                    </div>
+
+                    <div class="linha_dupla">
+                        <div class="grupo_input">
+                            <label for="input_senha">Senha</label>
+                            <input type="password" id="input_senha" placeholder="••••••••">
+                        </div>
+                        <div class="grupo_input">
+                            <label for="input_confirmarSenha">Confirmar Senha</label>
+                            <input type="password" id="input_confirmarSenha" placeholder="••••••••">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" onclick="validarCadastro()" class="botao_cadastrar">Finalizar Cadastro</button>
+                <button type="button" onclick="window.location.href='login.html'" class="btn-voltar-login">Já tem conta? Voltar ao Login</button>
+            </form>
+
+            <!-- divs erro/sucesso -->
+            <div id="div_erro" class="msg_erro"></div>
+            <div id="div_sucesso" class="msg_sucesso"></div>
+        </div>
+    </main>
+
+    <script>
+        function validarCadastro() {
+            // variaveis valores
+            let nomeFantasia = input_nomeFantasia.value;
+            let cnpj = input_cnpj.value;
+            let responsavel = input_responsavel.value;
+            let telefone = input_telefone.value;
+            let email = input_emailEmpresa.value;
+            let uf = input_uf.value;
+            let cidade = input_cidade.value;
+            let logradouro = input_logradouro.value;
+
+            let nomeUsuario = input_nomeUsuario.value;
+            let cargo = input_cargo.value;
+            let senha = input_senha.value;
+            let confirmarSenha = input_confirmarSenha.value;
+
+            // Limpa as divs
+            div_erro.style.display = '';
+            div_sucesso.style.display = '';
+            div_erro.innerHTML = '';
+
+            // Limpar telefone e cnpj(para pegar só os números, sem simbolos caso a pessoa digite ou copie e cole de algum lugar)
+            let cnpjLimpo = cnpj.replaceAll('.', '').replaceAll('/', '').replaceAll('-', '').replaceAll(' ', '');
+            let telefoneLimpo = telefone.replaceAll(' ', '').replaceAll('-', '').replaceAll('(', '').replaceAll(')', '');
+
+            // checagem email
+            let indiceArroba = email.indexOf('@');
+            let indicePonto = email.lastIndexOf('.');
+            let emailInvalido = !email.includes('@') || indiceArroba == 0 || indicePonto < indiceArroba ||
+            (!email.toLowerCase().endsWith('.com') && !email.toLowerCase().endsWith('.br'));
+
+            // checagem uf
+            let ufFormatada = uf.toUpperCase();
+
+            // validando senha
+            if (nomeFantasia.length < 3 || responsavel.length < 3 || cidade.length < 2 || logradouro.length < 3 || cargo.length < 2) {
+                div_erro.style.display = 'block';
+                div_erro.innerHTML = 'Por favor, preencha todos os campos de texto corretamente.';
+            } else if (cnpjLimpo.length != 14) {
+                div_erro.style.display = 'block';
+                div_erro.innerHTML = 'CNPJ inválido! O CNPJ deve conter exatamente 14 números.';
+            } else if (telefoneLimpo.length < 10 || telefoneLimpo.length > 11) {
+                div_erro.style.display = 'block';
+                div_erro.innerHTML = 'Telefone inválido! Deve conter entre 10 e 11 dígitos (com DDD).';
+            } else if (emailInvalido) {
+                div_erro.style.display = 'block';
+                div_erro.innerHTML = 'E-mail corporativo inválido! Exemplo aceito: contato@empresa.com';
+            } else if (ufFormatada.length != 2) {
+                div_erro.style.display = 'block';
+                div_erro.innerHTML = 'A UF (Estado) deve ter exatamente 2 caracteres (Ex: SP, RJ).';
+            } else if (nomeUsuario.includes(' ')) {
+                div_erro.style.display = 'block';
+                div_erro.innerHTML = 'O Nome de Usuário não pode conter espaços em branco.';
+            } else if (senha.length < 8) {
+                div_erro.style.display = 'block';
+                div_erro.innerHTML = 'A senha precisa ter no mínimo 8 caracteres.';
+            } else if (senha != confirmarSenha) {
+                div_erro.style.display = 'block';
+                div_erro.innerHTML = 'A senha e a confirmação de senha não coincidem!';
+            } else {
+                div_sucesso.style.display = 'block';
+                div_sucesso.innerHTML = '<strong>Cadastro realizado com sucesso!</strong> Redirecionando para a tela de login...';
+
+                setTimeout(function() {
+                    window.location.href = 'login.html';
+                }, 2500);
+            }
+        }
+    </script>
+</body>
+</html>
