@@ -815,7 +815,6 @@ i {
 
 .como_conteudo {
     width: 100%;
-
     max-width: 1350px;
 
     margin: auto;
@@ -1661,17 +1660,17 @@ i {
 
 
 
-/* FUNDO LOGIN */
+/* LOGIN */
 
-.pagina_login {
+.pagina_login_bianca {
     min-height: 100vh;
 
     background:
         linear-gradient(
-            rgba(0, 0, 0, 0.48),
-            rgba(0, 0, 0, 0.48)
+            rgba(0, 0, 0, 0.35),
+            rgba(0, 0, 0, 0.35)
         ),
-        url("https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=1600&q=85");
+        url("../img/fundo.jpg");
 
     background-size: cover;
 
@@ -1681,82 +1680,38 @@ i {
 }
 
 
-
-/* LOGIN */
-
-.area_login {
+.area_login_bianca {
     min-height: calc(100vh - 65px);
 
-    padding: 55px 20px;
+    padding: 45px 20px;
 
     display: flex;
 
     align-items: center;
     justify-content: center;
-
-    background-color: transparent;
 }
 
 
-.caixa_login {
-    width: 850px;
-    min-height: 470px;
+.caixa-login {
+    width: 800px;
+    min-height: 430px;
 
-    display: grid;
-    grid-template-columns: 0.9fr 1.1fr;
+    display: flex;
 
     background-color: white;
 
-    border-radius: 25px;
+    border-radius: 30px;
 
     overflow: hidden;
 }
 
 
-.login_esquerda {
-    padding: 45px;
+/* Lado esquerdo */
 
-    background-color: #49680d;
+.esquerda-login {
+    width: 50%;
 
-    color: white;
-}
-
-
-.logo_login span {
-    color: white;
-}
-
-
-.logo_login b {
-    color: #cbd8bc;
-}
-
-
-.login_esquerda h1 {
-    margin-top: 70px;
-
-    font-size: 32px;
-
-    font-weight: normal;
-}
-
-
-.login_esquerda h1 i {
-    color: #dce9cf;
-}
-
-
-.login_esquerda p {
-    margin-top: 20px;
-
-    font-size: 13px;
-
-    line-height: 1.6;
-}
-
-
-.login_direita {
-    padding: 45px;
+    padding: 50px;
 
     display: flex;
     flex-direction: column;
@@ -1765,184 +1720,253 @@ i {
 }
 
 
-.login_direita h2 {
-    font-size: 28px;
+.esquerda-login h1 {
+    font-size: 34px;
 
-    font-weight: normal;
+    color: #222222;
 }
 
 
-.texto_login {
-    margin-top: 5px;
-    margin-bottom: 25px;
+.esquerda-login p {
+    margin-top: 15px;
 
-    color: #666666;
+    font-size: 20px;
 
-    font-size: 12px;
+    font-weight: bold;
 }
 
 
-.campo_login {
-    margin-bottom: 15px;
+/* Lado direito */
+
+.direita-login {
+    width: 50%;
+
+    padding: 50px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+
+    gap: 14px;
+
+    background-color: #6fa382;
 }
 
 
-.campo_login label {
-    display: block;
+/* Campos */
 
-    margin-bottom: 6px;
+.campo-login-bianca {
+    display: flex;
 
-    font-size: 12px;
+    flex-direction: column;
+
+    gap: 5px;
+
+    font-size: 14px;
 }
 
 
-.campo_login input {
+.campo-login-bianca input {
     width: 100%;
     height: 42px;
 
-    padding: 0 15px;
+    padding: 0 12px;
 
     border: 1px solid #cccccc;
 
-    border-radius: 20px;
+    border-radius: 8px;
+
+    background-color: white;
 
     outline: none;
 }
 
 
-.campo_login input:focus {
+.campo-login-bianca input:focus {
     border-color: #49680d;
 }
 
 
-.login_direita > button {
-    width: 100%;
-    height: 42px;
 
-    margin-top: 5px;
+/* MOSTRAR SENHA */
 
-    border: none;
-
-    border-radius: 20px;
-
-    background-color: #49680d;
-
-    color: white;
-}
-
-
-.mostrar_senha {
-    margin-bottom: 15px;
-
+.mostrar-senha-bianca {
     display: flex;
 
     align-items: center;
 
-    gap: 6px;
+    gap: 7px;
 
-    font-size: 10px;
-
-    color: #666666;
+    font-size: 12px;
 }
 
 
-.links_login {
-    margin-top: 18px;
+.mostrar-senha-bianca input {
+    width: 14px;
+    height: 14px;
+
+    cursor: pointer;
+}
+
+
+
+/* BOTAO ENTRAR */
+
+.btn-entrar {
+    width: 100%;
+    height: 42px;
+
+    padding: 0 16px;
 
     display: flex;
-    flex-direction: column;
 
-    gap: 9px;
+    align-items: center;
+    justify-content: space-between;
 
-    text-align: center;
+    border: none;
 
-    font-size: 11px;
+    border-radius: 8px;
+
+    background-color: white;
+
+    color: #49680d;
+
+    font-size: 14px;
+
+    font-weight: bold;
 }
 
 
-.links_login a {
-    color: #49680d;
+.btn-entrar:hover {
+    background-color: #edf5f2;
+}
+
+
+.btn-entrar span {
+    font-size: 18px;
+}
+
+
+
+/* RESULTADO DO LOGIN */
+
+#div_login_bianca {
+    font-size: 12px;
+
+    text-align: center;
+}
+
+
+
+/* ESQUECI MINHA SENHA */
+
+.btn-senha {
+    width: 100%;
+
+    padding: 5px;
+
+    background: none;
+
+    border: none;
+
+    font-size: 12px;
+
+    text-align: center;
 
     text-decoration: underline;
 }
 
 
-#div_login {
-    margin-top: 10px;
-
-    font-size: 11px;
+.btn-senha:hover {
+    color: white;
 }
 
 
 
 /* RECUPERAR SENHA */
 
-.recuperar_senha {
+.recuperacao_bianca {
     display: none;
-
-    margin-top: 20px;
 
     padding: 15px;
 
-    background-color: #edf5f2;
+    background-color: rgba(255, 255, 255, 0.25);
 
-    border-radius: 12px;
+    border-radius: 10px;
 }
 
 
-.recuperar_senha h3 {
-    color: #49680d;
-
+.recuperacao_bianca h3 {
     font-size: 14px;
 }
 
 
-.recuperar_senha p {
-    margin: 5px 0 10px;
+.recuperacao_bianca p {
+    margin-top: 4px;
+    margin-bottom: 10px;
 
-    font-size: 10px;
+    font-size: 11px;
 }
 
 
-.recuperar_senha input {
+.recuperacao_bianca input {
     width: 100%;
     height: 37px;
 
-    padding: 0 12px;
+    padding: 0 10px;
 
     border: 1px solid #cccccc;
 
-    border-radius: 18px;
+    border-radius: 8px;
 
     outline: none;
 }
 
 
-.recuperar_senha button {
+.recuperacao_bianca button {
     width: 100%;
-    height: 36px;
+    height: 37px;
 
     margin-top: 8px;
 
     border: none;
 
-    border-radius: 18px;
+    border-radius: 8px;
 
-    background-color: #49680d;
+    background-color: white;
 
-    color: white;
+    color: #49680d;
+
+    font-weight: bold;
 }
 
 
-#div_recuperacao {
+#div_resultado_recuperacao {
     margin-top: 8px;
 
-    font-size: 10px;
+    font-size: 11px;
+
+    text-align: center;
+}
+
+
+.cadastro_login {
+    text-align: center;
+
+    font-size: 11px;
+}
+
+
+.cadastro_login a {
+    font-weight: bold;
+
+    text-decoration: underline;
 }
 
 
 
-/* FUNDO CADASTRO */
+/* CADASTRO */
 
 .pagina_cadastro {
     min-height: 100vh;
@@ -1952,7 +1976,7 @@ i {
             rgba(0, 0, 0, 0.48),
             rgba(0, 0, 0, 0.48)
         ),
-        url("https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=1600&q=85");
+        url("../img/fundo.jpg");
 
     background-size: cover;
 
@@ -1961,9 +1985,6 @@ i {
     background-attachment: fixed;
 }
 
-
-
-/* CADASTRO */
 
 .area_cadastro {
     min-height: calc(100vh - 65px);
@@ -2100,6 +2121,21 @@ i {
 
 .campos_senha .campo_cadastro {
     width: 100%;
+}
+
+
+.mostrar_senha {
+    margin-bottom: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    font-size: 10px;
+
+    color: #666666;
 }
 
 
@@ -2358,10 +2394,26 @@ i {
     }
 
 
-    .caixa_login {
+    .caixa-login {
         width: 90%;
 
-        grid-template-columns: 1fr;
+        flex-direction: column;
+    }
+
+
+    .esquerda-login,
+    .direita-login {
+        width: 100%;
+    }
+
+
+    .esquerda-login {
+        padding: 35px;
+    }
+
+
+    .direita-login {
+        padding: 35px;
     }
 
 
@@ -2372,7 +2424,6 @@ i {
     }
 
 
-    .login_esquerda h1,
     .cadastro_esquerda h1 {
         margin-top: 30px;
     }

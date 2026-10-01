@@ -46,16 +46,34 @@ function irParaLogin() {
 
 
 
+// função para mostrar ou esconder a senha
+
+function mostrarSenha() {
+
+    if (input_senha.type == "password") {
+
+        input_senha.type = "text";
+
+    } else {
+
+        input_senha.type = "password";
+
+    }
+
+}
+
+
+
 // função para validar o login
 
 function login() {
 
     let email = input_email.value;
 
-    let senhaDigitada = input_senha.value;
+    let senhaDigititada = input_senha.value;
 
 
-    if (email != '' && senhaDigitada != '') {
+    if (email != '' && senhaDigititada != '') {
 
         div_login_bianca.innerHTML = `<span style="color:green;">Login realizado com sucesso.</span>`;
 
@@ -73,11 +91,19 @@ function login() {
 
 
 
-// mostra a parte para recuperar a senha
+// mostra ou esconde a parte para recuperar senha
 
 function senha() {
 
-    div_recuperacao_bianca.style.display = "block";
+    if (div_recuperacao_bianca.style.display == "block") {
+
+        div_recuperacao_bianca.style.display = "none";
+
+    } else {
+
+        div_recuperacao_bianca.style.display = "block";
+
+    }
 
 }
 
@@ -140,15 +166,15 @@ function cadastrar() {
 
     let email = ipt_email.value;
 
-    let senha = ipt_senha.value;
+    let senhaCadastro = ipt_senha.value;
 
     let confirmarSenha = ipt_confirmar_senha.value;
 
 
-    if (nome != '' && empresa != '' && email != '' && senha != '' && confirmarSenha != '') {
+    if (nome != '' && empresa != '' && email != '' && senhaCadastro != '' && confirmarSenha != '') {
 
 
-        if (senha == confirmarSenha) {
+        if (senhaCadastro == confirmarSenha) {
 
             div_cadastro.innerHTML = `<span style="color:green;">Cadastro realizado com sucesso.</span>`;
 
@@ -295,35 +321,63 @@ function calcularImplementacao() {
         // mostra os resultados
 
         div_implementacao.innerHTML = `<div class="resultado_destaque">
+
                 Investimento inicial estimado
 
-                <span class="resultado_valor">R$ ${investimento.toFixed(2)}</span>
+                <span class="resultado_valor">
+                    R$ ${investimento.toFixed(2)}
+                </span>
 
                 ${corredores} corredor(es) de ${metros} m · ${totalSensores} sensores no total.
+
             </div>
+
 
             <div class="resultado_lista">
 
                 <div class="resultado_caixa">
+
                     Sensores por corredor
-                    <b>${sensoresPorCorredor}</b>
+
+                    <b>
+                        ${sensoresPorCorredor}
+                    </b>
+
                 </div>
 
+
                 <div class="resultado_caixa">
+
                     Equipamentos
-                    <b>R$ ${equipamentos.toFixed(2)}</b>
+
+                    <b>
+                        R$ ${equipamentos.toFixed(2)}
+                    </b>
+
                 </div>
 
+
                 <div class="resultado_caixa">
+
                     Instalação
-                    <b>R$ ${instalacao.toFixed(2)}</b>
+
+                    <b>
+                        R$ ${instalacao.toFixed(2)}
+                    </b>
+
                 </div>
 
             </div>
 
+
             <p class="texto_apoio">
-                ${metros} m ÷ 4, arredondado para cima = ${sensoresPorCorredor} sensor(es) por corredor.<br>
+
+                ${metros} m ÷ 4, arredondado para cima = ${sensoresPorCorredor} sensor(es) por corredor.
+
+                <br>
+
                 ${totalSensores} conjuntos × R$ ${precoSensor.toFixed(2)} + ${totalSensores} instalações × R$ ${instalacaoSensor.toFixed(2)}.
+
             </p>`;
 
     } else {
@@ -400,11 +454,17 @@ function calcularRoi() {
 
                     ROI ilustrativo em ${meses} meses
 
-                    <span class="resultado_valor">${roi.toFixed(2)}%</span>
+                    <span class="resultado_valor">
+                        ${roi.toFixed(2)}%
+                    </span>
 
-                    <h3>${titulo}</h3>
+                    <h3>
+                        ${titulo}
+                    </h3>
 
-                    <p>${mensagem}</p>
+                    <p>
+                        ${mensagem}
+                    </p>
 
                 </div>
 
@@ -412,24 +472,43 @@ function calcularRoi() {
                 <div class="resultado_lista">
 
                     <div class="resultado_caixa">
+
                         Investimento inicial
-                        <b>R$ ${investimento.toFixed(2)}</b>
+
+                        <b>
+                            R$ ${investimento.toFixed(2)}
+                        </b>
+
                     </div>
 
+
                     <div class="resultado_caixa">
+
                         Ganho hipotético acumulado
-                        <b>R$ ${ganhoTotal.toFixed(2)}</b>
+
+                        <b>
+                            R$ ${ganhoTotal.toFixed(2)}
+                        </b>
+
                     </div>
 
+
                     <div class="resultado_caixa">
+
                         Saldo depois da implementação
-                        <b>R$ ${saldo.toFixed(2)}</b>
+
+                        <b>
+                            R$ ${saldo.toFixed(2)}
+                        </b>
+
                     </div>
 
                 </div>
 
 
-                <h3>Recuperação do investimento inicial</h3>
+                <h3>
+                    Recuperação do investimento inicial
+                </h3>
 
 
                 <div class="barra_roi">
@@ -440,32 +519,56 @@ function calcularRoi() {
 
 
                 <p class="texto_apoio">
+
                     O ganho acumulado equivale a <b>${recuperacao.toFixed(2)}%</b> do custo inicial.
+
                     Recuperar 100% do custo significa <b>ROI de 0%</b>.
+
                 </p>
 
 
                 <div class="valores_simulacao">
 
-                    <h3>Entenda a conta</h3>
+                    <h3>
+                        Entenda a conta
+                    </h3>
 
                     <p class="texto_apoio">
+
                         Ganho mensal hipotético:
+
                         R$ ${investimento.toFixed(2)} × ${taxaMensal}% =
-                        <b>R$ ${ganhoMensal.toFixed(2)}</b>.
+
+                        <b>
+                            R$ ${ganhoMensal.toFixed(2)}
+                        </b>.
+
                     </p>
 
                     <p class="texto_apoio">
+
                         Ganho em ${meses} meses:
+
                         R$ ${ganhoMensal.toFixed(2)} × ${meses} =
-                        <b>R$ ${ganhoTotal.toFixed(2)}</b>.
+
+                        <b>
+                            R$ ${ganhoTotal.toFixed(2)}
+                        </b>.
+
                     </p>
 
                     <p class="texto_apoio">
+
                         ROI:
+
                         (R$ ${ganhoTotal.toFixed(2)} − R$ ${investimento.toFixed(2)})
+
                         ÷ R$ ${investimento.toFixed(2)} × 100 =
-                        <b>${roi.toFixed(2)}%</b>.
+
+                        <b>
+                            ${roi.toFixed(2)}%
+                        </b>.
+
                     </p>
 
                 </div>`;
@@ -514,13 +617,24 @@ function calcularLucro() {
         div_lucro.innerHTML = `<div class="resultado_lista">
 
                 <div class="resultado_caixa">
+
                     Lucro bruto simplificado por unidade
-                    <b>R$ ${lucroUnidade.toFixed(2)}</b>
+
+                    <b>
+                        R$ ${lucroUnidade.toFixed(2)}
+                    </b>
+
                 </div>
 
+
                 <div class="resultado_caixa">
+
                     Lucro bruto simplificado no mês informado
-                    <b>R$ ${lucroAtual.toFixed(2)}</b>
+
+                    <b>
+                        R$ ${lucroAtual.toFixed(2)}
+                    </b>
+
                 </div>
 
             </div>`;
@@ -541,29 +655,39 @@ function calcularLucro() {
 
             div_lucro.innerHTML = `<div class="resultado_destaque">
 
-                    <h3>Uma venda a mais por dia. Veja o acumulado em 12 meses.</h3>
+                    <h3>
+                        Uma venda a mais por dia. Veja o acumulado em 12 meses.
+                    </h3>
 
-                    <span class="resultado_valor">+ R$ ${ganhoAnual.toFixed(2)}</span>
+                    <span class="resultado_valor">
+                        + R$ ${ganhoAnual.toFixed(2)}
+                    </span>
 
                     de lucro bruto adicional no cenário de 12 meses.
 
                     <p>
-                        <b>+ R$ ${ganhoExtra.toFixed(2)} a cada 30 dias</b>
+                        <b>
+                            + R$ ${ganhoExtra.toFixed(2)} a cada 30 dias
+                        </b>
                     </p>
 
                     <p class="texto_apoio">
+
                         Hipótese: 1 unidade extra por dia, em 12 meses de 30 dias,
                         com o mesmo preço e custo. Antes da implementação,
                         impostos e demais despesas. Não é uma promessa de resultado.
+
                     </p>
 
                 </div>` + div_lucro.innerHTML;
 
 
             div_lucro.innerHTML += `<p class="texto_apoio">
+
                     Com as 30 vendas extras, o lucro bruto simplificado mensal
                     passaria de <b>R$ ${lucroAtual.toFixed(2)}</b>
                     para <b>R$ ${lucroCenario.toFixed(2)}</b>.
+
                 </p>`;
 
 
@@ -582,19 +706,28 @@ function calcularLucro() {
 
                 div_lucro.innerHTML += `<div class="valores_simulacao">
 
-                        <h3>Colocando o investimento em perspectiva</h3>
+                        <h3>
+                            Colocando o investimento em perspectiva
+                        </h3>
 
                         <p class="texto_apoio">
-                            <b>${unidadesNecessarias} unidades extras</b>
+
+                            <b>
+                                ${unidadesNecessarias} unidades extras
+                            </b>
+
                             desse produto gerariam um lucro bruto simplificado
                             equivalente aos <b>R$ ${investimento.toFixed(2)}</b>
                             da implementação.
+
                         </p>
 
                         <p class="texto_apoio">
+
                             Essa equivalência não é prazo de retorno nem lucro líquido:
                             impostos, taxas, despesas adicionais e possíveis mensalidades
                             aumentam o valor necessário.
+
                         </p>
 
                     </div>`;

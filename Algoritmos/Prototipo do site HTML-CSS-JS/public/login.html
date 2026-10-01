@@ -34,6 +34,7 @@
         <!-- Login -->
         <div class="acoes">
 
+            <!-- Icone de usuario -->
             <button class="icone_usuario" onclick="irParaLogin()">
 
                 <div class="cabeca_usuario"></div>
@@ -42,6 +43,7 @@
 
             </button>
 
+            <!-- Botao -->
             <button class="botao_login" onclick="irParaLogin()">
                 Entrar
             </button>
@@ -78,7 +80,7 @@
 
                     <span>E-mail:</span>
 
-                    <input type="text" id="input_email" placeholder="Login">
+                    <input type="text" id="input_email" placeholder="Digite seu e-mail">
 
                 </div>
 
@@ -93,9 +95,23 @@
                 </div>
 
 
+                <!-- Mostrar senha -->
+                <div class="mostrar-senha-bianca">
+
+                    <input type="checkbox" id="check_senha" onclick="mostrarSenha()">
+
+                    <span>Mostrar senha</span>
+
+                </div>
+
+
                 <!-- Botao entrar -->
                 <button class="btn-entrar" onclick="login()">
+
                     Entrar
+
+                    <span>→</span>
+
                 </button>
 
 
@@ -114,12 +130,14 @@
                 <!-- Recuperar senha -->
                 <div class="recuperacao_bianca" id="div_recuperacao_bianca">
 
-                    <span>Digite seu e-mail:</span>
+                    <h3>Recuperar senha</h3>
 
-                    <input type="text" id="input_email_recuperar" placeholder="E-mail">
+                    <p>Informe o e-mail da sua conta.</p>
+
+                    <input type="text" id="input_email_recuperar" placeholder="Digite seu e-mail">
 
                     <button onclick="recuperarSenha()">
-                        Enviar
+                        Enviar recuperação
                     </button>
 
                     <div id="div_resultado_recuperacao">
