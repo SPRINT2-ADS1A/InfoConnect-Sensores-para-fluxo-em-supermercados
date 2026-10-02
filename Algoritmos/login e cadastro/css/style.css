@@ -3,7 +3,6 @@ body {
     background-size: cover;
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #265022;
 }
 
 header {
@@ -48,6 +47,7 @@ nav {
 .logo {
     font-size: 26px;
     font-weight: bold;
+    color: #387D2D;
 }
 
 .logo:hover {
@@ -65,11 +65,70 @@ nav {
 
 .esquerda {
     width: 50%;
+    background-color: white;
     padding: 50px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.direita {
+    width: 50%;
+    background-color: #387D2D;
+    padding: 50px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+}
+
+.card-simulador {
+    background-color: white;
+    width: 100%;
+    max-width: 900px;
+    padding: 40px;
+    border-radius: 20px;
+    color: #222222;
+    box-sizing: border-box;
+}
+
+.card-simulador h3 {
+    color: #387D2D;
+    font-size: 20px;
+}
+
+.simulador {
+    text-align: center;
+    color: #222222;
+    font-size: 34px;
+    font-weight: 700;
+    margin: 0 0 30px 0;
+}
+
+.simulador::after {
+    content: "";
+    display: block;
+    width: 400px;
+    height: 4px;
+    background-color: #387D2D;
+    margin: 10px auto 0;
+    border-radius: 4px;
+}
+
+.btn-calcular {
+    height: 40px;
+    background-color: #387D2D;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-calcular:hover {
+    background-color: #2d6624;
 }
 
 .esquerda h1 {
@@ -80,23 +139,12 @@ nav {
 }
 
 .esquerda h1 span {
-    color: #6fa382;
+    color: #387D2D;
 }
 
 .esquerda p {
     font-size: 20px;
     font-weight: bold;
-}
-
-.direita {
-    width: 50%;
-    background-color: #6fa382;
-    padding: 50px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 15px;
 }
 
 .campo {
@@ -133,6 +181,10 @@ nav {
     color: white;
     font-weight: bold;
     cursor: pointer;
+}
+
+.btn-cadastrar-login:hover {
+    background-color: rgba(255, 255, 255, 0.099);
 }
 
 .btn-senha {
@@ -178,21 +230,34 @@ nav {
 .cabecalho_card {
     text-align: center;
     margin-bottom: 20px;
-    border-bottom: 4px solid #6fa382;
     padding-bottom: 10px;
 }
 
 .titulo_card {
-    color: darkgreen;
-    margin-bottom: 10px;
+    text-align: center;
+    color: #222222;
+    font-size: 34px;
+    font-weight: 700;
+    margin: 0 0 30px 0;
 }
+
 
 .subtitulo_card {
     color: grey;
 }
 
+.titulo_card::after {
+    content: "";
+    display: block;
+    width: 450px;
+    height: 4px;
+    background-color: #387D2D;
+    margin: 10px auto 0;
+    border-radius: 4px;
+}
+
 .secao_formulario {
-    border-bottom: 4px solid #6fa382;
+    border-bottom: 2px solid #287544;
     padding-bottom: 15px;
     margin-bottom: 15px;
 }
@@ -200,7 +265,7 @@ nav {
 .titulo_secao {
     font-weight: bold;
     font-size: 18px;
-    color: #05691e;
+    color: #034207;
     margin-bottom: 12px;
 }
 
@@ -214,7 +279,7 @@ nav {
 .grupo_input label {
     font-size: 15px;
     font-weight: bold;
-    color: #034207;
+    color: #387D2D;
 }
 
 .grupo_input input {
@@ -253,7 +318,7 @@ nav {
 .botao_cadastrar {
     width: 100%;
     padding: 10px;
-    background-color: #6fa382;
+    background-color: #387D2D;
     color: white;
     border: none;
     border-radius: 10px;
@@ -263,17 +328,25 @@ nav {
     font-size: 15px;
 }
 
+.botao_cadastrar:hover {
+    background-color: #2d6624;
+}
+
 .btn-voltar-login {
     width: 100%;
     padding: 10px;
     background-color: transparent;
-    color: #05691e;
-    border: 1px solid #05691e;
+    color: #387D2D;
+    border: 1px solid #387d2db5;
     border-radius: 10px;
     font-weight: bold;
     cursor: pointer;
     margin-top: 8px;
     font-size: 14px;
+}
+
+.btn-voltar-login:hover {
+    background-color: #f0f4f098;
 }
 
 .msg_erro {
