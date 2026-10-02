@@ -22,8 +22,12 @@ idMonitoramento INT PRIMARY KEY AUTO_INCREMENT,
 dataHora DATETIME NOT NULL,
 fluxoPessoas INT NOT NULL,
 tempoPermanenciaS FLOAT NOT NULL,
-distanciaCm FLOAT NOT NULL 
+distanciaCm FLOAT NOT NULL, 
+aproximacao TINYINT,
+CONSTRAINT chk_aproximacao 
+	CHECK (aproximacao IN (0, 1))
 );
+
 
 
 CREATE TABLE sensor (
@@ -54,6 +58,16 @@ fkUsuario INT,
 CONSTRAINT usuario_usuario
 	FOREIGN KEY (fkUsuario)
 		REFERENCES usuario (idUsuario)
+);
+
+CREATE TABLE cliente (
+idCliente INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(45) NOT NULL,
+cpf CHAR(11) UNIQUE NOT NULL,
+email VARCHAR(45) NOT NULL,
+telefone VARCHAR(45),
+CONSTRAINT chkEmailCliente 
+	CHECK (email LIKE '%@%.%')
 );
 
 INSERT INTO supermercado (nomeFantasia, cnpj, responsavel, telefone, email, estado, cidade, logradouro) VALUES
@@ -104,8 +118,29 @@ INSERT INTO usuario VALUES
 (default, 'Bruno Oliveira', 'Analista', 8),
 (default, 'Camila Ferreira', 'Marketing', 8);
 
+INSERT INTO cliente (nome, cpf, email, telefone) VALUES
+('João Silva', '12345678901', 'joao.silva@gmail.com', '11987654321'),
+('Maria Oliveira', '23456789012', 'maria.oliveira@gmail.com', '11976543210'),
+('Pedro Santos', '34567890123', 'pedro.santos@gmail.com', '11965432109'),
+('Ana Costa', '45678901234', 'ana.costa@gmail.com', '11954321098'),
+('Lucas Martins', '56789012345', 'lucas.martins@gmail.com', '11943210987'),
+('Juliana Souza', '67890123456', 'juliana.souza@gmail.com', '11932109876'),
+('Rafael Almeida', '78901234567', 'rafael.almeida@gmail.com', '11921098765'),
+('Camila Ferreira', '89012345678', 'camila.ferreira@gmail.com', '11910987654'),
+('Bruno Rocha', '90123456789', 'bruno.rocha@gmail.com', '11999887766'),
+('Fernanda Lima', '01234567890', 'fernanda.lima@gmail.com', '11988776655');
+
 
 -- SELECTS TABELA CLIENTE --
+SELECT
+    CONCAT(
+        'Cliente: ', nome,
+        ' | CPF: ', cpf,
+        ' | Email: ', email,
+        ' | Telefone: ', telefone
+    ) AS 'Dados do Cliente'
+FROM cliente;
+
 SELECT * FROM cliente;
 
 SELECT
