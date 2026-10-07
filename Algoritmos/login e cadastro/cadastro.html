@@ -12,15 +12,17 @@
     <header>
         <span class="logo">InfoConnect</span>
 
-        <nav>
+        <nav class="nav-bar">
             <span>Sobre</span>
             <span>Serviços</span>
             <span>Suporte</span>
+            <span onclick="window.location.href='simulador.html'">Simulador</span>
+
         </nav>
 
         <div class="icones">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <i class="fa-regular fa-user"></i>
+            <i onclick="window.location.href='login.html'" class="fa-regular fa-user"></i>
         </div>
     </header>
 
@@ -78,7 +80,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- Dados do Usuário -->
                 <div class="secao_formulario">
                     <h3 class="titulo_secao">Dados do Usuário Administrador</h3>
@@ -105,6 +106,8 @@
                         </div>
                     </div>
                 </div>
+                
+                <br>
 
                 <button type="button" onclick="validarCadastro()" class="botao_cadastrar">Finalizar Cadastro</button>
                 <button type="button" onclick="window.location.href='login.html'" class="btn-voltar-login">Já tem conta? Voltar ao Login</button>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InfoConnect | Calculadora de Investimento</title>
+
+    <link rel="stylesheet" href="./css/style.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <header>
+        <span class="logo">InfoConnect</span>
+
+        <nav class="nav-bar">
+            <span>Sobre</span>
+            <span>Serviços</span>
+            <span>Suporte</span>
+            <span onclick="window.location.href='simulador.html'">Simulador</span>
+        </nav>
+
+        <div class="icones">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <i onclick="window.location.href='login.html'" class="fa-regular fa-user"></i>
+        </div>
+    </header>
+
+    <main>
+        <div class="card-simulador">
+            
+            <h1 class="simulador">Simulador Financeiro</h1>
+
+                <h3>01 · Implementação</h3>
+
+                <div class="campo">
+                    <span>Quantidade de corredores:</span>
+                    <input type="number" id="input_corredores" placeholder="Ex: 5"> <br><br>
+
+                    <span>Comprimento de cada corredor (metros):</span>
+                    <input type="number" id="input_metros" placeholder="Ex: 10"> <br><br>
+                    <button class="btn-calcular" onclick="calcular_implementacao()">Calcular Implementação</button> <br>
+                </div>
+                <div id="div_implementacao"></div>
+
+                <br>
+                <hr>
+                <br>
+
+                <h3>02 · Retorno do Investimento (ROI)</h3>
+
+                <div class="campo">
+                    <span>Período da simulação (meses):</span>
+                    <input type="number" id="input_meses_roi" value="12"> <br><br>
+                    <button class="btn-calcular" onclick="calcular_roi()">Calcular ROI</button> <br>
+                </div>
+                <div id="div_roi"></div>
+        </div>
+    </main>
+</body>
+</html>
+<script>
+    let investimento = 0;
+
+    function calcular_implementacao() {
+        let corredores = Number(input_corredores.value);
+        let metros = Number(input_metros.value);
+        let preco_sensor = 150;
+        let instalacao_sensor = 50;
+
+        if (corredores > 0 && metros > 0) {
+            let sensores_por_corredor = Math.ceil(metros / 4);
+            let total_sensores = corredores * sensores_por_corredor;
+            let equipamentos = total_sensores * preco_sensor;
+            let instalacao = total_sensores * instalacao_sensor;
+
+            investimento = equipamentos + instalacao;
+
+            div_implementacao.innerHTML = `
+                <b>Investimento inicial estimado:</b> R$ ${investimento.toFixed(2)}<br>
+                ${corredores} corredor(es) de ${metros}m — Total de ${total_sensores} sensores.<br><br>
+                Sensores por corredor: ${sensores_por_corredor}<br>
+                Equipamentos: R$ ${equipamentos.toFixed(2)}<br>
+                Instalação: R$ ${instalacao.toFixed(2)}
+            `;
+        } else {
+            div_implementacao.innerHTML = "Informe a quantidade e o comprimento dos corredores corretamente.";
+        }
+    }
+
+    function calcular_roi() {
+        calcular_implementacao();
+        let meses = Number(input_meses_roi.value);
+        let taxa_mensal = 10;
+
+        if (investimento > 0) {
+            if (meses > 0) {
+                let ganho_mensal = investimento * (taxa_mensal / 100);
+                let ganho_total = ganho_mensal * meses;
+                let saldo = ganho_total - investimento;
+                let roi = (saldo / investimento) * 100;
+
+                div_roi.innerHTML = `
+                    <b>ROI em ${meses} meses:</b> ${roi.toFixed(2)}%<br>
+                    <b>Investimento inicial:</b> R$ ${investimento.toFixed(2)}<br>
+                    <b>Ganho acumulado:</b> R$ ${ganho_total.toFixed(2)}<br>
+                    <b>Saldo final:</b> R$ ${saldo.toFixed(2)}<br><br>
+                    Ganho mensal estimado: R$ ${ganho_mensal.toFixed(2)}
+                `;
+            } else {
+                div_roi.innerHTML = "Informe um período válido de meses.";
+            }
+        } else {
+            div_roi.innerHTML = "Preencha primeiro os dados do módulo de implementação.";
+        }
+    }
+</script>
