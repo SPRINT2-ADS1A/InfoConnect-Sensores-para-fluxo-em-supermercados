@@ -45,6 +45,12 @@ nav {
     cursor: pointer;
 }
 
+.logoimagem {
+    height: 60px;
+    width: auto;
+} 
+
+
 .logo {
     font-size: 26px;
     font-weight: bold;
@@ -55,6 +61,15 @@ nav {
 }
 
 .caixa-login {
+    width: 800px;
+    height: 450px; 
+    background-color: white;
+    display: flex;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.caixa-esqueci-senha {
     width: 800px;
     height: 450px; 
     background-color: white;
@@ -124,6 +139,17 @@ nav {
     cursor: pointer;
     color: #222222;
 }
+
+.btn-esqueci-senha {
+    height: 40px;
+    border: 2px solid white;
+    border-radius: 8px;
+    background-color: transparent;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 
 .btn-cadastrar-login {
     height: 40px;
@@ -297,3 +323,4 @@ nav {
     border: 1px solid #b2f5ea;
     display: none;
 }
+
