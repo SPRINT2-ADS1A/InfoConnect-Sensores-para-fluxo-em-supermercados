@@ -1,45 +1,76 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>InfoConnect - Nossos serviços</title>
-    <link rel="stylesheet" href="tela sobre projeto/css/style.css">
-</head>
-<body>
-
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
     <header class="topo">
-        <div class="caixa_serviços">
-            <h1>Nossos <span class="destaque">serviços</span></h1>
-            <p>
-                Três frentes de monitoramento integradas na mesma solução para
-                entender o comportamento do consumidor no ponto de venda.
-            </p>
-        </div>
+      <div class="caixa_serviços">
+        <h1>Nossos <span class="destaque">serviços</span></h1>
+        <p>
+          Três frentes de monitoramento integradas na mesma solução para
+          entender o comportamento do consumidor no ponto de venda.
+        </p>
+      </div>
     </header>
 
     <main class="servicos">
+      <section class="servico-01 container">
+        <div class="servico-texto">
+          <h2>1. Fluxo de aproximação</h2>
+          <p>
+            Cada vez que um cliente se aproxima de uma gôndola, ele deixa um
+            sinal — mesmo sem tocar em nada.
+            <br />
+            O InfoConnect capta esse movimento por meio de sensores simples, sem
+            câmeras e sem reconhecimento de imagem, transformando o que antes
+            era invisível em um dado real sobre o que desperta o interesse do
+            consumidor dentro da loja.
+          </p>
+        </div>
 
-        <section class="servico container">
-            <div class="servico-texto">
-                <h2><span class="numero">1.</span> Fluxo de aproximação</h2>
-                <p>
-                    Cada vez que um cliente se aproxima de uma gôndola, ele deixa
-                    um sinal — mesmo sem tocar em nada.
-                    <br>
-                    O InfoConnect capta esse movimento por meio de sensores simples,
-                    sem câmeras e sem reconhecimento de imagem, transformando o que
-                    antes era invisível em um dado real sobre o que desperta o
-                    interesse do consumidor dentro da loja.
-                </p>
-            </div>
+        <div class="servico-imagem">
+          <img src="img/gondola.jpg" />
+        </div>
+      </section>
 
-            <div class="servico-imagem">
-                <img src="tela sobre projeto/img/gondola.jpg">
-            </div>
-        </section>
+      <section class="servico-02 container">
+        
+          <div class="servico-imagem">
+            <img src="img/gondola.jpg" />
+          </div>
+
+
+        <div class="servico-texto">
+          <h2>2. Tempo de atenção</h2>
+          <p>
+            Não basta saber que o cliente parou — é preciso entender por quanto tempo ele ficou ali, 
+            avaliando, comparando, decidindo. Esse tempo de permanência revela o que realmente prende a atenção na prateleira, 
+            uma informação que os dados de venda tradicionais nunca conseguem mostrar sozinhos.
+          </p>
+        </div> 
+      </section>
+
+      <section class="servico-01 container">
+        <div class="servico-texto">
+          <h2>3. Integração física </h2>
+          <p>
+            Cada gesto do cliente diante da gôndola indica intenção de compra.
+             Sensores conectados a um Arduino detectam a aproximação e a permanência em frente a cada produto,
+             e enviam os registros para a API, que os guarda no banco de dados. 
+              Com esse histórico, o supermercado descobre quais produtos atraem mais atenção, em quais horários o fluxo é maior 
+              e como a disposição das mercadorias influencia a compra.
+          </p>
+        </div>
+
+        <div class="servico-imagem">
+          <img src="img/gondola.jpg" />
+        </div>
+      </section>
 
     </main>
-
-</body>
+  </body>
 </html>

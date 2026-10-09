@@ -1,0 +1,69 @@
+
+body {
+    margin: 0; /* Para zerar a bordas, por padrão o body vem 8px */
+    font-family: Arial, sans-serif;/* define a fonte do site inteiro */
+    background-color: #edf2ef;   /* cor fundo da pagina */
+}
+
+.caixa_serviços {
+     width: 1400px;  /*definir largura da titulo e ajustar espaçamento*/
+    margin: auto;  /*centralizar e ir ajustando com width*/
+}
+
+
+.topo {
+    background-color: white; /*Pinta o fundo da caixa de branco*/
+    padding: 50px 0 /*tamanho caixa topo*/
+}
+
+.topo h1 {
+    font-size: 56px;
+    margin: 0 0 15px;
+}
+
+.topo p {
+    font-size: 20px;
+    margin: 0;
+}
+
+.destaque {
+    color: #4a5d1a;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.servico-01 {
+    display: flex;
+    align-items: center; /*Controla o alinhamento no eixo vertical*/
+    justify-content: space-between; /*espaçar foto e texto*/
+    padding: 80px;
+}
+
+.servico-texto {
+    width: 50%; /*largura texto*/
+}
+
+.servico-texto h2 {
+    font-size: 44px;
+    font-style: italic;
+    color: #4a5d1a;
+}
+
+.servico-texto p {
+    font-size: 20px;
+    line-height: 1.6;/*espaçamento entre linhas*/
+}
+
+.servico-imagem img {
+    width: 500px;
+    height: 540px;
+    object-fit: cover;/*sem isso ficaria deformada*/
+    border-radius: 50px;
+}
+
+.servico-02 {
+    display: flex;
+    align-items: center; /*Controla o alinhamento no eixo vertical*/
+    justify-content: space-between; /*espaçar foto e texto*/
+    padding: 80px;
+}
