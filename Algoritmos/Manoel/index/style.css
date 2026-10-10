@@ -6,9 +6,9 @@
 /* Precisa coemçar com -- par ao navegador entender que não é uma propriedade. */
 :root {
     --verde-escuro: #485C11;
-    --verde-claro: #C6CFBB;
-    --fundo: #EDF4F1;
-    --texto:var(--verde-escuro);
+    --verde-claro: #8E9C78;
+    --fundo: white;
+    --texto: black;
 }
 
 body {
@@ -21,7 +21,7 @@ body {
     display: flex;
     align-items: center; /*centraliza as duas colunas na vertical, uma em relação à outra*/
     gap: 48px; /*abre um espaço entre a coluna do texto e da foto*/
-    padding: 80px 48px; /*afasta o conteúdo de cima e de baixo (80px) e das laterais (48px)*/
+    padding: 80px 0 80px 48px; /*afasta o conteúdo de cima e de baixo (80px) e das laterais (48px)*/
 }
 
 .topo-texto{
@@ -32,6 +32,7 @@ body {
     align-items: flex-start; /*impede que os botões esticam até a largura inteira, e eles ficam encostados à esquerda*/
     justify-content: center; /*centraliza o conjunto na vertical, em relação à altura da foto*/
     gap: 16px; /*dá o espaço entre os itens*/
+    padding-left: 10vw;
 }
 
 .topo-imagem{
@@ -40,7 +41,8 @@ body {
 
 .topo-imagem img{
     width: 100%;
-    border-radius: 30px;
+    display: block;
+    border-radius: 50px 0 0 50px;
 }
 
 h1 {
@@ -73,11 +75,12 @@ h2 span {
 .botao-contorno{
     background-color: transparent;
     color: var(--verde-escuro);
+    border: 1px solid currentColor;
     border-radius: 999px;
     padding: 12px 28px;
     font-size: 16px;
     font-family: inherit;
-    cursor: inherit;
+    /* cursor: pointer; */
 }
 
 header {
@@ -104,6 +107,12 @@ header {
     font-size: 18px;
 }
 
+.nav-bar ul {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+}
+
 .icones{
     display: flex; /*coloca <li> lado a lado*/
     gap: 32px; /*espaça um do outro*/
@@ -115,7 +124,7 @@ header {
     background-color: var(--verde-claro);  
     border-radius: 30px;     /*arredonda os cantos*/
     padding: 48px;   /*afasta o conteúdo das bordas*/
-    margin: 0 24px 64px;  /*primeiro valor: cima; segundo: laterais; terceiro: embaixo*/
+    margin: 64px 0;  /*primeiro valor: cima; segundo: laterais; terceiro: embaixo*/
     text-align: center;   /*centraliza os textos*/ 
 }
 
@@ -173,10 +182,76 @@ header {
 
 .sensor-imagem img{
     width: 100%;
-    border-radius: 30px;
+    /* border-radius: 30px; */
+    height: 100%;
+}
+.sensor-imagem {
+    flex: 3;
+}
+
+.sensor-texto{
+    flex: 2;
 }
 
 .sensor-texto p {
+    /*Usam a técnica de que, somente quando a classe for "sensor" e for "p" que estas caractéristicas são tomadas*/
+    font-size: 22px;
+    color: black;
+    font-weight: 300; 
+    line-height: 1.5; 
+    margin-bottom: 24px; /*Faz as linahs ficarem bem próximas*/
+}
+
+.sensor-texto .botao-verde {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sensor {
+    padding: 48px; /*Para a seção não colar nar bordas*/
+}
+
+.sobre {
+    background-color: var(--verde-escuro);
+    border-radius: 30px;     /*arredonda os cantos*/
+    margin: 0 auto 128px;  /*primeiro valor: cima; segundo: laterais; terceiro: embaixo*/
+    max-width: 1000px;
+    overflow: hidden;
+}
+.sobre h2 {
+    text-transform: uppercase;
+}
+
+.sobre-colunas {
+    display: flex; /*coloca foto e texto lado a lado*/
+    align-items: stretch;  /*alinha os dois pelo meio, na vertical*/
+    /* gap: 48px;  para afastar a foto do texto  */
+}
+
+.sobre-imagem {
+    flex: 1;
+    position: relative;
+}
+.sobre-imagem img{
+    width: 100%;
+    /* border-radius: 30px; */
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.sobre-texto {
+    flex: 1;
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.sobre-texto p {
     /*Usam a técnica de que, somente quando a classe for "sensor" e for "p" que estas caractéristicas são tomadas*/
     font-size: 28px;
     font-weight: 300; 
@@ -184,6 +259,33 @@ header {
     margin-bottom: 24px; /*Faz as linahs ficarem bem próximas*/
 }
 
-.sensor {
-    padding: 48px; /*Para a seção não colar nar bordas*/
+footer {
+    background-color: var(--verde-escuro);
+    color: white;
+    border-radius: 30px 30px 0 0;
+    padding: 24px 24px 12px 200px;
+}
+
+footer ul {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    padding-bottom: 12px;
+    border-bottom: 1px solid white;
+}
+
+footer a {
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+footer p {
+    text-align: right;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 300;
+    margin-top: 8px;
 }
