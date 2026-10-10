@@ -262,10 +262,18 @@ header {
 footer {
     background-color: var(--verde-escuro);
     color: white;
+    font-size: 48px;
     border-radius: 30px 30px 0 0;
     padding: 24px 24px 12px 200px;
 }
 
+footer h2 {
+    font-size: 50px;
+}
+
+footer h3 {
+    font-size: 48px;
+}
 footer ul {
     display: flex;
     justify-content: space-around;
