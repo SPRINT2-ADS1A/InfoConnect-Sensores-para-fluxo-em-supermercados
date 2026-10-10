@@ -2,18 +2,21 @@
 body {
     margin: 0; /* Para zerar a bordas, por padrão o body vem 8px */
     font-family: Arial, sans-serif;/* define a fonte do site inteiro */
-    background-color: #edf2ef;   /* cor fundo da pagina */
+    background-color: rgb(226, 255, 226);   /* cor fundo da pagina */
+
 }
 
 .caixa_serviços {
-     width: 1400px;  /*definir largura da titulo e ajustar espaçamento*/
+    width: 1400px;  /*definir largura da titulo e ajustar espaçamento*/
     margin: auto;  /*centralizar e ir ajustando com width*/
+   
 }
 
 
 .topo {
     background-color: white; /*Pinta o fundo da caixa de branco*/
-    padding: 50px 0 /*tamanho caixa topo*/
+    padding: 50px 0 ;/*tamanho caixa topo*/
+    box-shadow: 5px 1px 10px black ;
 }
 
 .topo h1 {
@@ -36,11 +39,18 @@ body {
     display: flex;
     align-items: center; /*Controla o alinhamento no eixo vertical*/
     justify-content: space-between; /*espaçar foto e texto*/
-    padding: 80px;
+    padding: 50px;
+   
 }
 
 .servico-texto {
     width: 50%; /*largura texto*/
+    border: solid 2px green;
+    background-color: rgb(161, 247, 161);
+    border-radius: 50px;
+    padding: 50px;
+     box-shadow: 5px 5px 10px black;
+
 }
 
 .servico-texto h2 {
@@ -52,13 +62,16 @@ body {
 .servico-texto p {
     font-size: 20px;
     line-height: 1.6;/*espaçamento entre linhas*/
+    
 }
 
 .servico-imagem img {
     width: 500px;
     height: 540px;
     object-fit: cover;/*sem isso ficaria deformada*/
+    border: 5px solid;
     border-radius: 50px;
+    border-color: #4a5d1a;
 }
 
 .servico-02 {
