@@ -1,0 +1,189 @@
+*{
+    margin: 0;
+    padding:  0;
+    box-sizing: border-box;
+}
+/* Precisa coemçar com -- par ao navegador entender que não é uma propriedade. */
+:root {
+    --verde-escuro: #485C11;
+    --verde-claro: #C6CFBB;
+    --fundo: #EDF4F1;
+    --texto:var(--verde-escuro);
+}
+
+body {
+    background-color: var(--fundo);
+    font-family: "Inter",sans-serif;
+    color: var(--texto);
+}
+
+.topo {
+    display: flex;
+    align-items: center; /*centraliza as duas colunas na vertical, uma em relação à outra*/
+    gap: 48px; /*abre um espaço entre a coluna do texto e da foto*/
+    padding: 80px 48px; /*afasta o conteúdo de cima e de baixo (80px) e das laterais (48px)*/
+}
+
+.topo-texto{
+    /* display,flex-direction:column: empilham o títulos e os botões, um embaixo do outro */
+    flex:1;
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start; /*impede que os botões esticam até a largura inteira, e eles ficam encostados à esquerda*/
+    justify-content: center; /*centraliza o conjunto na vertical, em relação à altura da foto*/
+    gap: 16px; /*dá o espaço entre os itens*/
+}
+
+.topo-imagem{
+    flex:1;
+}
+
+.topo-imagem img{
+    width: 100%;
+    border-radius: 30px;
+}
+
+h1 {
+    /* controla o título, font: tamanho da letra
+    font-weight: deixa o traço fino, line-height: aproxima as linhas */
+    font-size: 56px;
+    font-weight: 300;
+    line-height: 1.1;
+}
+
+h1 span,
+h2 span {
+    /* estilizam a palavra em destaque */
+    font-family: "DM Serif Display", serif;
+    font-style: italic;
+    color: var(--verde-escuro);
+}
+
+.botao-verde{
+    background-color: var(--verde-escuro);
+    color: white;
+    border: none; /*tira o contorno padrão do navegador*/
+    border-radius: 999px; /*faz o formato de pílula (um valor muito alto arredonda tudo)*/
+    padding: 12px 28px; /*dá 12px em cima e embaixo e 28px dos lados*/
+    font-size: 16px; 
+    font-family: inherit; /*faz o botão usar a Inter. Sem isso, ele usa a fonte padrão do sistema*/
+    cursor: pointer; /*troca o cursor por uma mãozinha*/
+}
+
+.botao-contorno{
+    background-color: transparent;
+    color: var(--verde-escuro);
+    border-radius: 999px;
+    padding: 12px 28px;
+    font-size: 16px;
+    font-family: inherit;
+    cursor: inherit;
+}
+
+header {
+    display: flex; /*coloca logo, menu e ícones lado a lado*/
+    align-items: center; /*alinha os três na vertical, pelo meio*/
+    padding: 12px 48px; /*dá 12px de espaço em cima e embaixo e 48px nas laterais, p/ o conteúdo não colar na borda*/
+    background-color: white;
+}
+
+.logo{
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--verde-escuro);
+}
+
+.nav-bar{
+    flex:1; /*ocupa todo o espaço livre. Como sobre espaço depois dele, os ícones são empurradas p/ direita*/
+    margin-left: 48px; /*afasta o menu da logo*/
+}
+
+.nav-bar a{
+    text-decoration: none; /*tira o sublinhado dos links*/
+    color: var(--texto);
+    font-size: 18px;
+}
+
+.icones{
+    display: flex; /*coloca <li> lado a lado*/
+    gap: 32px; /*espaça um do outro*/
+    color: gray;
+    cursor: pointer;
+}
+
+.faixa { /*É a caixa verde inteira*/
+    background-color: var(--verde-claro);  
+    border-radius: 30px;     /*arredonda os cantos*/
+    padding: 48px;   /*afasta o conteúdo das bordas*/
+    margin: 0 24px 64px;  /*primeiro valor: cima; segundo: laterais; terceiro: embaixo*/
+    text-align: center;   /*centraliza os textos*/ 
+}
+
+.faixa h2 {  /*estiliza o título só dentro da faixa*/
+    font-size: 44px;
+    font-weight: 300;  /*deixo fino o design*/
+    color: var(--verde-escuro);
+}
+
+.faixa > p{  /*">" significa "filho direto": pega só o "p" que está logo dentro da ".faixa", e não os demais "p"*/
+    margin-top: 8px;
+    font-size: 18px;
+}
+
+.itens {  /*linha dos itens*/
+    display: flex;  /*coloca os itens lado a lado*/
+    justify-content: space-around; 
+    gap: 32px;
+    margin: 32px auto 0;  /*limita nas laterais e centraliza a caixa*/
+    padding-top: 32px;
+    max-width: 1000px;  /*limita a largura*/
+    border-top: 1px solid var(--verde-escuro);  /*desenha a linha de divisória (estética)*/
+}
+
+.item {
+    flex: 1;  /*divide o espaço igualmente entre eles*/
+    display: flex;
+    flex-direction: column;  /*empilha ícone, título e descrição*/
+    align-items: center;  /*centraliza os três*/
+    gap: 8px;
+}
+
+.item img {
+    width: 90px;
+}
+
+.item h3 {
+    font-size: 15px; 
+    text-transform: uppercase;  /*transforma o texto em maiúsculas sem você ter digitado assim no HTML*/
+    color: var(--verde-escuro);
+}
+
+.sensor h2 {
+    text-align: center;  /*centraliza o título*/
+    font-size: 44px; 
+    font-weight: 400;
+    margin-bottom: 40px;  /*para afastar o título das colunas*/
+}
+
+.sensor-colunas {
+    display: flex; /*coloca foto e texto lado a lado*/
+    align-items: center;  /*alinha os dois pelo meio, na vertical*/
+    gap: 48px;  /*para afastar a foto do texto*/ 
+}
+
+.sensor-imagem img{
+    width: 100%;
+    border-radius: 30px;
+}
+
+.sensor-texto p {
+    /*Usam a técnica de que, somente quando a classe for "sensor" e for "p" que estas caractéristicas são tomadas*/
+    font-size: 28px;
+    font-weight: 300; 
+    line-height: 1.5; 
+    margin-bottom: 24px; /*Faz as linahs ficarem bem próximas*/
+}
+
+.sensor {
+    padding: 48px; /*Para a seção não colar nar bordas*/
+}
