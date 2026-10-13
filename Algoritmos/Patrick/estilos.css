@@ -1,0 +1,228 @@
+* {
+    margin: 0;
+    padding:  0;
+    box-sizing: border-box;
+}
+
+:root {
+    --verde-escuro: #485C11;
+    --verde-claro: #8E9C78;
+    --fundo: white;
+    --texto: black;
+}
+
+body {
+    background-color: var(--fundo);
+    font-family: "Inter",sans-serif;
+    color: var(--texto);
+}
+
+h1 {
+    /* controla o título, font: tamanho da letra
+    font-weight: deixa o traço fino, line-height: aproxima as linhas */
+    font-size: 56px;
+    font-weight: 300;
+    line-height: 1.1;
+}
+
+h1 span,
+h2 span {
+    /* estilizam a palavra em destaque */
+    font-family: "DM Serif Display", serif;
+    font-style: italic;
+    color: var(--verde-escuro);
+}
+
+.botao-verde {
+    background-color: var(--verde-escuro);
+    color: white;
+    border: none; /*tira o contorno padrão do navegador*/
+    border-radius: 999px; /*faz o formato de pílula (um valor muito alto arredonda tudo)*/
+    padding: 12px 28px; /*dá 12px em cima e embaixo e 28px dos lados*/
+    font-size: 16px; 
+    font-family: inherit; /*faz o botão usar a Inter. Sem isso, ele usa a fonte padrão do sistema*/
+    cursor: pointer; /*troca o cursor por uma mãozinha*/
+}
+
+header {
+    display: flex; /*coloca logo, menu e ícones lado a lado*/
+    align-items: center; /*alinha os três na vertical, pelo meio*/
+    padding: 12px 48px; /*dá 12px de espaço em cima e embaixo e 48px nas laterais, p/ o conteúdo não colar na borda*/
+    background-color: white;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--verde-escuro);
+}
+
+.nav-bar {
+    flex:1; /*ocupa todo o espaço livre. Como sobre espaço depois dele, os ícones são empurradas p/ direita*/
+    margin-left: 48px; /*afasta o menu da logo*/
+}
+
+.nav-bar a {
+    text-decoration: none; /*tira o sublinhado dos links*/
+    color: var(--texto);
+    font-size: 18px;
+}
+
+.nav-bar ul {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+}
+
+.icones {
+    display: flex; /*coloca <li> lado a lado*/
+    gap: 32px; /*espaça um do outro*/
+    color: gray;
+    cursor: pointer;
+}
+
+.topo {
+    background-color: #EDF3F1;
+    padding: 64px 48px 48px;
+}
+
+.topo-texto{
+    /* empilha o título, a descrição e os botões */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
+}
+
+.topo-texto h1 {
+    max-width: 1000px;
+}
+
+.topo-texto p {
+    font-size: 18px;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.2;
+}
+
+.topo-texto .botao-verde {
+    width: 280px;
+}
+
+.sensor h2 {
+    text-align: center;
+    font-size: 44px;
+    font-weight: 300;
+    padding: 48px;
+    background-color: white;
+    border-radius: 0 0 30px 30px;
+}
+
+.sensor h2 b,
+.sensor-texto b {
+    color: var(--verde-escuro);
+}
+
+.sensor-colunas {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 26px 30px 40px 0;
+    background-color: #EDF3F1;
+}
+
+.sensor-imagem {
+    flex: 0 0 51%;
+    min-width: 0;
+}
+
+.sensor-imagem img{
+    display: block;
+    object-fit: cover; /*preenche o espaço da foto sem deformar*/
+}
+
+.prateleira {
+    width: 85%;
+    aspect-ratio: 1.8;
+    margin-left: 15%;
+    border-radius: 40px;
+}
+
+.arduino {
+    width: 76%;
+    aspect-ratio: 1.8;
+    margin-top: 14px;
+    border-radius: 40px;
+}
+
+.notebook {
+    width: 90%;
+    aspect-ratio: 1.8;
+    margin-left: 10%;
+    margin-top: 14px;
+    border-radius: 40px;
+}
+
+.sensor-texto {
+    flex: 1;
+    min-width: 0;
+    padding: 16px 0 0;
+}
+
+.sensor-texto p {
+    font-size: 26px;
+    font-weight: 300;
+    line-height: 1.55;
+    text-align: left;
+}
+
+.sensor-texto b {
+    font-weight: 700; /*destaca as palavras verdes do texto*/
+}
+
+.servicos {
+    padding: 48px 80px;
+    background-color: white;
+    border-radius: 30px 30px 0 0;
+}
+
+.servicos h2 {
+    font-size: 44px;
+    font-weight: 300;
+}
+
+.servicos p {
+    margin-top: 8px;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.sensor {
+    background-color: #EDF3F1;
+}
+
+/* Mantém as mesmas proporções em uma tela menor. */
+@media (max-width: 700px) {
+    .sensor-colunas {
+        gap: 12px;
+        padding: 12px 14px 18px 0;
+    }
+
+    .sensor-texto {
+        padding-top: 6px;
+    }
+
+    .sensor-texto p {
+        font-size: 2.6vw;
+        line-height: 1.55;
+    }
+
+    .prateleira,
+    .arduino,
+    .notebook {
+        border-radius: 20px;
+    }
+}
