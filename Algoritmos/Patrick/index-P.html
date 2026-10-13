@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>InfoConnect</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <!-- Crossorigin permite o uso entre domínios. -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="estilos.css" />
+    <!-- Carrega o CSS; O style-P.css tem que estar na mesma pasta. -->
+    <link rel="stylesheet" href="style-P.css" />
+    <!-- Carrega a biblioteca de ícones -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -18,17 +21,24 @@
   </head>
   <body>
     <header>
+      <!-- Class liga o elemento às regras CSS. -->
       <span class="logo">InfoConnect</span>
-
+      <!-- Agrupa os links de navegação. -->
       <nav class="nav-bar">
+        <!-- Cria uma lista sem numeração. -->
         <ul>
+          <!-- Li é um item; a cria o link; #sobre leva ao id sobre. -->
           <li><a href="#sobre">Sobre</a></li>
+          <!-- Leva à seção com id servicos. -->
           <li><a href="#servicos">Serviços</a></li>
+          <!-- Link provisório que aponta para o início da página. -->
           <li><a href="#">Suporte</a></li>
         </ul>
       </nav>
       <div class="icones">
+        <!-- As classes do Font Awesome desenham a lupa. -->
         <i class="fa-solid fa-magnifying-glass"></i>
+        <!-- As classes abaixo desenham o ícone de usuário. -->
         <i
           class="fa-regular fa-user"
         ></i>
@@ -46,12 +56,14 @@
             Monitore o comportamento do seu consumidor nas prateleiras<br />
             com tecnologia acessível.
           </p>
+          <!-- Class define a aparencia -->
           <button class="botao-verde">Solicitar cotação</button>
           <button class="botao-verde">Acessar simulador financeiro</button>
         </div>
       </section>
       <section class="sensor" id="sobre">
         <h2>Como o <b>Info</b>Connect funciona?</h2>
+        <!-- class="sensor" dá um nome para o css estilizar essa seção -->
         <div class="sensor-colunas">
           <div class="sensor-imagem">
             <img
