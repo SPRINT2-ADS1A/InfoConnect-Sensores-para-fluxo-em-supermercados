@@ -1,0 +1,296 @@
+* {
+    margin: 0; /* Remove o espaço externo padrão. */
+    padding:  0; /* Espaço interno igual nos quatro lados. */
+    box-sizing: border-box; /* Inclui bordas e padding no tamanho definido. */
+}
+
+/* :root guarda as variáveis usadas na página inteira. */
+:root {
+    --verde-escuro: #485C11; /* Cria uma variável de cor para reutilizar com var(). */
+    --verde-claro: #8E9C78; /* Cria uma variável de cor para reutilizar com var(). */
+    --fundo: white; /* Cria uma variável de cor para reutilizar com var(). */
+    --texto: black; /* Cria uma variável de cor para reutilizar com var(). */
+}
+
+body {
+    background-color: var(--fundo); /* Define a cor do fundo. */
+    font-family: "Inter",sans-serif; /* Usa Inter; sans-serif é a fonte alternativa. */
+    color: var(--texto); /* Define a cor do texto; var() usa uma variável. */
+}
+
+h1 {
+    
+    font-size: 56px; /* Define o tamanho das letras. */
+    font-weight: 300; /* Define a espessura: 300 é fino; 700 é negrito. */
+    line-height: 1.1; /* Define a distância entre as linhas do texto. */
+}
+
+h1 span,
+h2 span {
+    
+    font-family: "DM Serif Display", serif; /* Escolhe a fonte; inherit usa a fonte do elemento pai. */
+    font-style: italic; /* Aplica itálico ao texto. */
+    color: var(--verde-escuro); /* Define a cor do texto; var() usa uma variável. */
+}
+
+.botao-verde {
+    background-color: var(--verde-escuro); /* Define a cor do fundo. */
+    color: white; /* Define a cor do texto; var() usa uma variável. */
+    border: none; /* Define a borda; none remove a borda. */
+    border-radius: 999px; /* Arredonda os cantos. */
+    padding: 12px 28px; /* Espaço interno: cima/baixo e esquerda/direita. */
+    font-size: 16px; /* Define o tamanho das letras. */
+    font-family: inherit; /* Escolhe a fonte; inherit usa a fonte do elemento pai. */
+    cursor: pointer; /* Pointer mostra a mãozinha ao passar o mouse. */
+}
+
+header {
+    display: flex; /* Flex organiza os filhos; block coloca o elemento em um bloco. */
+    align-items: center; /* Alinha os filhos: center centraliza; flex-start alinha no início. */
+    padding: 12px 48px; /* Espaço interno: cima/baixo e esquerda/direita. */
+    background-color: white; /* Define a cor do fundo. */
+}
+
+.logo {
+    font-size: 28px; /* Define o tamanho das letras. */
+    font-weight: 700; /* Define a espessura: 300 é fino; 700 é negrito. */
+    color: var(--verde-escuro); /* Define a cor do texto; var() usa uma variável. */
+}
+
+.nav-bar {
+    flex:1; /* Ocupa o espaço livre disponível na linha flex. */
+    margin-left: 48px; /* Define o espaço externo à esquerda. */
+}
+
+.nav-bar a {
+    text-decoration: none; /* None retira o sublinhado dos links. */
+    color: var(--texto); /* Define a cor do texto; var() usa uma variável. */
+    font-size: 18px; /* Define o tamanho das letras. */
+}
+
+.nav-bar ul {
+    display: flex; /* Flex organiza os filhos; block coloca o elemento em um bloco. */
+    gap: 32px; /* Define o espaço entre os elementos do flex. */
+    list-style: none; /* None remove as bolinhas da lista. */
+}
+
+.icones {
+    display: flex; /* Flex organiza os filhos; block coloca o elemento em um bloco. */
+    gap: 32px; /* Define o espaço entre os elementos do flex. */
+    color: gray; /* Define a cor do texto; var() usa uma variável. */
+    cursor: pointer; /* Pointer mostra a mãozinha ao passar o mouse. */
+}
+
+.topo {
+    background-color: #EDF3F1; /* Define a cor do fundo. */
+    padding: 64px 48px 48px; /* Espaço interno: cima, laterais e baixo. */
+}
+
+.topo-texto{
+    
+    display: flex; /* Flex organiza os filhos; block coloca o elemento em um bloco. */
+    flex-direction: column; /* Column coloca os elementos um abaixo do outro. */
+    align-items: center; /* Alinha os filhos: center centraliza; flex-start alinha no início. */
+    gap: 16px; /* Define o espaço entre os elementos do flex. */
+    text-align: center; /* Alinha o texto no centro ou à esquerda. */
+}
+
+.topo-texto h1 {
+    max-width: 1000px; /* Limita a largura máxima do elemento. */
+}
+
+.topo-texto p {
+    font-size: 18px; /* Define o tamanho das letras. */
+    font-weight: 300; /* Define a espessura: 300 é fino; 700 é negrito. */
+    font-style: italic; /* Aplica itálico ao texto. */
+    line-height: 1.2; /* Define a distância entre as linhas do texto. */
+}
+
+.topo-texto .botao-verde {
+    width: 280px; /* Define a largura; porcentagens usam a largura do elemento pai. */
+}
+
+.sensor h2 {
+    text-align: center; /* Alinha o texto no centro ou à esquerda. */
+    font-size: 44px; /* Define o tamanho das letras. */
+    font-weight: 300; /* Define a espessura: 300 é fino; 700 é negrito. */
+    padding: 48px; /* Espaço interno igual nos quatro lados. */
+    background-color: white; /* Define a cor do fundo. */
+    border-radius: 0 0 30px 30px; /* Arredonda somente os dois cantos inferiores. */
+}
+
+.sensor h2 b,
+.sensor-texto b {
+    color: var(--verde-escuro); /* Define a cor do texto; var() usa uma variável. */
+}
+
+.sensor-colunas {
+    display: flex; /* Flex organiza os filhos; block coloca o elemento em um bloco. */
+    align-items: flex-start; /* Alinha os filhos: center centraliza; flex-start alinha no início. */
+    gap: 30px; /* Define o espaço entre os elementos do flex. */
+    max-width: 1000px; /* Limita a largura máxima do elemento. */
+    margin: 0 auto; /* Espaço externo; auto centraliza nas laterais. */
+    padding: 26px 30px 40px 0; /* Espaço interno: cima, direita, baixo e esquerda. */
+    background-color: #EDF3F1; /* Define a cor do fundo. */
+}
+
+.sensor-imagem {
+    flex: 0 0 51%; /* Não cresce nem encolhe; ocupa 51% da largura da linha. */
+    min-width: 0; /* Permite que a coluna encolha sem forçar a largura do conteúdo. */
+}
+
+.sensor-imagem img{
+    display: block; /* Flex organiza os filhos; block coloca o elemento em um bloco. */
+    object-fit: cover; /* Cover preenche a imagem sem deformar, podendo cortar as bordas. */
+}
+
+.prateleira {
+    width: 85%; /* Define a largura; porcentagens usam a largura do elemento pai. */
+    aspect-ratio: 1.8; /* 1.8 deixa a largura 1,8 vez maior que a altura. */
+    margin-left: 15%; /* Define o espaço externo à esquerda. */
+    border-radius: 40px; /* Arredonda os cantos. */
+}
+
+.arduino {
+    width: 76%; /* Define a largura; porcentagens usam a largura do elemento pai. */
+    aspect-ratio: 1.8; /* 1.8 deixa a largura 1,8 vez maior que a altura. */
+    margin-top: 14px; /* Define o espaço externo acima do elemento. */
+    border-radius: 40px; /* Arredonda os cantos. */
+}
+
+.notebook {
+    width: 90%; /* Define a largura; porcentagens usam a largura do elemento pai. */
+    aspect-ratio: 1.8; /* 1.8 deixa a largura 1,8 vez maior que a altura. */
+    margin-left: 10%; /* Define o espaço externo à esquerda. */
+    margin-top: 14px; /* Define o espaço externo acima do elemento. */
+    border-radius: 40px; /* Arredonda os cantos. */
+}
+
+.sensor-texto {
+    flex: 1; /* Ocupa o espaço livre disponível na linha flex. */
+    min-width: 0; /* Permite que a coluna encolha sem forçar a largura do conteúdo. */
+    padding: 16px 0 0; /* Espaço interno: cima, laterais e baixo. */
+}
+
+.sensor-texto p {
+    font-size: 26px; /* Define o tamanho das letras. */
+    font-weight: 300; /* Define a espessura: 300 é fino; 700 é negrito. */
+    line-height: 1.55; /* Define a distância entre as linhas do texto. */
+    text-align: left; /* Alinha o texto no centro ou à esquerda. */
+}
+
+.sensor-texto b {
+    font-weight: 700; /* Define a espessura: 300 é fino; 700 é negrito. */
+}
+
+.servicos {
+    padding: 48px 80px; /* Espaço interno: cima/baixo e esquerda/direita. */
+    background-color: white; /* Define a cor do fundo. */
+    border-radius: 30px 30px 0 0; /* Arredonda somente os dois cantos superiores. */
+}
+
+.servicos h2 {
+    font-size: 44px; /* Define o tamanho das letras. */
+    font-weight: 300; /* Define a espessura: 300 é fino; 700 é negrito. */
+}
+
+.servicos p {
+    margin-top: 8px; /* Define o espaço externo acima do elemento. */
+    font-size: 18px; /* Define o tamanho das letras. */
+    font-weight: 300; /* Define a espessura: 300 é fino; 700 é negrito. */
+}
+
+.sensor {
+    background-color: #EDF3F1; /* Define a cor do fundo. */
+}
+
+
+/* Aplica estas regras somente em telas de até 700px. */
+@media (max-width: 700px) {
+    .sensor-colunas {
+        gap: 12px; /* Define o espaço entre os elementos do flex. */
+        padding: 12px 14px 18px 0; /* Espaço interno: cima, direita, baixo e esquerda. */
+    }
+
+    .sensor-texto {
+        padding-top: 6px; /* Define o espaço interno acima do conteúdo. */
+    }
+
+    .sensor-texto p {
+        font-size: 2.6vw; /* Ajusta a letra à largura da tela: 1vw equivale a 1% dela. */
+        line-height: 1.55; /* Define a distância entre as linhas do texto. */
+    }
+
+    .prateleira,
+    .arduino,
+    .notebook {
+        border-radius: 20px; /* Arredonda os cantos. */
+    }
+}
+
+/* Serviços integrados à página inicial. */
+.lista-servicos {
+    background-color: #EDF3F1;
+}
+.servico-01,
+.servico-02 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px; /* Separa o texto da imagem. */
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 30px;
+}
+.servico-texto {
+    width: 50%;
+}
+.servico-texto h2 {
+    font-size: 30px;
+    font-style: italic;
+    color: #485C11;
+    margin-bottom: 14px;
+}
+.servico-texto p {
+    font-size: 20px;
+    line-height: 1.6;
+    font-weight: 300;
+}
+.servico-02 .servico-texto {
+    text-align: right; /* Acompanha a posição do segundo serviço no Figma. */
+}
+.servico-imagem {
+    width: 42%;
+}
+.servico-imagem img {
+    display: block;
+    width: 100%;
+    height: 440px;
+    object-fit: cover;
+    border-radius: 40px;
+}
+@media (max-width: 700px) {
+    header {
+        padding: 12px;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    .logo { font-size: 20px; }
+    .nav-bar { margin-left: 0; }
+    .nav-bar ul { gap: 12px; }
+    .nav-bar a { font-size: 13px; }
+    .icones { gap: 12px; }
+    .topo { padding: 40px 16px; }
+    h1 { font-size: 32px; }
+    .sensor h2 { font-size: 26px; padding: 30px 12px; }
+    .servicos { padding: 30px 20px; }
+    .servicos h2 { font-size: 30px; }
+    .servico-01,
+    .servico-02 { gap: 16px; padding: 20px 12px; }
+    .servico-texto { width: 54%; }
+    .servico-texto h2 { font-size: 18px; }
+    .servico-texto p { font-size: 13px; }
+    .servico-imagem { width: 42%; }
+    .servico-imagem img { height: 280px; border-radius: 24px; }
+}
+
