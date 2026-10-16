@@ -55,6 +55,7 @@
                     <button class="btn-calcular" onclick="calcular_roi()">Calcular ROI</button> <br>
                 </div>
                 <div id="div_roi"></div>
+                <div id="div_acumulo_por_mes"></div>
         </div>
     </main>
 </body>
@@ -92,6 +93,10 @@
         calcular_implementacao();
         let meses = Number(input_meses_roi.value);
         let taxa_mensal = 10;
+        let contarMes = 0
+        let acumuloMensal = 0
+
+         div_acumulo_por_mes.innerHTML = ""
 
         if (investimento > 0) {
             if (meses > 0) {
@@ -107,6 +112,15 @@
                     <b>Saldo final:</b> R$ ${saldo.toFixed(2)}<br><br>
                     Ganho mensal estimado: R$ ${ganho_mensal.toFixed(2)}
                 `;
+
+                while(contarMes < meses){
+                    contarMes ++
+                    acumuloMensal += ganho_mensal
+                  div_acumulo_por_mes.innerHTML += `${contarMes} mes = ${acumuloMensal} <br>`
+                  
+
+                }
+
             } else {
                 div_roi.innerHTML = "Informe um período válido de meses.";
             }
