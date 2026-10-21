@@ -230,7 +230,7 @@ header {
 
 /* Serviços integrados à página inicial. */
 .lista-servicos {
-    background: linear-gradient(145deg , #EDF3F1, #7f948d);
+    background-color:var(--verde-claro);
 }
 .servico-01,
 .servico-02 {

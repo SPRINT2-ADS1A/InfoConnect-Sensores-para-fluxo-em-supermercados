@@ -6,7 +6,7 @@
 /* Precisa coemçar com -- par ao navegador entender que não é uma propriedade. */
 :root {
     --verde-escuro: #485C11;
-    --verde-claro: #8E9C78;
+    --verde-claro: #C4CE88;
     --fundo: white;
     --texto: black;
 }

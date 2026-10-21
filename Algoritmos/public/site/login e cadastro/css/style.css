@@ -1,19 +1,37 @@
+*{
+    margin: 0;
+    padding:  0;
+    box-sizing: border-box;
+}
+
+
+
+:root {
+    --verde-escuro: #485C11;
+    --verde-claro: #8E9C78;
+    --fundo: white;
+    --texto: black;
+}
+
+
+
 body {
+    background-image: url("../img/fundo.jpg") ;
+    background-size: cover;
+    font-family: "Inter",sans-serif;
+    color: var(--texto);
+}
+
+
+
+/* body {
     background-image: url("../img/fundo.jpg");
     background-size: cover;
     margin: 0;
     font-family: Arial, sans-serif;
-}
+} */
 
-header {
-    background-color: white;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 40px;
-    color: #222222;
-}
+
 
 main {
     min-height: 600px;
@@ -24,41 +42,48 @@ main {
     box-sizing: border-box;
 }
 
-nav {
+
+
+
+
+header {
+    display: flex; /*coloca logo, menu e ícones lado a lado*/
+    align-items: center; /*alinha os três na vertical, pelo meio*/
+    padding: 12px 48px; /*dá 12px de espaço em cima e embaixo e 48px nas laterais, p/ o conteúdo não colar na borda*/
+    background-color: white;
+}
+
+.logo{
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--verde-escuro);
+}
+
+.nav-bar{
+    flex:1; /*ocupa todo o espaço livre. Como sobre espaço depois dele, os ícones são empurradas p/ direita*/
+    margin-left: 48px; /*afasta o menu da logo*/
+}
+
+.nav-bar a{
+    text-decoration: none; /*tira o sublinhado dos links*/
+    color: var(--texto);
+    font-size: 18px;
+}
+
+.nav-bar ul {
     display: flex;
-    gap: 30px;
-    font-size: 16px;
-    font-weight: bold;
+    gap: 32px;
+    list-style: none;
 }
 
-.nav-bar:hover {
+.icones{
+    display: flex; /*coloca <li> lado a lado*/
+    gap: 32px; /*espaça um do outro*/
+    color: gray;
     cursor: pointer;
 }
 
-.icones {
-    display: flex;
-    gap: 30px;
-}
 
-.icones:hover {
-    cursor: pointer;
-}
-
-.logoimagem {
-    height: 60px;
-    width: auto;
-} 
-
-
-.logo {
-    font-size: 26px;
-    font-weight: bold;
-    color: #387D2D;
-}
-
-.logo:hover {
-    cursor: pointer;
-}
 
 .caixa-login {
     width: 800px;
@@ -67,16 +92,9 @@ nav {
     display: flex;
     border-radius: 30px;
     overflow: hidden;
+    box-shadow: 5px 5px 10px;
 }
 
-.caixa-esqueci-senha {
-    width: 800px;
-    height: 450px; 
-    background-color: white;
-    display: flex;
-    border-radius: 30px;
-    overflow: hidden;
-}
 
 .esquerda {
     width: 50%;
@@ -90,7 +108,7 @@ nav {
 
 .direita {
     width: 50%;
-    background-color: #387D2D;
+    background-color: var(--verde-escuro);
     padding: 50px;
     box-sizing: border-box;
     display: flex;
