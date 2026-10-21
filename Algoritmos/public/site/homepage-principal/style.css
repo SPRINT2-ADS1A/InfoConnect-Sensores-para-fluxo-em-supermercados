@@ -96,6 +96,11 @@ header {
     color: var(--verde-escuro);
 }
 
+img {
+    width: 250px;
+    height: auto;
+}
+
 .nav-bar{
     flex:1; /*ocupa todo o espaço livre. Como sobre espaço depois dele, os ícones são empurradas p/ direita*/
     margin-left: 48px; /*afasta o menu da logo*/
