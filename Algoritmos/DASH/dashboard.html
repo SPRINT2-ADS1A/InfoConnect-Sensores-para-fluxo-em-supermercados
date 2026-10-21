@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <title>Dashboard</title>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <span class="logo">InfoConnect</span>
+            <img src="./logo.png" alt="infoconnect.logo" class = "logoimagem">
+        </div>
+        
+        <nav class="nav-bar">
+            <span>Sobre</span>
+            <span>Serviços</span>
+            <span>Suporte</span>
+            <span onclick="window.location.href='simulador.html'">Simulador</span>
+        </nav>
+
+        <div class="icones">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <i onclick="window.location.href='login.html'" class="fa-regular fa-user"></i>
+        </div>
+    </header> 
+
+    <div>
+        <div class="cabecalho-dashboard">
+            <div class="titulo">
+                <h1>Visão <i>Geral</i></h1>
+                <span>Panorama geral do fluxo de aproximação no supermercado</span>
+            </div>
+
+            <div class="filtros">
+
+                <div class="filtro">
+                    <span>Setor</span>
+                    <select id="select_setor">
+                        <option>Todos</option>
+                        <option>Alimentos</option>
+                        <option>Bebidas</option>
+                        <option>Congelados</option>
+                        <option>Limpeza</option>
+                        <option>Higiene</option>
+                    </select>
+                </div>
+
+                <div class="filtro">
+                    <span>Período</span>
+                    <select id="select-periodo">
+                        <option>01/09/2026 - 30/09/2026</option>
+                    </select>
+                </div>
+
+                <button onclick="atualizar()">Atualizar</button>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
