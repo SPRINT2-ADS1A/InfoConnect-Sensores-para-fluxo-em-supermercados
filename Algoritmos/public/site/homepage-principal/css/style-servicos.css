@@ -394,3 +394,20 @@ header {
         border-radius: 24px; /* Arredonda os cantos. */
     }
 }
+
+.decide {
+    background-color: var(--fundo-claro); /* Define a cor do fundo. */
+}
+
+.decide h2 {
+    padding: 48px; /* Espaço interno igual nos quatro lados. */
+    border-radius: 0 0 30px 30px; /* Arredonda somente os dois cantos inferiores. */
+    background-color: white; /* Define a cor do fundo. */
+    font-size: 44px; /* Define o tamanho das letras. */
+    font-weight: 300; /* Define a espessura: 300 é fino; 700 é negrito. */
+    text-align: center; /* Centraliza o texto. */
+}
+
+.decide b {
+    color: var(--verde-escuro); /* Define a cor do texto; var() usa uma variável. */
+}
