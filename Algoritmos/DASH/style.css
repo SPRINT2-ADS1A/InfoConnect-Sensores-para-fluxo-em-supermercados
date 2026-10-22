@@ -126,3 +126,37 @@ nav {
 .filtros button:hover{
     background-color: #2c6324;
 }
+
+.card1 {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 25px;
+    border-radius: 20px;
+}
+
+.cards {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cardI {
+    display: flex;
+    align-items:flex-start;
+    background-color: white;
+    max-width: 1200px;
+    margin: 10px 10px 10px 10px;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.cardI h3 {
+    padding: 5px;
+    font-weight: 350;
+    color: #387D2D;
+    font-size: 22px;
+    margin-top: 0;
+}
