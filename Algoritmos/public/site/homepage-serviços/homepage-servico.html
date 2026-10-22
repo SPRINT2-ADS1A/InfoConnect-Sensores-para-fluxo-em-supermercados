@@ -21,8 +21,8 @@
   </head>
   <body>
     <header>
-      <!-- Class liga o elemento às regras CSS. -->
-      <span class="logo">InfoConnect</span>
+      <img src="img/logoCompleta.png" class="img" />
+
       <!-- Agrupa os links de navegação. -->
       <nav class="nav-bar">
         <!-- Cria uma lista sem numeração. -->
@@ -39,9 +39,7 @@
         <!-- As classes do Font Awesome desenham a lupa. -->
         <i class="fa-solid fa-magnifying-glass"></i>
         <!-- As classes abaixo desenham o ícone de usuário. -->
-        <i
-          class="fa-regular fa-user"
-        ></i>
+        <i class="fa-regular fa-user"></i>
       </div>
     </header>
     <main>
@@ -85,13 +83,18 @@
           <div class="sensor-texto">
             <p>
               <b>Sensores de proximidade</b> instalados na gôndola captam quando
-              um cliente se aproxima ou interage com o produto — sem câmeras
-              e sem nenhum traço identificável da pessoa. Uma
+              um cliente se aproxima ou interage com o produto — sem câmeras e
+              sem nenhum traço identificável da pessoa. Uma
               <b>placa com microcontrolador</b> processa esses dados,
               transformando o movimento em informação: quantas pessoas pararam,
               por quanto tempo e se houve contato com o item. O resultado chega
-              a um <b>painel</b> simples, com o comportamento agregado por produto —
-              <b><i>sem biometria, sem reconhecimento facial, dentro da LGPD.</i></b>
+              a um <b>painel</b> simples, com o comportamento agregado por
+              produto —
+              <b
+                ><i
+                  >sem biometria, sem reconhecimento facial, dentro da LGPD.</i
+                ></b
+              >
             </p>
           </div>
         </div>
@@ -104,63 +107,64 @@
         </p>
       </section>
       <div class="lista-servicos">
+        <section class="servico-01">
+          <div class="servico-texto">
+            <h2>1. Fluxo de aproximação</h2>
+            <p>
+              Cada vez que um cliente se aproxima de uma gôndola, ele deixa um
+              sinal — mesmo sem tocar em nada.
+              <br />
+              O InfoConnect capta esse movimento por meio de sensores simples,
+              sem câmeras e sem reconhecimento de imagem, transformando o que
+              antes era invisível em um dado real sobre o que desperta o
+              interesse do consumidor dentro da loja.
+            </p>
+          </div>
 
-      <section class="servico-01">
-        <div class="servico-texto">
-          <h2>1. Fluxo de aproximação</h2>
-          <p>
-            Cada vez que um cliente se aproxima de uma gôndola, ele deixa um
-            sinal — mesmo sem tocar em nada.
-            <br />
-            O InfoConnect capta esse movimento por meio de sensores simples, sem
-            câmeras e sem reconhecimento de imagem, transformando o que antes
-            era invisível em um dado real sobre o que desperta o interesse do
-            consumidor dentro da loja.
-          </p>
-        </div>
+          <div class="servico-imagem">
+            <img src="img/mercado1.png" alt="Gôndolas de supermercado" />
+          </div>
+        </section>
 
-        <div class="servico-imagem">
-          <img src="img/mercado1.png" alt="Gôndolas de supermercado" />
-        </div>
-      </section>
-
-      <section class="servico-02">
-        
+        <section class="servico-02">
           <div class="servico-imagem">
             <img src="img/mercado2.png" alt="Cliente escolhendo produtos" />
           </div>
 
+          <div class="servico-texto">
+            <h2>2. Tempo de atenção</h2>
+            <p>
+              Não basta saber que o cliente parou — é preciso entender por
+              quanto tempo ele ficou ali, avaliando, comparando, decidindo. Esse
+              tempo de permanência revela o que realmente prende a atenção na
+              prateleira, uma informação que os dados de venda tradicionais
+              nunca conseguem mostrar sozinhos.
+            </p>
+          </div>
+        </section>
 
-        <div class="servico-texto">
-          <h2>2. Tempo de atenção</h2>
-          <p>
-            Não basta saber que o cliente parou — é preciso entender por quanto tempo ele ficou ali, 
-            avaliando, comparando, decidindo. Esse tempo de permanência revela o que realmente prende a atenção na prateleira, 
-            uma informação que os dados de venda tradicionais nunca conseguem mostrar sozinhos.
-          </p>
-        </div> 
-      </section>
+        <section class="servico-01">
+          <div class="servico-texto">
+            <h2>3. Integração física</h2>
+            <p>
+              Cada gesto do cliente diante da gôndola indica intenção de compra.
+              Sensores conectados a um Arduino detectam a aproximação e a
+              permanência em frente a cada produto, e enviam os registros para a
+              API, que os guarda no banco de dados. Com esse histórico, o
+              supermercado descobre quais produtos atraem mais atenção, em quais
+              horários o fluxo é maior e como a disposição das mercadorias
+              influencia a compra.
+            </p>
+          </div>
 
-      <section class="servico-01">
-        <div class="servico-texto">
-          <h2>3. Integração física </h2>
-          <p>
-            Cada gesto do cliente diante da gôndola indica intenção de compra.
-             Sensores conectados a um Arduino detectam a aproximação e a permanência em frente a cada produto,
-             e enviam os registros para a API, que os guarda no banco de dados. 
-              Com esse histórico, o supermercado descobre quais produtos atraem mais atenção, em quais horários o fluxo é maior 
-              e como a disposição das mercadorias influencia a compra.
-          </p>
-        </div>
-
-        <div class="servico-imagem">
-          <img src="img/mercado3.png" alt="Cliente em frente às prateleiras" />
-        </div>
-      </section>
-
-    
+          <div class="servico-imagem">
+            <img
+              src="img/mercado3.png"
+              alt="Cliente em frente às prateleiras"
+            />
+          </div>
+        </section>
       </div>
     </main>
   </body>
 </html>
-
