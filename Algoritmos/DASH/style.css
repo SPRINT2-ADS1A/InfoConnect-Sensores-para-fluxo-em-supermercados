@@ -19,7 +19,6 @@ nav {
     display: flex;
     gap: 30px;
     font-size: 16px;
-    font-weight: bold;
 }
 
 .nav-bar:hover {
@@ -42,9 +41,15 @@ nav {
 }
 
 .logo {
+    font-family: "Playfair Display", serif;
     font-size: 26px;
     font-weight: bold;
     color: #387D2D;
+}
+
+.logo label {
+    color:#444444;
+    font-weight: 500;
 }
 
 .logoimagem {
@@ -65,19 +70,20 @@ nav {
 }
 
 .titulo h1 {
+    font-family: "Playfair Display", serif;
     font-size: 36px;
-    color: #387D2D;
+    color: #444444;
     margin: 0;
+}
+
+.titulo i {
+    color: #387D2D;
 }
 
 .titulo span {
     font-size: 15px;
     color: #666666;
     margin-top: 10px;
-}
-
-.titulo i {
-    color: #444444;
 }
 
 .filtros {
@@ -100,8 +106,8 @@ nav {
 }
 
 .filtro select {
-    padding: 12px;
-    border: 1px solid antiquewhite;
+    padding: 12px 15px;
+    border: 1px solid #e5e5e5;
     border-radius: 8px;
     background-color: white;
     font-size: 14px;
