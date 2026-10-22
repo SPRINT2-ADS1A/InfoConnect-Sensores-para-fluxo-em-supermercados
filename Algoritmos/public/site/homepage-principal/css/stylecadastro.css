@@ -13,6 +13,10 @@
     --texto: black;
 }
 
+img {
+    width: 250px;
+    height: auto;
+}
 
 
 body {
