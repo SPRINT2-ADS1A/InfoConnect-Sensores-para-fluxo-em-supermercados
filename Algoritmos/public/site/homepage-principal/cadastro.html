@@ -12,7 +12,7 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/stylecadastro.css" />
 
     <link
       rel="stylesheet"
@@ -48,7 +48,7 @@
           </p>
         </div>
 
-        <form id="form_cadastro">
+        <form id="form_cadastro" onsubmit="return cadastrar()">
           <!-- Dados da Empresa -->
           <div class="secao_formulario">
             <h3 class="titulo_secao">Dados da Empresa (Supermercado)</h3>
@@ -91,6 +91,12 @@
                   placeholder="11987654321"
                 />
               </div>
+            </div>
+
+
+            <div class="grupo_input">
+              <label for="input_cpf">CPF do Responsavel</label>
+              <input type="text" id="input_cpf" placeholder="000.000.000-00" maxlength="14" />
             </div>
 
             <div class="grupo_input">
@@ -169,7 +175,7 @@
 
           <button
             type="button"
-            onclick="validarCadastro()"
+            onclick="cadastrar()"
             class="botao_cadastrar"
           >
             Finalizar Cadastro
@@ -183,107 +189,143 @@
           </button>
         </form>
 
-        <!-- divs erro/sucesso -->
-        <div id="div_erro" class="msg_erro"></div>
-        <div id="div_sucesso" class="msg_sucesso"></div>
+        <!-- div erro/sucesso -->
+        <div id="div_mensagem" class="msg_erro"></div>
       </div>
     </main>
+  <script>
+// Cadastro do InfoConnect - seguindo o estilo do Web Data Viz / AquaTech.
+function cadastrar() {
+    // 1. Pega os valores dos inputs HTML.
+    var nomeFantasiaVar = input_nomeFantasia.value;
+    var cnpjVar = input_cnpj.value;
+    var responsavelVar = input_responsavel.value;
+    var cpfVar = input_cpf.value;
+    var telefoneVar = input_telefone.value;
+    var emailVar = input_emailEmpresa.value;
+    var ufVar = input_uf.value;
+    var cidadeVar = input_cidade.value;
+    var logradouroVar = input_logradouro.value;
 
-    <script>
-      function validarCadastro() {
-        // variaveis valores
-        let nomeFantasia = input_nomeFantasia.value;
-        let cnpj = input_cnpj.value;
-        let responsavel = input_responsavel.value;
-        let telefone = input_telefone.value;
-        let email = input_emailEmpresa.value;
-        let uf = input_uf.value;
-        let cidade = input_cidade.value;
-        let logradouro = input_logradouro.value;
+    var nomeVar = input_nomeUsuario.value;
+    var cargoVar = input_cargo.value;
+    var senhaVar = input_senha.value;
+    var confirmacaoSenhaVar = input_confirmarSenha.value;
 
-        let nomeUsuario = input_nomeUsuario.value;
-        let cargo = input_cargo.value;
-        let senha = input_senha.value;
-        let confirmarSenha = input_confirmarSenha.value;
+    // 2. Esconde qualquer mensagem de uma tentativa anterior.
+    var mensagem = "";
+    div_mensagem.innerHTML = "";
+    div_mensagem.style.display = "none";
 
-        // Limpa as divs
-        div_erro.style.display = "";
-        div_sucesso.style.display = "";
-        div_erro.innerHTML = "";
+    // 3. Verifica se faltou preencher alguma informação obrigatória.
+    if (
+        nomeFantasiaVar.trim() == "" ||
+        cnpjVar.trim() == "" ||
+        responsavelVar.trim() == "" ||
+        cpfVar.trim() == "" ||
+        telefoneVar.trim() == "" ||
+        emailVar.trim() == "" ||
+        ufVar.trim() == "" ||
+        cidadeVar.trim() == "" ||
+        logradouroVar.trim() == "" ||
+        nomeVar.trim() == "" ||
+        cargoVar.trim() == "" ||
+        senhaVar == "" ||
+        confirmacaoSenhaVar == ""
+    ) {
+        mensagem = "Preencha todos os campos!";
+        div_mensagem.innerHTML = mensagem;
+        div_mensagem.className = "msg_erro";
+        div_mensagem.style.display = "block";
+        return false; // Para por aqui: não chega ao fetch.
+    }
 
-        // Limpar telefone e cnpj(para pegar só os números, sem simbolos caso a pessoa digite ou copie e cole de algum lugar)
-        let cnpjLimpo = cnpj
-          .replaceAll(".", "")
-          .replaceAll("/", "")
-          .replaceAll("-", "")
-          .replaceAll(" ", "");
-        let telefoneLimpo = telefone
-          .replaceAll(" ", "")
-          .replaceAll("-", "")
-          .replaceAll("(", "")
-          .replaceAll(")", "");
+    // 4. Verifica se as duas senhas são iguais.
+    if (senhaVar != confirmacaoSenhaVar) {
+        mensagem = "As senhas não coincidem!";
+        div_mensagem.innerHTML = mensagem;
+        div_mensagem.className = "msg_erro";
+        div_mensagem.style.display = "block";
+        return false;
+    }
 
-        // checagem email
-        let indiceArroba = email.indexOf("@");
-        let indicePonto = email.lastIndexOf(".");
-        let emailInvalido =
-          !email.includes("@") ||
-          indiceArroba == 0 ||
-          indicePonto < indiceArroba ||
-          (!email.toLowerCase().endsWith(".com") &&
-            !email.toLowerCase().endsWith(".br"));
+    if (senhaVar.length < 8 || senhaVar.length > 72) {
+        mensagem = "A senha precisa ter entre 8 e 72 caracteres!";
+        div_mensagem.innerHTML = mensagem;
+        div_mensagem.className = "msg_erro";
+        div_mensagem.style.display = "block";
+        return false;
+    }
 
-        // checagem uf
-        let ufFormatada = uf.toUpperCase();
+    // 5. Remove os pontos, traços e barras do /CNPJ.
+    var cnpjNumeros = cnpjVar.replace(/\D/g, "");
+    var cpfNumeros = cpfVar.replace(/\D/g, "");
 
-        // validando senha
-        if (
-          nomeFantasia.length < 3 ||
-          responsavel.length < 3 ||
-          cidade.length < 2 ||
-          logradouro.length < 3 ||
-          cargo.length < 2
-        ) {
-          div_erro.style.display = "block";
-          div_erro.innerHTML =
-            "Por favor, preencha todos os campos de texto corretamente.";
-        } else if (cnpjLimpo.length != 14) {
-          div_erro.style.display = "block";
-          div_erro.innerHTML =
-            "CNPJ inválido! O CNPJ deve conter exatamente 14 números.";
-        } else if (telefoneLimpo.length < 10 || telefoneLimpo.length > 11) {
-          div_erro.style.display = "block";
-          div_erro.innerHTML =
-            "Telefone inválido! Deve conter entre 10 e 11 dígitos (com DDD).";
-        } else if (emailInvalido) {
-          div_erro.style.display = "block";
-          div_erro.innerHTML =
-            "E-mail corporativo inválido! Exemplo aceito: contato@empresa.com";
-        } else if (ufFormatada.length != 2) {
-          div_erro.style.display = "block";
-          div_erro.innerHTML =
-            "A UF (Estado) deve ter exatamente 2 caracteres (Ex: SP, RJ).";
-        } else if (nomeUsuario.includes(" ")) {
-          div_erro.style.display = "block";
-          div_erro.innerHTML =
-            "O Nome de Usuário não pode conter espaços em branco.";
-        } else if (senha.length < 8) {
-          div_erro.style.display = "block";
-          div_erro.innerHTML = "A senha precisa ter no mínimo 8 caracteres.";
-        } else if (senha != confirmarSenha) {
-          div_erro.style.display = "block";
-          div_erro.innerHTML =
-            "A senha e a confirmação de senha não coincidem!";
+    if (cnpjNumeros.length != 14) {
+        mensagem = "O CNPJ precisa ter 14 números!";
+        div_mensagem.innerHTML = mensagem;
+        div_mensagem.className = "msg_erro";
+        div_mensagem.style.display = "block";
+        return false;
+    }
+
+    if (cpfNumeros.length != 11) {
+        div_mensagem.innerHTML = "O CPF precisa ter 11 numeros!";
+        div_mensagem.className = "msg_erro";
+        div_mensagem.style.display = "block";
+        return false;
+    }
+
+    // 6. Envia um JSON para o servidor Express.
+    // Os nomes que terminam em Server são os que o controller lê em req.body.
+    fetch("/usuarios/cadastrar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            nomeServer: nomeVar,
+            emailServer: emailVar,
+            senhaServer: senhaVar,
+            cargoServer: cargoVar,
+            nomeFantasiaServer: nomeFantasiaVar,
+            cnpjServer: cnpjNumeros,
+            responsavelServer: responsavelVar,
+            cpfServer: cpfNumeros,
+            telefoneServer: telefoneVar,
+            ufServer: ufVar,
+            cidadeServer: cidadeVar,
+            logradouroServer: logradouroVar
+        })
+    })
+    .then(function (resposta) {
+        // 7. Verifica se o backend confirmou o cadastro.
+        if (resposta.ok) {
+            mensagem = "Cadastro realizado com sucesso! Indo para o login...";
+            div_mensagem.innerHTML = mensagem;
+            div_mensagem.className = "msg_sucesso";
+            div_mensagem.style.display = "block";
+
+            setTimeout(function () {
+                window.location = "login.html";
+            }, 2000);
         } else {
-          div_sucesso.style.display = "block";
-          div_sucesso.innerHTML =
-            "<strong>Cadastro realizado com sucesso!</strong> Redirecionando para a tela de login...";
-
-          setTimeout(function () {
-            window.location.href = "login.html";
-          }, 2500);
+            // Lê a mensagem de erro enviada pelo backend
+            return resposta.text().then(function (textoErro) {
+                throw new Error(textoErro || "Erro HTTP: " + resposta.status);
+            });
         }
-      }
-    </script>
+    })
+    .catch(function (erro) {
+        console.log("#ERRO:", erro);
+        div_mensagem.innerHTML = erro.message || "Não foi possível realizar o cadastro.";
+        div_mensagem.className = "msg_erro";
+        div_mensagem.style.display = "block";
+    });
+
+    // Impede o envio tradicional do formulário HTML.
+    return false;
+}
+  </script>
   </body>
 </html>

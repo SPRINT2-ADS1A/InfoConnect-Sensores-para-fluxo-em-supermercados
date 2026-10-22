@@ -41,8 +41,36 @@ function buscarMedidasEmTempoReal(req, res) {
     });
 }
 
+function indicadores(req, res) {
+    var idSupermercado = Number(req.params.idSupermercado);
+    if (!Number.isInteger(idSupermercado) || idSupermercado < 1) {
+        return res.status(400).send("Supermercado invalido!");
+    }
+    medidaModel.indicadores(idSupermercado, req.query.setor, req.query.periodo).then(function (resultados) {
+        res.json(resultados[0]);
+    }).catch(function (erro) {
+        console.log(erro);
+        res.status(500).send("Falha ao buscar indicadores.");
+    });
+}
+
+function grafico(req, res) {
+    var idSupermercado = Number(req.params.idSupermercado);
+    if (!Number.isInteger(idSupermercado) || idSupermercado < 1) {
+        return res.status(400).send("Supermercado invalido!");
+    }
+    medidaModel.grafico(idSupermercado, req.query.setor, req.query.periodo).then(function (resultados) {
+        res.json(resultados);
+    }).catch(function (erro) {
+        console.log(erro);
+        res.status(500).send("Falha ao buscar grafico.");
+    });
+}
+
 module.exports = {
     buscarUltimasMedidas,
-    buscarMedidasEmTempoReal
+    buscarMedidasEmTempoReal,
+    indicadores,
+    grafico
 
 }

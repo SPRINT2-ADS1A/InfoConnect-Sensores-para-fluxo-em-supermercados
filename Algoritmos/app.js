@@ -25,6 +25,8 @@ var empresasRouter = require("./src/routes/empresas");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
+// A dashboard do grupo esta na pasta DASH, ao lado de public.
+app.use("/DASH", express.static(path.join(__dirname, "DASH")));
 
 app.use(cors());
 

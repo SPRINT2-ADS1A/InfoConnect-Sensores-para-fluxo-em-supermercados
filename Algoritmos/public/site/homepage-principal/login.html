@@ -14,7 +14,7 @@
 
 
 
-    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/stylecadastro.css" />
 
     <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
@@ -74,23 +74,44 @@
         </div>
     </main>
 
+  <script>
+    function login() {
+        var emailVar = input_email.value;
+        var senhaVar = input_senha.value;
+        div_mensagem.innerHTML = "";
+        div_mensagem2.innerHTML = "";
+
+        if (emailVar == "" || senhaVar == "") {
+            div_mensagem2.innerHTML = "Preencha email e senha!";
+            return false;
+        }
+
+        // Mesmo POST /usuarios/autenticar usado na AquaTech.
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ emailServer: emailVar, senhaServer: senhaVar })
+        })
+        .then(function (resposta) {
+            if (!resposta.ok) throw new Error("Email ou senha invalidos!");
+            return resposta.json();
+        })
+        .then(function (usuario) {
+            // SessionStorage eh usado no Web Data Viz para mostrar dados na pagina.
+            // Nao e um token nem garante autenticacao protegida no servidor.
+            sessionStorage.setItem("ID_USUARIO", usuario.id);
+            sessionStorage.setItem("NOME_USUARIO", usuario.nome);
+            sessionStorage.setItem("ID_SUPERMERCADO", usuario.supermercadoId);
+            sessionStorage.setItem("NOME_SUPERMERCADO", usuario.nomeFantasia);
+            div_mensagem.innerHTML = "Login valido!";
+            window.location.href = "/DASH/dashboard.html";
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            div_mensagem2.innerHTML = erro.message;
+        });
+        return false;
+    }
+  </script>
 </body>
 </html>
-<script>
-    let email = 'supermercado@email.com'
-    let senha = 'Market123'
-    
-    function login() {
-        let entradaSenha = input_senha.value
-        let entradaEmail = input_email.value
-
-        if (senha == entradaSenha && email == entradaEmail) {
-            div_mensagem.innerHTML = `Login válido!`
-            div_mensagem2.innerHTML = ``
-        } else {
-            div_mensagem2.innerHTML = `E-mail ou senha inválidos!`
-            div_mensagem.innerHTML = ``
-        }
-    }
-    
-</script>

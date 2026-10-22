@@ -1,25 +1,74 @@
-var database = require("../database/config")
+var database = require("../database/config");
+var crypto = require("crypto"); // Bibliotaca nativa do Node; nao precisa instalar.
 
-function autenticar(email, senha) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha)
-    var instrucaoSql = `
-        SELECT id, nome, email, fk_empresa as empresaId FROM usuario WHERE email = '${email}' AND senha = '${senha}';
-    `;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
+// A tabela Usuario tem senha VARCHAR(100). Este hash usa 97 caracteres.
+function criarSenhaProtegida(senha) {
+    var salt = crypto.randomBytes(16).toString("hex");
+    var hash = crypto.scryptSync(senha, salt, 32).toString("hex");
+    return salt + "$" + hash;
 }
 
-// Coloque os mesmos parâmetros aqui. Vá para a var instrucaoSql
-function cadastrar(nome, email, senha, fkEmpresa) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha, fkEmpresa);
-    
-    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
-    //  e na ordem de inserção dos dados.
+function conferirSenha(senha, senhaBanco) {
+    var partes = String(senhaBanco).split("$");
+    if (partes.length != 2 || !/^[0-9a-f]{32}$/.test(partes[0]) ||
+        !/^[0-9a-f]{64}$/.test(partes[1])) return false;
+    var calculado = crypto.scryptSync(senha, partes[0], 32);
+    var esperado = Buffer.from(partes[1], "hex");
+    return crypto.timingSafeEqual(calculado, esperado);
+}
+
+function autenticar(email, senha) {
+    // Busca pelo email e verifica a senha sem colocar texto digitado dentro do SQL.
     var instrucaoSql = `
-        INSERT INTO usuario (nome, email, senha, fk_empresa) VALUES ('${nome}', '${email}', '${senha}', '${fkEmpresa}');
+        SELECT u.idUsuario AS id, u.nome, u.email, u.senha,
+               s.idSupermercado AS supermercadoId, s.nomeFantasia
+        FROM Usuario u
+        JOIN supermercado s ON s.idSupermercado = u.fkSupermercado
+        WHERE u.email = ?
     `;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
+    console.log("Consultando usuario pelo email.");
+    return database.executar(instrucaoSql, [email]).then(function (resultados) {
+        // O controller da AquaTech espera um array de resultados.
+        return resultados.filter(function (usuario) {
+            return conferirSenha(senha, usuario.senha);
+        });
+    });
+}
+
+// O nome da funcao cadastrar foi preservado. Foram adicionados os campos do HTML.
+function cadastrar(nome, email, senha, cargo, nomeFantasia, cnpj,
+                   responsavel, cpf, telefone, uf, cidade, logradouro) {
+    console.log("ACESSEI O USUARIO MODEL - cadastrando supermercado.");
+    var senhaProtegida = criarSenhaProtegida(senha);
+
+    // Cada novo supermercado exige cliente, endereco, supermercado e Usuario.
+    // A transacao permite desfazer tudo se algum INSERT falhar.
+    return database.executarTransacao(async function (conexao) {
+        var resultadoCliente = await conexao.execute(`
+            INSERT INTO cliente (nome, cpf, email, telefone)
+            VALUES (?, ?, ?, ?)
+        `, [responsavel, cpf, email, telefone]);
+        var idCliente = resultadoCliente[0].insertId;
+
+        var resultadoEndereco = await conexao.execute(`
+            INSERT INTO endereco (estado, cidade, logradouro)
+            VALUES (?, ?, ?)
+        `, [uf, cidade, logradouro]);
+        var idEndereco = resultadoEndereco[0].insertId;
+
+        var resultadoSupermercado = await conexao.execute(`
+            INSERT INTO supermercado (nomeFantasia, cnpj, fkCliente, fkEndereco)
+            VALUES (?, ?, ?, ?)
+        `, [nomeFantasia, cnpj, idCliente, idEndereco]);
+        var idSupermercado = resultadoSupermercado[0].insertId;
+
+        var resultadoUsuario = await conexao.execute(`
+            INSERT INTO Usuario (nome, cargo, email, senha, fkSupermercado)
+            VALUES (?, ?, ?, ?, ?)
+        `, [nome, cargo, email, senhaProtegida, idSupermercado]);
+
+        return { id: resultadoUsuario[0].insertId, supermercadoId: idSupermercado };
+    });
 }
 
 module.exports = {

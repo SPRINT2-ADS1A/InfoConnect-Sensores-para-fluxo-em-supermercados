@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,12 +20,12 @@
             <span>Sobre</span>
             <span>Serviços</span>
             <span>Suporte</span>
-            <span onclick="window.location.href='simulador.html'">Simulador</span>
+            <span onclick="window.location.href='/site/login%20e%20cadastro/simulador.html'">Simulador</span>
         </nav>
 
         <div class="icones">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <i onclick="window.location.href='login.html'" class="fa-regular fa-user"></i>
+            <i onclick="window.location.href='/site/login%20e%20cadastro/login.html'" class="fa-regular fa-user"></i>
         </div>
     </header> 
 
@@ -53,7 +53,8 @@
                 <div class="filtro">
                     <span>Período</span>
                     <select id="select-periodo">
-                        <option>01/09/2026 - 30/09/2026</option>
+                        <option value="todos">Todos os registros</option>
+                        <option value="2026-09">01/09/2026 - 30/09/2026</option>
                     </select>
                 </div>
 
@@ -62,5 +63,72 @@
             </div>
         </div>
     </div>
+
+    <!-- Somente complementos: painel original mantido. -->
+    <section style="margin:24px auto;max-width:1060px;padding:20px;background:white;border-radius:12px">
+        <p id="aviso_dados">Selecione Atualizar para consultar o banco.</p>
+        <div style="display:flex;gap:30px;flex-wrap:wrap;margin:16px 0">
+            <div><strong>Leituras</strong><h2 id="kpi_leituras">--</h2></div>
+            <div><strong>Leituras com aproximacao</strong><h2 id="kpi_aproximacao">--</h2></div>
+            <div><strong>Sensores ativos</strong><h2 id="kpi_sensores">--</h2></div>
+        </div>
+        <canvas id="grafico_distancia" height="100"></canvas>
+    </section>
+    <script>
+        var grafico = null;
+        // O painel mostra informacoes somente do supermercado selecionado no login.
+        // Como na AquaTech, o sessionStorage serve para interface, NAO e seguranca da API.
+        var supermercadoId = sessionStorage.getItem("ID_SUPERMERCADO");
+        if (!supermercadoId) {
+            aviso_dados.innerHTML = "Faca login antes de abrir o painel.";
+        } else {
+            atualizar();
+        }
+
+        function atualizar() {
+            if (!supermercadoId) return;
+            var setor = select_setor.value;
+            var periodo = document.getElementById("select-periodo").value;
+            var filtros = "?setor=" + encodeURIComponent(setor) + "&periodo=" + encodeURIComponent(periodo);
+            fetch("/medidas/indicadores/" + supermercadoId + filtros)
+                .then(function (resposta) {
+                    if (!resposta.ok) throw new Error("Falha ao consultar indicadores.");
+                    return resposta.json();
+                })
+                .then(function (dados) {
+                    kpi_leituras.innerHTML = dados.leituras;
+                    kpi_aproximacao.innerHTML = dados.leiturasAproximacao;
+                    kpi_sensores.innerHTML = dados.sensoresAtivos;
+                })
+                .catch(function (erro) { aviso_dados.innerHTML = erro.message; });
+
+            fetch("/medidas/grafico/" + supermercadoId + filtros)
+                .then(function (resposta) {
+                    if (!resposta.ok) throw new Error("Falha ao consultar grafico.");
+                    return resposta.json();
+                })
+                .then(function (leituras) {
+                    if (leituras.length == 0) {
+                        aviso_dados.innerHTML = "Este supermercado ainda nao possui leituras de sensores.";
+                        return;
+                    }
+                    aviso_dados.innerHTML = "Ultimas leituras recebidas dos sensores.";
+                    if (grafico) grafico.destroy();
+                    grafico = new Chart(document.getElementById("grafico_distancia"), {
+                        type: "line",
+                        data: {
+                            labels: leituras.map(function (item) { return item.momento_grafico; }),
+                            datasets: [{
+                                label: "Distancia em cm",
+                                data: leituras.map(function (item) { return item.distanciaCm; }),
+                                borderColor: "#387D2D", tension: 0.2
+                            }]
+                        },
+                        options: { responsive: true }
+                    });
+                })
+                .catch(function (erro) { aviso_dados.innerHTML = erro.message; });
+        }
+    </script>
 </body>
 </html>
