@@ -70,6 +70,7 @@ h2 span {
     font-size: 16px; 
     font-family: inherit; /*faz o botão usar a Inter. Sem isso, ele usa a fonte padrão do sistema*/
     cursor: pointer; /*troca o cursor por uma mãozinha*/
+    text-decoration: none;
 }
 
 .botao-contorno{

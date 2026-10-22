@@ -62,6 +62,7 @@ h2 span {
     font-family: inherit; /* Escolhe a fonte; inherit usa a fonte do elemento pai. */
     font-size: 16px; /* Define o tamanho das letras. */
     cursor: pointer; /* Pointer mostra a mãozinha ao passar o mouse. */
+    text-decoration: none;
 }
 
 /* ==========================================================================
