@@ -34,6 +34,10 @@ body {
     background-color: var(--fundo); /* Define a cor do fundo. */
     font-family: "Inter", sans-serif; /* Usa Inter; sans-serif é a fonte alternativa. */
     color: var(--texto); /* Define a cor do texto; var() usa uma variável. */
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 h1 {
@@ -268,6 +272,7 @@ header {
     font-size: 30px; /* Define o tamanho das letras. */
     font-style: italic; /* Aplica itálico ao texto. */
     color: var(--verde-escuro); /* Define a cor do texto; var() usa uma variável. */
+    
 }
 
 .servico-texto p {
@@ -410,4 +415,111 @@ header {
 
 .decide b {
     color: var(--verde-escuro); /* Define a cor do texto; var() usa uma variável. */
+}
+
+.clientes {
+    padding: 64px 48px 48px; /* Espaço interno: cima, laterais e baixo. */
+    background-color: var(--fundo-claro); /* Define a cor do fundo. */
+}
+
+.clientes-texto {
+    display: flex; /* Flex organiza os filhos. */
+    flex-direction: column; /* Column coloca os elementos um abaixo do outro. */
+    align-items: center; /* Centraliza os filhos na horizontal. */
+    gap: 16px; /* Define o espaço entre os elementos do flex. */
+    text-align: center; /* Centraliza o texto. */
+}
+
+.clientes-texto h1 {
+    max-width: 1000px; /* Limita a largura máxima do elemento. */
+}
+
+.clientes-texto p {
+    font-size: 18px; /* Define o tamanho das letras. */
+    font-weight: 300; /* Define a espessura: 300 é fino; 700 é negrito. */
+    font-style: italic; /* Aplica itálico ao texto. */
+    line-height: 1.2; /* Define a distância entre as linhas do texto. */
+}
+
+.perguntas {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 48px 80px; /* Mantém o seu padding original */
+    border-radius: 30px 30px 0 0;
+    background-color: white;
+}
+
+.perguntas h2 {
+    font-size: 44px;
+    font-weight: 300;
+    color: #485C11;
+}
+
+.perguntas p {
+    margin-top: 8px;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.solicitacao {
+    padding: 64px 48px 48px; /* Espaço interno: cima, laterais e baixo. */
+    background-color: var(--fundo-claro); /* Define a cor do fundo. */
+}
+
+.solicitacao-texto {
+    display: flex; /* Flex organiza os filhos. */
+    flex-direction: column; /* Column coloca os elementos um abaixo do outro. */
+    align-items: center; /* Centraliza os filhos na horizontal. */
+    gap: 16px; /* Define o espaço entre os elementos do flex. */
+    text-align: center; /* Centraliza o texto. */
+}
+
+.solicitacao-texto h1 {
+    max-width: 1000px; /* Limita a largura máxima do elemento. */
+}
+
+.solicitacao-texto p {
+    font-size: 18px; /* Define o tamanho das letras. */
+    font-weight: 300; /* Define a espessura: 300 é fino; 700 é negrito. */
+    font-style: italic; /* Aplica itálico ao texto. */
+    line-height: 1.2; /* Define a distância entre as linhas do texto.*/
+}
+
+footer {
+    background-color: var(--verde-escuro);
+    color: white;
+    font-size: 48px;
+    border-radius: 30px 30px 0 0;
+    padding: 24px 24px 12px 200px;
+}
+
+footer h2 {
+    font-size: 50px;
+}
+
+footer h3 {
+    font-size: 48px;
+}
+footer ul {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    padding-bottom: 12px;
+    border-bottom: 1px solid white;
+}
+
+footer a {
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+footer p {
+    text-align: right;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 300;
+    margin-top: 8px;
 }
