@@ -162,15 +162,6 @@ header > a img {
     width: 280px; /* Define a largura do botão. */
 }
 
-.topo-texto a.botao-verde {
-    background-color: var(--verde-claro);
-    color: var(--verde-escuro);
-}
-
-.topo-texto a.botao-verde:hover {
-    background-color: #B3BDA5;
-}
-
 /* ==========================================================================
    7. SEÇÃO SENSOR ("Como o InfoConnect funciona?")
    ========================================================================== */
@@ -380,9 +371,7 @@ header > a img {
         font-size: 32px; /* Define o tamanho das letras. */
     }
 
-    .topo-texto .botao-verde {
-        max-width: 100%;
-    }
+
 
     /* Sensor */
     .sensor h2 {
