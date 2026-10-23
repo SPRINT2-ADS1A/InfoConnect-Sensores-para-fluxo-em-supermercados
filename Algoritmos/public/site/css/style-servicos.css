@@ -67,6 +67,14 @@ h2 span {
     font-size: 16px; /* Define o tamanho das letras. */
     cursor: pointer; /* Pointer mostra a mãozinha ao passar o mouse. */
     text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.botao-verde:hover {
+    background-color: #36470C;
+    transform: translateY(-2px);
 }
 
 /* ==========================================================================
@@ -76,8 +84,16 @@ h2 span {
 header {
     display: flex; /* Flex organiza os filhos em linha. */
     align-items: center; /* Centraliza os filhos na vertical. */
-    padding: 12px 48px; /* Espaço interno: cima/baixo e esquerda/direita. */
+    padding: 18px 48px; /* Espaço interno: cima/baixo e esquerda/direita. */
     background-color: white; /* Define a cor do fundo. */
+    gap: 28px;
+    border-bottom: 1px solid #E5E9E0;
+    box-shadow: 0 3px 12px rgba(35, 51, 12, 0.05);
+}
+
+header > a img {
+    width: 210px;
+    display: block;
 }
 
 .logo {
@@ -88,7 +104,7 @@ header {
 
 .nav-bar {
     flex: 1; /* Ocupa o espaço livre disponível na linha flex. */
-    margin-left: 48px; /* Define o espaço externo à esquerda. */
+    margin-left: 0; /* Mantém os links à esquerda, próximos da logo. */
 }
 
 .nav-bar ul {
@@ -98,14 +114,18 @@ header {
 }
 
 .nav-bar a {
-    font-size: 18px; /* Define o tamanho das letras. */
+    font-size: 16px; /* Define o tamanho das letras. */
     color: var(--texto); /* Define a cor do texto; var() usa uma variável. */
     text-decoration: none; /* None retira o sublinhado dos links. */
 }
 
+.nav-bar a:hover {
+    color: var(--verde-escuro);
+}
+
 .icones {
     display: flex; /* Flex coloca os ícones lado a lado. */
-    gap: 32px; /* Define o espaço entre os elementos do flex. */
+    gap: 20px; /* Define o espaço entre os elementos do flex. */
     color: gray; /* Define a cor dos ícones. */
     cursor: pointer; /* Pointer mostra a mãozinha ao passar o mouse. */
 }
@@ -115,7 +135,7 @@ header {
    ========================================================================== */
 
 .topo {
-    padding: 64px 48px 48px; /* Espaço interno: cima, laterais e baixo. */
+    padding: 64px 48px 56px; /* Espaço interno: cima, laterais e baixo. */
     background-color: var(--fundo-claro); /* Define a cor do fundo. */
 }
 
@@ -142,6 +162,15 @@ header {
     width: 280px; /* Define a largura do botão. */
 }
 
+.topo-texto a.botao-verde {
+    background-color: var(--verde-claro);
+    color: var(--verde-escuro);
+}
+
+.topo-texto a.botao-verde:hover {
+    background-color: #B3BDA5;
+}
+
 /* ==========================================================================
    7. SEÇÃO SENSOR ("Como o InfoConnect funciona?")
    ========================================================================== */
@@ -166,8 +195,8 @@ header {
 
 .sensor-colunas {
     display: flex; /* Flex coloca imagens e texto lado a lado. */
-    align-items: flex-start; /* Alinha os filhos no início (topo). */
-    gap: 30px; /* Define o espaço entre os elementos do flex. */
+    align-items: center; /* Centraliza as imagens e o texto na vertical. */
+    gap: 40px; /* Define o espaço entre os elementos do flex. */
     max-width: 1000px; /* Limita a largura máxima do elemento. */
     margin: 0 auto; /* Espaço externo; auto centraliza nas laterais. */
     padding: 26px 30px 40px 0; /* Espaço interno: cima, direita, baixo e esquerda. */
@@ -182,28 +211,32 @@ header {
 .sensor-imagem img {
     display: block; /* Block remove o espaço extra abaixo da imagem. */
     object-fit: cover; /* Cover preenche a imagem sem deformar, podendo cortar as bordas. */
+    object-position: center;
+    height: auto;
+    border: 1px solid #DBE3D6;
+    box-shadow: 0 6px 16px rgba(35, 51, 12, 0.09);
 }
 
 .prateleira {
-    width: 85%; /* Define a largura; porcentagens usam a largura do elemento pai. */
-    aspect-ratio: 1.8; /* 1.8 deixa a largura 1,8 vez maior que a altura. */
-    margin-left: 15%; /* Define o espaço externo à esquerda. */
-    border-radius: 40px; /* Arredonda os cantos. */
+    width: 88%; /* Define a largura; porcentagens usam a largura do elemento pai. */
+    aspect-ratio: 2.15; /* Mantém o formato retangular sem ocupar tanta altura. */
+    margin-left: 12%; /* Define o espaço externo à esquerda. */
+    border-radius: 24px; /* Arredonda os cantos. */
 }
 
 .arduino {
     width: 76%; /* Define a largura; porcentagens usam a largura do elemento pai. */
-    aspect-ratio: 1.8; /* 1.8 deixa a largura 1,8 vez maior que a altura. */
-    margin-top: 14px; /* Define o espaço externo acima do elemento. */
-    border-radius: 40px; /* Arredonda os cantos. */
+    aspect-ratio: 2.15; /* Mantém a proporção semelhante à das outras fotos. */
+    margin-top: 12px; /* Define o espaço externo acima do elemento. */
+    border-radius: 24px; /* Arredonda os cantos. */
 }
 
 .notebook {
-    width: 90%; /* Define a largura; porcentagens usam a largura do elemento pai. */
-    aspect-ratio: 1.8; /* 1.8 deixa a largura 1,8 vez maior que a altura. */
-    margin-top: 14px; /* Define o espaço externo acima do elemento. */
-    margin-left: 10%; /* Define o espaço externo à esquerda. */
-    border-radius: 40px; /* Arredonda os cantos. */
+    width: 88%; /* Define a largura; porcentagens usam a largura do elemento pai. */
+    aspect-ratio: 2.15; /* Mantém a proporção semelhante à das outras fotos. */
+    margin-top: 12px; /* Define o espaço externo acima do elemento. */
+    margin-left: 12%; /* Define o espaço externo à esquerda. */
+    border-radius: 24px; /* Arredonda os cantos. */
 }
 
 .sensor-texto {
@@ -213,7 +246,7 @@ header {
 }
 
 .sensor-texto p {
-    font-size: 26px; /* Define o tamanho das letras. */
+    font-size: 22px; /* Define o tamanho das letras. */
     font-weight: 300; /* Define a espessura: 300 é fino; 700 é negrito. */
     line-height: 1.55; /* Define a distância entre as linhas do texto. */
     text-align: left; /* Alinha o texto à esquerda. */
@@ -292,10 +325,13 @@ header {
 .servico-imagem img {
     display: block; /* Block remove o espaço extra abaixo da imagem. */
     width: 100%; /* Ocupa toda a largura da coluna. */
-    height: 440px; /* Define a altura da imagem. */
-    border-radius: 40px; /* Arredonda os cantos. */
+    height: auto; /* A altura acompanha a largura da coluna. */
+    aspect-ratio: 1 / 1; /* Deixa as três fotos dos serviços em quadrados iguais. */
+    border-radius: 24px; /* Arredonda os cantos. */
     object-fit: cover; /* Cover preenche a imagem sem deformar, podendo cortar as bordas. */
-    box-shadow: 5px 5px 10px; /* Sombra: deslocamento horizontal, vertical e desfoque. */
+    object-position: center;
+    border: 1px solid #DBE3D6;
+    box-shadow: 0 6px 18px rgba(35, 51, 12, 0.12); /* Sombra suave da imagem. */
 }
 
 /* ==========================================================================
@@ -312,8 +348,14 @@ header {
         padding: 12px; /* Espaço interno igual nos quatro lados. */
     }
 
+    header > a img {
+        width: 170px;
+    }
+
     .nav-bar {
         margin-left: 0; /* Remove o espaço externo à esquerda. */
+        order: 3;
+        flex-basis: 100%;
     }
 
     .nav-bar ul {
@@ -326,6 +368,7 @@ header {
 
     .icones {
         gap: 12px; /* Define o espaço entre os elementos do flex. */
+        margin-left: auto;
     }
 
     /* Topo */
@@ -337,6 +380,10 @@ header {
         font-size: 32px; /* Define o tamanho das letras. */
     }
 
+    .topo-texto .botao-verde {
+        max-width: 100%;
+    }
+
     /* Sensor */
     .sensor h2 {
         padding: 30px 12px; /* Espaço interno: cima/baixo e esquerda/direita. */
@@ -345,7 +392,12 @@ header {
 
     .sensor-colunas {
         gap: 12px; /* Define o espaço entre os elementos do flex. */
-        padding: 12px 14px 18px 0; /* Espaço interno: cima, direita, baixo e esquerda. */
+        flex-direction: column;
+        padding: 24px; /* Espaço interno igual nos quatro lados. */
+    }
+
+    .sensor-imagem {
+        width: 100%;
     }
 
     .sensor-texto {
@@ -353,14 +405,22 @@ header {
     }
 
     .sensor-texto p {
-        font-size: 2.6vw; /* Ajusta a letra à largura da tela: 1vw equivale a 1% dela. */
+        font-size: 17px; /* Mantém o texto legível no celular. */
         line-height: 1.55; /* Define a distância entre as linhas do texto. */
     }
 
     .prateleira,
     .arduino,
     .notebook {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 12px;
+        aspect-ratio: 16 / 9;
         border-radius: 20px; /* Arredonda os cantos. */
+    }
+
+    .prateleira {
+        margin-top: 0;
     }
 
     /* Serviços */
@@ -375,11 +435,12 @@ header {
     .servico-01,
     .servico-02 {
         gap: 16px; /* Separa o texto da imagem. */
+        flex-direction: column;
         padding: 20px 12px; /* Espaço interno: cima/baixo e esquerda/direita. */
     }
 
     .servico-texto {
-        width: 54%; /* Define a largura; porcentagens usam a largura do elemento pai. */
+        width: 100%; /* Ocupa toda a largura em telas menores. */
     }
 
     .servico-texto h2 {
@@ -387,16 +448,35 @@ header {
     }
 
     .servico-texto p {
-        font-size: 13px; /* Define o tamanho das letras. */
+        font-size: 16px; /* Define o tamanho das letras. */
     }
 
     .servico-imagem {
-        width: 42%; /* Define a largura; porcentagens usam a largura do elemento pai. */
+        width: 100%; /* Ocupa toda a largura em telas menores. */
     }
 
     .servico-imagem img {
-        height: 280px; /* Define a altura da imagem. */
+        height: auto; /* Mantém a proporção em telas menores. */
+        aspect-ratio: 16 / 10;
         border-radius: 24px; /* Arredonda os cantos. */
+    }
+
+    .servico-02 .servico-texto {
+        order: 1;
+        text-align: left;
+    }
+
+    .servico-02 .servico-imagem {
+        order: 2;
+    }
+
+    .perguntas, .clientes, .solicitacao {
+        padding: 32px 24px;
+    }
+
+    footer ul {
+        flex-wrap: wrap;
+        gap: 24px;
     }
 }
 
@@ -432,6 +512,7 @@ header {
 
 .clientes-texto h1 {
     max-width: 1000px; /* Limita a largura máxima do elemento. */
+    font-size: 38px;
 }
 
 .clientes-texto p {
@@ -459,6 +540,12 @@ header {
     margin-top: 8px;
     font-size: 18px;
     font-weight: 300;
+}
+
+.perguntas h3 {
+    color: var(--verde-escuro);
+    font-size: 20px;
+    margin-top: 12px;
 }
 
 .solicitacao {
@@ -490,7 +577,7 @@ footer {
     color: white;
     font-size: 48px;
     border-radius: 30px 30px 0 0;
-    padding: 24px 24px 12px 200px;
+    padding: 40px 48px 24px;
 }
 
 footer h2 {
@@ -502,7 +589,8 @@ footer h3 {
 }
 footer ul {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 64px;
     list-style: none;
     padding-bottom: 12px;
     border-bottom: 1px solid white;
@@ -517,9 +605,10 @@ footer a {
 }
 
 footer p {
-    text-align: right;
+    text-align: center;
     text-transform: uppercase;
     font-size: 12px;
     font-weight: 300;
-    margin-top: 8px;
+    margin-top: 20px;
 }
+    
