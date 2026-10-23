@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>InfoConnect | Calculadora de Investimento</title>
 
-    <link rel="stylesheet" href="./css/stylecadastro.css" />
+    <link rel="stylesheet" href="./css/style-simulador.css" />
 
     <link
       rel="stylesheet"
@@ -134,7 +134,7 @@
         while (contarMes < meses) {
           contarMes++;
           acumuloMensal += ganho_mensal;
-          div_acumulo_por_mes.innerHTML += `${contarMes} mes = ${acumuloMensal} <br>`;
+          div_acumulo_por_mes.innerHTML += `${contarMes} mês = ${acumuloMensal} <br>`;
         }
       } else {
         div_roi.innerHTML = "Informe um período válido de meses.";
