@@ -1,0 +1,421 @@
+*{
+    margin: 0;
+    padding:  0;
+    box-sizing: border-box;
+}
+
+
+
+:root {
+    --verde-escuro: #485C11;
+    --verde-claro: #8E9C78;
+    --fundo: white;
+    --texto: black;
+}
+
+img {
+    width: 250px;
+    height: auto;
+}
+
+
+body {
+    background-image: url("../img/fundo.jpg") ;
+    background-size: cover;
+    font-family: "Inter",sans-serif;
+    color: var(--texto);
+}
+
+
+
+/* body {
+    background-image: url("../img/fundo.jpg");
+    background-size: cover;
+    margin: 0;
+    font-family: Arial, sans-serif;
+} */
+
+
+
+main {
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+
+
+
+
+header {
+    display: flex; /*coloca logo, menu e ícones lado a lado*/
+    align-items: center; /*alinha os três na vertical, pelo meio*/
+    padding: 12px 48px; /*dá 12px de espaço em cima e embaixo e 48px nas laterais, p/ o conteúdo não colar na borda*/
+    background-color: white;
+}
+
+.logo{
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--verde-escuro);
+}
+
+.nav-bar{
+    flex:1; /*ocupa todo o espaço livre. Como sobre espaço depois dele, os ícones são empurradas p/ direita*/
+    margin-left: 48px; /*afasta o menu da logo*/
+}
+
+.nav-bar a{
+    text-decoration: none; /*tira o sublinhado dos links*/
+    color: var(--texto);
+    font-size: 18px;
+}
+
+.nav-bar ul {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+}
+
+.icones{
+    display: flex; /*coloca <li> lado a lado*/
+    gap: 32px; /*espaça um do outro*/
+    color: gray;
+    cursor: pointer;
+}
+
+
+
+.caixa-login {
+    width: 800px;
+    height: 450px; 
+    background-color: white;
+    display: flex;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 5px 5px 10px;
+}
+
+
+.esquerda {
+    width: 50%;
+    background-color: white;
+    padding: 50px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.direita {
+    width: 50%;
+    background-color: var(--verde-escuro);
+    padding: 50px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+}
+
+.card-simulador {
+    background-color: white;
+    width: 100%;
+    max-width: 900px;
+    padding: 40px;
+    border-radius: 20px;
+    color: #222222;
+    box-sizing: border-box;
+}
+
+.card-simulador h3 {
+    color: #387D2D;
+    font-size: 20px;
+}
+
+.simulador {
+    text-align: center;
+    color: #222222;
+    font-size: 34px;
+    font-weight: 700;
+    margin: 0 0 30px 0;
+}
+
+.simulador::after {
+    content: "";
+    display: block;
+    width: 400px;
+    height: 4px;
+    background-color: #387D2D;
+    margin: 10px auto 0;
+    border-radius: 4px;
+}
+
+.btn-calcular {
+    height: 40px;
+    background-color: #387D2D;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-calcular:hover {
+    background-color: #2d6624;
+}
+
+.esquerda h1 {
+    font-size: 34px;
+    font-weight: 700;
+    color: #222222;
+    margin: 0 0 15px 0;
+}
+
+.esquerda h1 span {
+    color: #387D2D;
+}
+
+.esquerda p {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.campo input {
+    height: 40px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    padding: 0 12px;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #222222;
+}
+
+.btn-entrar {
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    background-color: white;
+    font-weight: bold;
+    cursor: pointer;
+    color: #222222;
+}
+
+.btn-esqueci-senha {
+    height: 40px;
+    border: 2px solid white;
+    border-radius: 8px;
+    background-color: transparent;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.btn-cadastrar-login {
+    height: 40px;
+    border: 2px solid white;
+    border-radius: 8px;
+    background-color: transparent;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-cadastrar-login:hover {
+    background-color: rgba(255, 255, 255, 0.099);
+}
+
+.btn-senha {
+    background: none;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    color: #222222;
+}
+
+.loginvalido {
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    font-style: italic;
+}
+
+.login_sucesso {
+    color: lightgreen;
+}
+
+.login_erro {
+    color: red;
+}
+
+.ou {
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+}
+
+/* css cadastro */
+
+.card {
+    background: white;
+    width: 100%;
+    max-width: 900px;
+    padding: 25px;
+    border-radius: 20px;
+    color: #387D2D;
+}
+
+.cabecalho_card {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+.titulo_card {
+    text-align: center;
+    color: #222222;
+    font-size: 34px;
+    font-weight: 700;
+    margin: 0 0 30px 0;
+}
+
+
+.subtitulo_card {
+    color: grey;
+}
+
+.titulo_card::after {
+    content: "";
+    display: block;
+    width: 450px;
+    height: 4px;
+    background-color: #387D2D;
+    margin: 10px auto 0;
+    border-radius: 4px;
+}
+
+.secao_formulario {
+    border-bottom: 2px solid #287544;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.titulo_secao {
+    font-weight: bold;
+    font-size: 18px;
+    color: #034207;
+    margin-bottom: 12px;
+}
+
+.grupo_input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.grupo_input label {
+    font-size: 15px;
+    font-weight: bold;
+    color: #387D2D;
+}
+
+.grupo_input input {
+    padding: 8px 10px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    font-size: 13px;
+}
+
+.linha_dupla {
+    display: flex;
+    justify-content: space-between;
+}
+
+.linha_dupla .grupo_input {
+    width: 48%;
+}
+
+.linha_tripla {
+    display: flex;
+    justify-content: space-between;
+}
+
+.linha_uf {
+    width: 15%;
+}
+
+.linha_cidade {
+    width: 40%;
+}
+
+.linha_logradouro {
+    width: 40%;
+}
+
+.botao_cadastrar {
+    width: 100%;
+    padding: 10px;
+    background-color: #387D2D;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+.botao_cadastrar:hover {
+    background-color: #2d6624;
+}
+
+.btn-voltar-login {
+    width: 100%;
+    padding: 10px;
+    background-color: transparent;
+    color: #387D2D;
+    border: 1px solid #387d2db5;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+.btn-voltar-login:hover {
+    background-color: #f0f4f098;
+}
+
+.msg_erro {
+    background-color: #ffe6e6;
+    color: #d93025;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    margin-top: 12px;
+    border: 1px solid #f5c6cb;
+    display: none;
+}
+
+.msg_sucesso {
+    background-color: white;
+    color: #2b007a;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 13.6px;
+    margin-top: 12px;
+    border: 1px solid #b2f5ea;
+    display: none;
+}
+
