@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ptBR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +15,7 @@
     <header>
         <div class="logo-container">
             <span class="logo">Info<label>Connect</label></span>
-            <img src="./logo.png" alt="infoconnect.logo" class = "logoimagem">
+            <img src="./logo.png" alt="infoconnect.logo" class="logoimagem">
         </div>
         
         <nav class="nav-bar">
@@ -29,10 +29,11 @@
             <i class="fa-solid fa-magnifying-glass"></i>
             <i onclick="window.location.href='login.html'" class="fa-regular fa-user"></i>
         </div>
-    </header> 
+    </header>
 
-    <div>
-        <div class="cabecalho-dashboard">
+    <div class="dashboard"> 
+
+    <div class="cabecalho-dashboard">
             <div class="titulo">
                 <h1>Visão <i>Geral</i></h1>
                 <span>Panorama geral do fluxo de aproximação no supermercado</span>
@@ -62,50 +63,172 @@
                 <button onclick="atualizar()">Atualizar</button>
 
             </div>
+    </div>
+
+    <div class="cards-kpi">
+        <div class="cardKPI">
+            <img src="./motion.png" alt="" class="kpimagem">
+            <div>
+                <h2>8.240</h2>
+                <h3>Total de Aproximações</h3>
+            </div>
+        </div>
+
+        <div class="cardKPI">
+            <img src="./hourglass.png" alt="" class="kpimagem">
+            <div>
+                <h2>36,5 s</h2>
+                <h3>Tempo Médio de Permanência</h3>
+            </div>
+        </div>
+
+        <div class="cardKPI">
+            <img src="./clock.png" alt="" class="kpimagem">
+            <div>
+                <h2>1.320</h2>
+                <h3>Permanência Prolongada</h3>
+            </div>
+        </div>
+
+        <div class="cardKPI">
+            <img src="./sensor.png" alt="" class="kpimagem">
+            <div>
+                <h2>8</h2>
+                <h3>Sensores Ativos</h3>
+            </div>
         </div>
     </div>
 
-    <div>
-        <!-- LUGARZINHO KPIS -->
-    </div>
-
     <div class="cards">
-        <div>
-            <!-- GRÁFICOS SUPERIORES -->
+        <div class="coluna-esquerda">
             <div class="cardI">
-                <h3>Aproximações por horário</h3>
-                <div>
+                <h3><i class="fa-solid fa-chart-column"></i> Aproximações por horário</h3>
+                <div class="grafico">
                     <canvas id="myChart1"></canvas>
                 </div>
             </div>
 
             <div class="cardI">
-                <h3>Tempo de permanência por faixa</h3>
-                <div>
+                <h3><i class="fa-solid fa-chart-line"></i> Histórico de aproximações</h3>
+                <div class="grafico">
+                    <canvas id="myChart3"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="coluna-direita">
+            <div class="cardI">
+                <h3><i class="fa-regular fa-clock"></i> Tempo de permanência por faixa</h3>
+                <div class="grafico">
                     <canvas id="myChar2"></canvas>
                 </div>
             </div>
 
-        </div>
-
-        <div>
-            <!-- GRÁFICOS INFERIORES -->
             <div class="cardI">
-                <h3>Histórico de aproximações</h3>
-                <div>
-                    <canvas id="myChart3"></canvas>
-                </div>
-            </div>
-
-            <div class="cardI">
-                <h3>Top 5 setores com mais aproximações</h3>
-                <div>
+                <h3><i class="fa-solid fa-chart-column"></i> Top 5 setores com mais aproximações</h3>
+                <div class="grafico">
                     <canvas id="myChar4"></canvas>
                 </div>
             </div>
-                    
         </div>
     </div>
 
+    <div class="aviso" id="div_msg">Dados de exemplo para visualização da dashboard.</div>
+    </div>
+<script>
+    var graficoHorario = new Chart(document.getElementById('myChart1'), {
+        type: 'bar',
+        data: {
+            labels: ['08h', '09h', '10h', '11h', '12h', '13h', '14h', '15h', '16h', '17h', '18h', '19h', '20h', '21h'],
+            datasets: [{
+                label: 'Aproximações',
+                data: [120, 280, 450, 620, 810, 760, 690, 580, 520, 480, 420, 360, 270, 150],
+                backgroundColor: '#169cf4',
+                borderRadius: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { beginAtZero: true, max: 1000, title: { display: true, text: 'Quantidade' } }
+            }
+        }
+    });
+
+    var graficoPermanencia = new Chart(document.getElementById('myChar2'), {
+        type: 'doughnut',
+        data: {
+            labels: ['Menos de 30 segundos', 'Entre 30 e 60 segundos', 'Entre 60 e 180 segundos', 'Mais de 180 segundos'],
+            datasets: [{
+                data: [5214, 2021, 842, 343],
+                backgroundColor: ['#20c66c', '#ffda33', '#ff992b', '#ff6252'],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '58%',
+            plugins: {
+                legend: { position: 'right', labels: { usePointStyle: true, padding: 18 } }
+            }
+        }
+    });
+
+    var graficoHistorico = new Chart(document.getElementById('myChart3'), {
+        type: 'line',
+        data: {
+            labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+            datasets: [{
+                label: 'Aproximações confirmadas',
+                data: [32, 41, 38, 56, 62, 78, 85],
+                borderColor: '#169cf4',
+                backgroundColor: '#169cf426',
+                fill: true,
+                pointRadius: 4
+            }, {
+                label: 'Permanências prolongadas',
+                data: [12, 17, 14, 22, 27, 35, 40],
+                borderColor: '#20c66c',
+                backgroundColor: '#20c66c26',
+                fill: true,
+                pointRadius: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { position: 'bottom', labels: { usePointStyle: true } } },
+            scales: {
+                y: { beginAtZero: true, max: 100, title: { display: true, text: 'Quantidade' } }
+            }
+        }
+    });
+
+    var graficoSetores = new Chart(document.getElementById('myChar4'), {
+        type: 'bar',
+        data: {
+            labels: ['Bebidas', 'Alimentos', 'Limpeza', 'Higiene', 'Congelados'],
+            datasets: [{
+                label: 'Aproximações',
+                data: [2140, 1730, 1220, 860, 470],
+                backgroundColor: ['#20c66c', '#ffda33', '#ff992b', '#169cf4', '#ff6252'],
+                borderRadius: 4
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { x: { beginAtZero: true } }
+        }
+    });
+    function atualizar() {
+        document.getElementById('div_msg').innerHTML = 'Os gráficos usam dados de exemplo. O filtro por setor depende da conexão com o banco de dados.';
+    }
+</script>
 </body>
 </html>
