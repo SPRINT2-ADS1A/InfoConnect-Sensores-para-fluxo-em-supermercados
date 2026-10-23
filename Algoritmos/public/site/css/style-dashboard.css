@@ -174,6 +174,7 @@ nav, .icones {
     color: #777777;
     font-size: 12px;
 }
+
 @media (max-width: 1100px) {
     .cabecalho-dashboard, .cards-kpi {
         flex-wrap: wrap;
