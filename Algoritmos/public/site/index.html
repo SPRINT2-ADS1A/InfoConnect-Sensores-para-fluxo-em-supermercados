@@ -1,98 +1,77 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>InfoConnect | Inteligência para o varejo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
   </head>
   <body>
     <header>
-      <a href="index.html">
-      <img src="img/logoCompleta.png" class="img" /> 
-    </a>
-
-      <nav class="nav-bar">
+      <a href="index.html"><img src="img/logoCompleta.png" alt="InfoConnect" /></a>
+      <nav class="nav-bar" aria-label="Navegação principal">
         <ul>
-          <li><a href="#">Sobre</a></li>
-          <li><a href="./homepage-servico.html">Serviços</a></li>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="./servicos.html">Serviços</a></li>
           <li><a href="./simulador.html">Simulador</a></li>
         </ul>
       </nav>
       <div class="icones">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <i
-          onclick="window.location.href = 'login.html'"
-          class="fa-regular fa-user"
-        ></i>
+        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        <a href="./login.html" aria-label="Acessar login"><i class="fa-regular fa-user"></i></a>
       </div>
     </header>
+
     <main>
       <section class="topo">
         <div class="topo-texto">
-          <h1>
-            Mais <span>inteligência</span> para cada metro quadrado da sua loja.
-          </h1>
-          <button class="botao-verde">Conheça a solução</button>
-          <a href="./simulador.html" class="botao-verde">Acessar simulador financeiro</a>
-          <button class="botao-contorno">Fale com um especialista</button>
+          <h1>Mais <span>inteligência</span> para cada metro quadrado da sua loja.</h1>
+          <div class="topo-botoes">
+            <a href="#solucao" class="botao-verde">Conheça a solução</a>
+            <a href="./simulador.html" class="botao-verde botao-simulador">Acessar simulador financeiro</a>
+            <a href="./suporte.html" class="botao-contorno">Fale com um especialista</a>
+          </div>
         </div>
-        <div class="topo-imagem">
-          <video src="img/Video.mp4"></video>
-          <!-- <img src="img/Video.jpg" alt="Moça próximo de uma prateleira." /> -->
-        </div>
+        <div class="topo-imagem"><video src="img/Video.mp4" autoplay muted loop playsinline></video></div>
       </section>
+
       <section class="faixa">
         <h2>Você sabe <span>onde</span> seus clientes estão?</h2>
-        <p>
-          Com nossos sensores inteligentes, é possível monitorar o fluxo e o
-          interesse dos consumidores dentro da loja.
-        </p>
+        <p>Com nossos sensores inteligentes, é possível monitorar o fluxo e o interesse dos consumidores dentro da loja.</p>
         <div class="itens">
           <div class="item">
-            <img src="img/fluxo.jpg" alt="fluxo" />
+            <img src="img/fluxo.jpg" alt="Fluxo de clientes" />
             <h3>Fluxo de clientes</h3>
             <p>Saiba quantas pessoas circulam por cada área.</p>
           </div>
           <div class="item">
-            <img src="img/tempo.jpg" alt="tempo" />
+            <img src="img/tempo.jpg" alt="Tempo de permanência" />
             <h3>Tempo de permanência</h3>
             <p>Descubra onde os consumidores permanecem por mais tempo.</p>
           </div>
           <div class="item">
-            <img src="img/mapa.jpg" alt="mapa" />
+            <img src="img/mapa.jpg" alt="Mapa de interesse" />
             <h3>Mapa de interesse</h3>
             <p>Identifique quais produtos atraem mais atenção.</p>
           </div>
         </div>
       </section>
-      <section class="sensor">
+
+      <section class="sensor" id="solucao">
         <h2>Do <span>movimento</span> aos <span>dados.</span></h2>
         <div class="sensor-colunas">
-          <div class="sensor-imagem">
-            <img src="img/movimento.jpg" alt="imagem do sensor" />
-          </div>
+          <div class="sensor-imagem"><img src="img/movimento.jpg" alt="Monitoramento do movimento na loja" /></div>
           <div class="sensor-texto">
-            <p>
-              Nosso sensor inteligente monitora o fluxo e o interesse dos
-              consumidores dentro do supermercado, gerando dados que ajudam sua
-              empresa a entender como os clientes percorrem a loja e quais
-              produtos despertam maior atenção.
-            </p>
-            <button class="botao-verde">Conheça a solução</button>
+            <p>Nosso sensor inteligente monitora o fluxo e o interesse dos consumidores dentro do supermercado, gerando dados que ajudam sua empresa a entender como os clientes percorrem a loja e quais produtos despertam maior atenção.</p>
+            <a href="./servicos.html" class="botao-verde">Conheça a solução</a>
           </div>
         </div>
       </section>
+
       <section class="faixa">
         <h2>Como funciona?</h2>
         <div class="itens">
@@ -118,34 +97,26 @@
           </div>
         </div>
       </section>
-      <section class="sobre">
+
+      <section class="sobre" id="sobre">
         <div class="sobre-colunas">
           <div class="sobre-texto">
-            <h2 style="color: #c6cfbb">Sobre nós</h2>
-            <h3 style="color: white">
-              <i>Tecnologia para transformar o varejo através de dados</i>
-            </h3>
-            <p style="color: white">
-              Desenvolvemos soluções capazes de transformar o comportamento
-              observado dentro da loja em informações úteis para a tomada de
-              decisões.
-            </p>
-            <button class="botao-contorno" style="color: white" onclick="">
-              Saiba mais
-            </button>
+            <h2>Sobre nós</h2>
+            <h3><i>Tecnologia para transformar o varejo através de dados</i></h3>
+            <p>Desenvolvemos soluções capazes de transformar o comportamento observado dentro da loja em informações úteis para a tomada de decisões.</p>
+            <a href="./servicos.html#sobre" class="botao-contorno">Saiba mais</a>
           </div>
-          <div class="sobre-imagem">
-            <img src="img/sobre.jpg" alt="Imagem de um carrinho" />
-          </div>
+          <div class="sobre-imagem"><img src="img/sobre.jpg" alt="Imagem de um carrinho" /></div>
         </div>
       </section>
     </main>
+
     <footer>
-      <nav>
+      <nav aria-label="Navegação do rodapé">
         <ul>
-          <a href="../homepage-servico.html#sobre">Sobre nós</a>
-          <a href="../homepage-servico.html">Serviços</a>
-          <a href="#">Suporte</a>
+          <li><a href="#sobre">Sobre nós</a></li>
+          <li><a href="./servicoa.html">Serviços</a></li>
+          <li><a href="./suporte.html">Suporte</a></li>
         </ul>
       </nav>
       <p>Copyright © 2026 - InfoConnect. Todos os direitos reservados.</p>
