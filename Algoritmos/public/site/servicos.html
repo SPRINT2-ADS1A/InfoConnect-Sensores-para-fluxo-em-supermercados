@@ -29,19 +29,22 @@
       <nav class="nav-bar">
         <!-- Cria uma lista sem numeração. -->
         <ul>
-          <!-- Li é um item; a cria o link; #sobre leva ao id sobre. -->
-          <li><a href="#sobre">Sobre</a></li>
-          <!-- Leva à seção com id servicos. -->
-          <li><a href="#servicos">Serviços</a></li>
-          <!-- Link provisório que aponta para o início da página. -->
+          <!-- Li é um item; a cria o link; ./index.html leva à página inicial. -->
+          <li><a href="./index.html">Home</a></li>
+          <!-- index.html#sobre abre o index e rola até a seção com id sobre. -->
+          <li><a href="./index.html#sobre">Sobre</a></li>
+          <!-- Leva à própria página de serviços. -->
+          <li><a href="./servicos.html">Serviços</a></li>
+          <!-- Leva à página do simulador financeiro. -->
           <li><a href="./simulador.html">Simulador</a></li>
         </ul>
       </nav>
       <div class="icones">
         <!-- As classes do Font Awesome desenham a lupa. -->
         <i class="fa-solid fa-magnifying-glass"></i>
-        <!-- As classes abaixo desenham o ícone de usuário. -->
-        <i class="fa-regular fa-user"></i>
+        <!-- O a deixa o ícone clicável e leva à página de login. -->
+        <!-- As classes do i desenham o ícone de usuário. -->
+        <a href="./login.html"><i class="fa-regular fa-user"></i></a>
       </div>
     </header>
     <main>
@@ -232,7 +235,7 @@
         <ul>
           <a href="../site/servicos.html#sobre">Sobre nós</a>
           <a href="./servicos.html">Serviços</a>
-          <a href="#">Suporte</a>
+          <a href="./suporte.html">Suporte</a>
         </ul>
       </nav>
       <p>Copyright © 2026 - InfoConnect. Todos os direitos reservados.</p>
