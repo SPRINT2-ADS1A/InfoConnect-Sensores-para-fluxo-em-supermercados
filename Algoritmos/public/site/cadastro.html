@@ -12,7 +12,7 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="./css/stylecadastro.css" />
+    <link rel="stylesheet" href="./css/style-cadastro.css" />
 
     <link
       rel="stylesheet"
@@ -27,14 +27,12 @@
 
       <nav class="nav-bar">
         <ul>
-          <li><a href="C:\Users\Dell\Downloads\InfoConnect-Sensores-para-fluxo-em-supermercados\Algoritmos\public\site\homepage-principal\index.html"><---  </a></li>
+          <li><a href="./index.html"></a></li>
         </ul>
       </nav>
       <div class="icones">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <i
+        <i class="fa-regular fa-user"
           onclick="window.location.href = 'login.html'"
-          class="fa-regular fa-user"
         ></i>
       </div>
     </header>
@@ -276,8 +274,6 @@ function cadastrar() {
         return false;
     }
 
-    // 6. Envia um JSON para o servidor Express.
-    // Os nomes que terminam em Server são os que o controller lê em req.body.
     fetch("/usuarios/cadastrar", {
         method: "POST",
         headers: {

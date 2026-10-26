@@ -4,8 +4,6 @@
     box-sizing: border-box;
 }
 
-
-
 :root {
     --verde-escuro: #485C11;
     --verde-claro: #8E9C78;
@@ -18,15 +16,15 @@ img {
     height: auto;
 }
 
-
 body {
-    background-image: url("../img/fundo.jpg") ;
+    background-image: url("../img/fundo.jpg");
     background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
     font-family: "Inter",sans-serif;
     color: var(--texto);
 }
-
-
 
 /* body {
     background-image: url("../img/fundo.jpg");
@@ -35,26 +33,28 @@ body {
     font-family: Arial, sans-serif;
 } */
 
-
-
 main {
     min-height: 600px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 40px 24px;
     box-sizing: border-box;
 }
-
-
-
-
 
 header {
     display: flex; /*coloca logo, menu e ícones lado a lado*/
     align-items: center; /*alinha os três na vertical, pelo meio*/
-    padding: 12px 48px; /*dá 12px de espaço em cima e embaixo e 48px nas laterais, p/ o conteúdo não colar na borda*/
+    gap: 32px;
+    padding: 18px 48px; /*dá espaço em cima e embaixo e nas laterais, p/ o conteúdo não colar na borda*/
     background-color: white;
+    border-bottom: 1px solid #e2e8d9;
+    box-shadow: 0 4px 16px rgba(35, 51, 12, 0.06);
+}
+
+header > a img {
+    width: 210px;
+    display: block;
 }
 
 .logo{
@@ -64,14 +64,19 @@ header {
 }
 
 .nav-bar{
-    flex:1; /*ocupa todo o espaço livre. Como sobre espaço depois dele, os ícones são empurradas p/ direita*/
-    margin-left: 48px; /*afasta o menu da logo*/
+    flex:1; /*ocupa todo o espaço livre. Como sobra espaço depois dele, os ícones são empurrados p/ direita*/
+    margin-left: 0; /*mantém o menu perto da logo*/
 }
 
 .nav-bar a{
     text-decoration: none; /*tira o sublinhado dos links*/
-    color: var(--texto);
-    font-size: 18px;
+    color: var(--verde-escuro);
+    font-size: 16px;
+    transition: opacity 0.2s;
+}
+
+.nav-bar a:hover {
+    opacity: 0.7;
 }
 
 .nav-bar ul {
@@ -82,23 +87,33 @@ header {
 
 .icones{
     display: flex; /*coloca <li> lado a lado*/
-    gap: 32px; /*espaça um do outro*/
-    color: gray;
+    gap: 12px; /*espaça um do outro*/
+    color: var(--verde-escuro);
     cursor: pointer;
 }
 
-
-
-.caixa-login {
-    width: 800px;
-    height: 450px; 
-    background-color: white;
+.icones i {
+    width: 40px;
+    height: 40px;
     display: flex;
-    border-radius: 30px;
-    overflow: hidden;
-    box-shadow: 5px 5px 10px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #dce5d0;
+    border-radius: 12px;
+    background-color: #fafcf7;
 }
 
+.caixa-login {
+    width: 860px;
+    max-width: 100%;
+    min-height: 460px;
+    background-color: white;
+    display: flex;
+    border: 1px solid #dde5d0;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 18px 45px rgba(30, 44, 12, 0.18);
+}
 
 .esquerda {
     width: 50%;
@@ -118,7 +133,7 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 15px;
+    gap: 16px;
 }
 
 .card-simulador {
@@ -148,6 +163,7 @@ header {
     content: "";
     display: block;
     width: 400px;
+    max-width: 80%;
     height: 4px;
     background-color: #387D2D;
     margin: 10px auto 0;
@@ -173,41 +189,71 @@ header {
     font-weight: 700;
     color: #222222;
     margin: 0 0 15px 0;
+    line-height: 1.2;
 }
 
 .esquerda h1 span {
-    color: #387D2D;
+    color: var(--verde-escuro);
+    font-family: "DM Serif Display", serif;
+    font-style: italic;
+    font-weight: 400;
 }
 
 .esquerda p {
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 18px;
+    font-weight: 400;
+    color: #555f49;
+    line-height: 1.5;
 }
 
 .campo {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 8px;
+}
+
+.campo span {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.direita .campo span {
+    color: white;
 }
 
 .campo input {
-    height: 40px;
+    height: 46px;
     border: 1px solid #cccccc;
-    border-radius: 8px;
-    padding: 0 12px;
+    border-radius: 10px;
+    padding: 0 14px;
     box-sizing: border-box;
+    font-family: inherit;
     font-size: 14px;
     color: #222222;
+    background-color: #fcfdf9;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.campo input:focus {
+    outline: none;
+    border-color: var(--verde-claro);
+    box-shadow: 0 0 0 3px rgba(196, 206, 136, 0.24);
 }
 
 .btn-entrar {
-    height: 40px;
+    height: 46px;
     border: none;
-    border-radius: 8px;
+    border-radius: 999px;
     background-color: white;
+    font-family: inherit;
     font-weight: bold;
     cursor: pointer;
-    color: #222222;
+    color: var(--verde-escuro);
+    transition: background-color 0.2s;
+}
+
+.btn-entrar:hover {
+    background-color: #edf3e3;
 }
 
 .btn-esqueci-senha {
@@ -220,15 +266,16 @@ header {
     cursor: pointer;
 }
 
-
 .btn-cadastrar-login {
-    height: 40px;
+    height: 46px;
     border: 2px solid white;
-    border-radius: 8px;
+    border-radius: 999px;
     background-color: transparent;
     color: white;
+    font-family: inherit;
     font-weight: bold;
     cursor: pointer;
+    transition: background-color 0.2s;
 }
 
 .btn-cadastrar-login:hover {
@@ -255,7 +302,7 @@ header {
 }
 
 .login_erro {
-    color: red;
+    color: #ffb9b9;
 }
 
 .ou {
@@ -289,7 +336,6 @@ header {
     margin: 0 0 30px 0;
 }
 
-
 .subtitulo_card {
     color: grey;
 }
@@ -298,6 +344,7 @@ header {
     content: "";
     display: block;
     width: 450px;
+    max-width: 80%;
     height: 4px;
     background-color: #387D2D;
     margin: 10px auto 0;
@@ -419,3 +466,51 @@ header {
     display: none;
 }
 
+@media (max-width: 850px) {
+    header {
+        flex-wrap: wrap;
+        gap: 18px;
+        padding: 16px 24px;
+    }
+
+    .nav-bar {
+        order: 3;
+        flex-basis: 100%;
+    }
+
+    .icones {
+        margin-left: auto;
+    }
+
+    .caixa-login {
+        min-height: 430px;
+    }
+
+    .esquerda, .direita {
+        padding: 36px;
+    }
+}
+
+@media (max-width: 600px) {
+    header > a img {
+        width: 165px;
+    }
+
+    .caixa-login {
+        flex-direction: column;
+        border-radius: 22px;
+    }
+
+    .esquerda, .direita {
+        width: 100%;
+        padding: 30px 26px;
+    }
+
+    .esquerda h1 {
+        font-size: 30px;
+    }
+
+    main {
+        padding: 30px 16px;
+    }
+}
