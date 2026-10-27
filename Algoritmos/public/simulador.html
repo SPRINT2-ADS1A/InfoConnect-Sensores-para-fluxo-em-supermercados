@@ -112,6 +112,8 @@
     let taxa_mensal = 10;
     let contarMes = 0;
     let acumuloMensal = 0;
+    let mensagem = ``;
+    let mensagem2 = ``;
 
     div_acumulo_por_mes.innerHTML = "";
 
@@ -122,18 +124,18 @@
         let saldo = ganho_total - investimento;
         let roi = (saldo / investimento) * 100;
 
-        div_roi.innerHTML = `
-                    <b>ROI em ${meses} meses:</b> ${roi.toFixed(2)}%<br>
+        mensagem = `<b>ROI em ${meses} meses:</b> ${roi.toFixed(2)}%<br>
                     <b>Investimento inicial:</b> R$ ${investimento.toFixed(2)}<br>
                     <b>Ganho acumulado:</b> R$ ${ganho_total.toFixed(2)}<br>
                     <b>Saldo final:</b> R$ ${saldo.toFixed(2)}<br><br>
                     Ganho mensal estimado: R$ ${ganho_mensal.toFixed(2)}
                 `;
-
+        div_roi.innerHTML = mensagem
         while (contarMes < meses) {
           contarMes++;
           acumuloMensal += ganho_mensal;
-          div_acumulo_por_mes.innerHTML += `${contarMes} mês = ${acumuloMensal} <br>`;
+          mensagem2 += `${contarMes} mês = ${acumuloMensal} <br>`;
+          div_acumulo_por_mes.innerHTML += mensagem2
         }
       } else {
         div_roi.innerHTML = "Informe um período válido de meses.";
