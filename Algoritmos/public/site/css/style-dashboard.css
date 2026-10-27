@@ -11,6 +11,11 @@ body {
     max-width: 1440px;
     margin: 0 auto;
 }
+img {
+    width: 250px;
+    height: auto;
+}
+
 header {
     background-color: white;
     height: 64px;
