@@ -1,24 +1,13 @@
-* {
-    box-sizing: border-box;
-}
 body {
     background-color: #FAF7F2;
+    background-size: cover;
     margin: 0;
     font-family: Arial, sans-serif;
-}
-.dashboard {
-    width: 94%;
-    max-width: 1440px;
-    margin: 0 auto;
-}
-img {
-    width: 250px;
-    height: auto;
 }
 
 header {
     background-color: white;
-    height: 64px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -26,189 +15,334 @@ header {
     border-bottom: 1px solid #e5e5e5;
     color: #222222;
 }
-nav, .icones {
+nav {
     display: flex;
     gap: 30px;
     font-size: 16px;
 }
-.nav-bar, .icones, .logo {
+
+.nav-bar:hover {
     cursor: pointer;
 }
+
+.icones {
+    display: flex;
+    gap: 30px;
+}
+
+.icones:hover {
+    cursor: pointer;
+}
+
 .logo-container {
     display: flex;
     align-items: center;
     gap: 12px;
 }
+
 .logo {
     font-family: "Playfair Display", serif;
     font-size: 26px;
     font-weight: bold;
     color: #387D2D;
 }
+
 .logo label {
-    color: #444444;
+    color:#444444;
     font-weight: 500;
 }
+
 .logoimagem {
-    height: 48px;
+    height: 60px;
     width: auto;
+} 
+
+.logo:hover {
+    cursor: pointer;
 }
+
+/* Cabeçalho da dashboard */
 .cabecalho-dashboard {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 28px 0;
-    gap: 30px;
+    margin: 30px 40px;
+    gap: 20px;
 }
+
 .titulo h1 {
-    font-family: "Playfair Display", serif;
+    color: #071957;
     font-size: 32px;
-    color: #444444;
     margin: 0;
 }
-.titulo i, .cardI h3 i {
-    color: #387D2D;
+
+.titulo p {
+    color: #666666;
+    margin-bottom: 0;
 }
-.titulo span {
+
+.periodo {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+/* Os três grupos usam o mesmo alinhamento. */
+.cards-kpi, .cards, .pontos {
+    display: flex;
+    gap: 20px;
+}
+
+.cards-kpi, .cards {
+    margin: 0 40px 20px;
+}
+
+.cardKPI, .cardI, .cardPonto {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+    min-width: 0;
+}
+
+.cardKPI, .cardPonto {
+    width: 25%;
+}
+
+.cardKPI i {
+    float: left;
+    color: #1688F0;
+    background-color: #E6F3FF;
+    font-size: 24px;
+    padding: 12px;
+    border-radius: 50%;
+    margin-right: 12px;
+}
+
+.cardKPI h2 {
+    color: #1688F0;
+    font-size: 32px;
+    margin: 10px 0 10px 60px;
+}
+
+.cardKPI h3 {
+    color: #071957;
     font-size: 15px;
+    min-height: 36px;
+    margin: 0 0 0 60px;
+}
+
+.cardKPI p, .cardPonto p {
+    font-size: 13px;
+    line-height: 1.5;
     color: #666666;
 }
-.filtros {
-    display: flex;
-    align-items: flex-end;
-    gap: 15px;
+
+.cardKPI p {
+    margin-left: 60px;
+    color: #6478AD;
 }
-.filtro {
+
+.cardKPI .comparacao, .cardPonto .comparacao {
+    color: #1688F0;
+}
+
+.cardPonto .queda {
+    color: #AD6800;
+}
+
+/* Gráficos */
+.cardI {
+    width: 50%;
     display: flex;
     flex-direction: column;
-    gap: 8px;
 }
-.filtro span {
-    font-size: 14px;
-    font-weight: bold;
-    color: #444444;
-}
-.filtro select {
-    padding: 12px 15px;
-    border: 1px solid #e5e5e5;
-    border-radius: 8px;
-    background-color: white;
-    font-size: 14px;
-    max-width: 100%;
-}
-.filtros button {
-    background-color: #387D2D;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 13px 25px;
-    font-size: 14px;
-    cursor: pointer;
-}
-.filtros button:hover {
-    background-color: #2c6324;
-}
-.cards-kpi, .cards {
-    display: flex;
-    gap: 15px;
-}
-.cards-kpi {
-    margin-bottom: 15px;
-}
-.cardKPI {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    flex: 1;
-    min-width: 0;
-    min-height: 136px;
-    background-color: white;
-    padding: 20px;
-    border-radius: 20px;
-}
-.kpimagem {
-    width: 48px;
-    height: 48px;
-    flex-shrink: 0;
-}
-.cardKPI > div {
-    min-width: 0;
-}
-.cardKPI h2 {
-    margin: 0 0 8px;
-    font-size: 28px;
-    color: #222222;
-}
-.cardKPI h3 {
+
+.cardI h3, .analise h2, .insights h3 {
+    color: #071957;
     margin: 0;
-    font-size: 14px;
-    line-height: 1.4;
-    font-weight: normal;
+}
+
+.cardI p {
     color: #666666;
-    overflow-wrap: break-word;
+    font-size: 14px;
+    line-height: 1.5;
 }
-.coluna-esquerda {
-    flex: 1.3;
-    min-width: 0;
-}
-.coluna-direita {
-    flex: 1;
-    min-width: 0;
-}
-.cardI {
-    background-color: white;
-    margin-bottom: 15px;
-    padding: 20px;
-    border-radius: 12px;
-}
-.cardI h3 {
-    color: #152249;
-    font-size: 17px;
-    margin: 0 0 15px;
-}
-.cardI h3 i {
-    margin-right: 8px;
-}
+
 .grafico {
-    position: relative;
-    height: 210px;
     width: 100%;
+    height: 270px;
+    margin-bottom: 8px;
 }
-.aviso {
-    margin-bottom: 15px;
-    color: #777777;
+
+.cardI .referencia, .cardPonto .referencia {
+    color: #996000;
     font-size: 12px;
 }
 
-@media (max-width: 1100px) {
-    .cabecalho-dashboard, .cards-kpi {
-        flex-wrap: wrap;
-    }
-    .cardKPI {
-        flex-basis: calc(50% - 15px);
-    }
-    .cards {
-        flex-direction: column;
-    }
-    .coluna-esquerda, .coluna-direita {
-        width: 100%;
-    }
+.cardI .insight {
+    background-color: #F7F7F4;
+    color: #526DA7;
+    padding: 14px;
+    border-radius: 8px;
+    margin-top: auto;
+    margin-bottom: 0;
 }
-@media (max-width: 650px) {
-    header {
-        height: auto;
-        padding: 15px;
-        flex-wrap: wrap;
-        gap: 15px;
-    }
-    nav, .filtros {
-        flex-wrap: wrap;
-        gap: 15px;
-    }
-    .cabecalho-dashboard {
-        padding: 25px 0;
-    }
-    .cardKPI {
-        flex-basis: 100%;
-    }
+
+
+/* Legendas e comentários dos gráficos */
+.ajuda {
+    float: right;
+    border: 1px solid #8495BD;
+    border-radius: 50%;
+    color: #6478AD;
+    padding: 2px 7px;
+    font-size: 14px;
+    margin-left: 8px;
 }
+
+.cardI .legenda-referencia {
+    text-align: center;
+    color: #6478AD;
+    font-size: 12px;
+}
+
+.legenda-referencia span {
+    display: inline-block;
+    width: 36px;
+    border-top: 2px dashed #F5A623;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.conteudo-grafico {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin: 15px 0;
+    flex: 1;
+}
+
+.pizza {
+    width: 42%;
+}
+
+.legenda {
+    width: 58%;
+}
+
+.cardI .legenda p {
+    color: #6478AD;
+    font-size: 13px;
+    margin: 18px 0;
+}
+
+.legenda b {
+    color: #071957;
+    margin-right: 12px;
+}
+
+.bolinha {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.cardI .referencia-pizza {
+    background-color: #FFF3E1;
+    color: #A65A00;
+    padding: 12px;
+    border-left: 4px solid #F5A623;
+    border-radius: 8px;
+}
+
+.cardKPI .resultado-bom, .legenda .resultado-bom, .resultado-bom b {
+    color: #277A26;
+}
+
+.resultado-ruim {
+    color: #B71C1C;
+}
+
+/* Pontos de exposição */
+.analise, .insights {
+    background-color: white;
+    margin: 0 40px 20px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.analise > p, .insights p {
+    color: #666666;
+    font-size: 14px;
+}
+
+.cardPonto {
+    padding: 15px;
+    border: 1px solid #E5E5E5;
+}
+
+.cardPonto h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.cardPonto strong {
+    float: right;
+    color: #222222;
+}
+
+.cardPonto .status {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #222222;
+}
+
+/* A largura do preenchimento e a posição do traço estão no HTML. */
+.barra {
+    background-color: #F0EDE7;
+    height: 16px;
+    border-radius: 4px;
+    position: relative;
+}
+
+.barra span {
+    display: block;
+    height: 100%;
+    border-radius: 4px;
+}
+
+.barra b {
+    position: absolute;
+    top: -4px;
+    width: 2px;
+    height: 24px;
+    background-color: #333333;
+}
+
+.verde {
+    background-color: #87C779;
+}
+
+.amarelo {
+    background-color: #FFCD82;
+}
+
+.vermelho {
+    background-color: #FFBDBD;
+}
+
+footer {
+    color: #666666;
+    font-size: 12px;
+    margin: 0 40px 20px;
+    line-height: 1.5;
+}
+
+

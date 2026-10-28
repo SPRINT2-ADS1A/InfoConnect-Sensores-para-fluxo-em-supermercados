@@ -1,234 +1,296 @@
-<!DOCTYPE html>
-<html lang="ptBR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/style-dashboard.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-    
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+      rel="stylesheet"
+    />
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Mostra os valores sobre as barras e dentro da pizza. -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 
     <title>Dashboard</title>
-</head>
-<body>
-    <header>
-        <div class="logo-container">
-        <a href="index.html"><img src="img/logoCompleta.png" class="logo" alt="InfoConnect" /></a>
-        </div>
-        
-        <div style="margin-right:300px ;">
-            <nav class="nav-bar">
-                <span onclick="window.location.href='index.html#sobre'">Sobre</span>
-                <span onclick="window.location.href='servicos.html'">Serviços</span>
-                <span onclick="window.location.href='suporte.html'">Suporte</span>
-                <span onclick="window.location.href='simulador.html'">Simulador</span>
-            </nav>
-        </div>
+  </head>
 
-        <div class="icones">
-            <i onclick="window.location.href='login.html'" class="fa-regular fa-user"></i>
-        </div>
+  <body>
+    <header>
+      <div class="logo-container">
+  <a href="./index.html"><img src="img/logoCompleta.png" alt="InfoConnect" class="logoimagem" /></a>
+</div>
+
+      <nav class="nav-bar">
+        <span>Sobre</span>
+        <span>Serviços</span>
+        <span>Suporte</span>
+        <span onclick="window.location.href = 'simulador.html'">Simulador</span>
+      </nav>
+
+      <div class="icones">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <i
+          onclick="window.location.href = 'login.html'"
+          class="fa-regular fa-user"
+        ></i>
+      </div>
     </header>
 
-    <div class="dashboard"> 
-
     <div class="cabecalho-dashboard">
-            <div class="titulo">
-                <h1>Visão <i>Geral</i></h1>
-                <span>Panorama geral do fluxo de aproximação no supermercado</span>
-            </div>
-
-            <div class="filtros">
-
-                <div class="filtro">
-                    <span>Setor</span>
-                    <select id="select_setor">
-                        <option>Todos</option>
-                        <option>Alimentos</option>
-                        <option>Bebidas</option>
-                        <option>Congelados</option>
-                        <option>Limpeza</option>
-                        <option>Higiene</option>
-                    </select>
-                </div>
-
-                <div class="filtro">
-                    <span>Período</span>
-                    <select id="select-periodo">
-                        <option>01/09/2026 - 30/09/2026</option>
-                    </select>
-                </div>
-
-                <button onclick="atualizar()">Atualizar</button>
-
-            </div>
+      <div class="titulo">
+        <h1>Movimento e permanência</h1>
+        <p>Entenda as aproximações e identifique oportunidades de análise.</p>
+      </div>
+      <p class="periodo">19 a 25 de outubro de 2026 · Demonstração</p>
     </div>
 
+    <!-- Os valores são fictícios, para demonstrar a dashboard. -->
     <div class="cards-kpi">
-        <div class="cardKPI">
-            <img src="./img/motion.png" alt="" class="kpimagem">
-            <div>
-                <h2>7.146</h2>
-                <h3>Total de Aproximações</h3>
-            </div>
-        </div>
+      <div class="cardKPI">
+        <i class="fa-solid fa-users"></i>
+        <h3>Aproximações na semana</h3>
+        <h2>9.000</h2>
+        <p class="resultado-bom">▲ 12,5% vs. semana anterior</p>
+        <p>Meta: 8.400 · <b class="resultado-bom">atingida</b></p>
+      </div>
 
-        <div class="cardKPI">
-            <img src="./img/hourglass.png" alt="" class="kpimagem">
-            <div>
-                <h2>65,5 s</h2>
-                <h3>Tempo Médio de Permanência</h3>
-            </div>
-        </div>
+      <div class="cardKPI">
+        <i class="fa-regular fa-clock"></i>
+        <h3>Faixa de maior movimento</h3>
+        <h2>12h às 16h</h2>
+        <p>3.600 aproximações (40%). Comparação da mesma faixa.</p>
+      </div>
 
-        <div class="cardKPI">
-            <img src="./img/clock.png" alt="" class="kpimagem">
-            <div>
-                <h2>3.250</h2>
-                <h3>Permanência Prolongada</h3>
-            </div>
-        </div>
+      <div class="cardKPI">
+        <i class="fa-solid fa-chart-column"></i>
+        <h3>Dias abaixo da referência</h3>
+        <h2>2 de 7 dias</h2>
+        <p class="comparacao">Segunda e terça-feira</p>
+        <p>Referência: 1.200/dia · <b class="resultado-ruim">investigar quedas</b></p>
+      </div>
 
-        <div class="cardKPI">
-            <img src="./img/sensor.png" alt="" class="kpimagem">
-            <div>
-                <h2>20</h2>
-                <h3>Sensores Ativos</h3>
-            </div>
-        </div>
+      <div class="cardKPI">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <h3>Pontos que precisam de atenção</h3>
+        <h2>2 de 4</h2>
+        <p>Ponto C · Limpeza e Ponto D · Hortifruti</p>
+      </div>
     </div>
 
     <div class="cards">
-        <div class="coluna-esquerda">
-            <div class="cardI">
-                <h3><i class="fa-solid fa-chart-column"></i> Aproximações por horário</h3>
-                <div class="grafico">
-                    <canvas id="myChart1"></canvas>
-                </div>
-            </div>
-
-            <div class="cardI">
-                <h3><i class="fa-solid fa-chart-line"></i> Histórico de aproximações</h3>
-                <div class="grafico">
-                    <canvas id="myChart3"></canvas>
-                </div>
-            </div>
+      <div class="cardI">
+        <h3><span class="ajuda" title="Quantidade de aproximações por dia e referência gerencial diária.">?</span>Como o movimento variou na semana?</h3>
+        <p>Quantas aproximações foram registradas por dia da semana?</p>
+        <div class="grafico">
+          <canvas id="myChart1" aria-label="Gráfico de aproximações por dia da semana" role="img"></canvas>
         </div>
+        <p class="legenda-referencia"><span></span>Referência gerencial: 1.200 aproximações/dia</p>
+        <p class="insight">Avaliar reposição nos dias de maior movimento.</p>
+      </div>
 
-        <div class="coluna-direita">
-            <div class="cardI">
-                <h3><i class="fa-regular fa-clock"></i> Tempo de permanência por faixa</h3>
-                <div class="grafico">
-                    <canvas id="myChar2"></canvas>
-                </div>
-            </div>
-
-            <div class="cardI">
-                <h3><i class="fa-solid fa-chart-column"></i> Top 5 setores com mais aproximações</h3>
-                <div class="grafico">
-                    <canvas id="myChar4"></canvas>
-                </div>
-            </div>
+      <div class="cardI">
+        <h3><span class="ajuda" title="Participação de cada faixa de horário no total de aproximações da semana.">?</span>Quando as aproximações se concentram?</h3>
+        <p>Em quais faixas de horário ocorrem mais aproximações?</p>
+        <div class="conteudo-grafico">
+          <div class="grafico pizza">
+            <canvas id="myChart2" aria-label="08h–12h: 30%; 12h–16h: 40%; 16h–20h: 30%." role="img"></canvas>
+          </div>
+          <div class="legenda">
+            <p><span class="bolinha" style="background-color: #1688F0;"></span><b>08h – 12h</b> 2.700 aproximações (30%)</p>
+            <p><span class="bolinha" style="background-color: #318B2F;"></span><b>12h – 16h</b> 3.600 aproximações (40%)</p>
+            <p><span class="bolinha" style="background-color: #88C9FF;"></span><b>16h – 20h</b> 2.700 aproximações (30%)</p>
+            <p class="referencia-pizza">Referência de atenção: 3.000 aproximações/faixa.</p>
+            <p class="resultado-bom"><b>12h – 16h: acima da referência.</b></p>
+          </div>
         </div>
+        <p class="insight">Entre 12h – 16h, avaliar o planejamento da reposição.</p>
+      </div>
     </div>
 
-    <div class="aviso" id="div_msg">Dados de exemplo para visualização da dashboard.</div>
+    <div class="analise">
+      <h2>Análise dos pontos de exposição</h2>
+      <p>Recorte de 4 pontos: 4.960 das 9.000 aproximações da semana.</p>
+
+      <!-- Cada barra vai de 0 a 60. O traço escuro indica a referência. -->
+      <div class="pontos">
+        <div class="cardPonto">
+          <h3>Ponto A · Bebidas</h3>
+          <p>Refrigerante 2 L · 1.796 aproximações</p>
+          <p class="status verde">Acima das referências</p>
+          <p>Permanências ≥ 3 s <strong>49,0%</strong></p>
+          <div class="barra">
+            <span class="verde" style="width: 81.7%;"></span>
+            <b style="left: 75%;"></b>
+          </div>
+          <p>Permanência média <strong>42 s</strong></p>
+          <div class="barra">
+            <span class="verde" style="width: 70%;"></span>
+            <b style="left: 58.3%;"></b>
+          </div>
+          <p class="referencia">Referências: 45% e 35 s</p>
+          <p class="comparacao">↑ Aproximações: +12,3% vs. semana anterior</p>
+        </div>
+
+        <div class="cardPonto">
+          <h3>Ponto B · Mercearia</h3>
+          <p>Biscoitos · 1.386 aproximações</p>
+          <p class="status verde">Acima das referências</p>
+          <p>Permanências ≥ 3 s <strong>46,9%</strong></p>
+          <div class="barra">
+            <span class="verde" style="width: 78.2%;"></span>
+            <b style="left: 75%;"></b>
+          </div>
+          <p>Permanência média <strong>39 s</strong></p>
+          <div class="barra">
+            <span class="verde" style="width: 65%;"></span>
+            <b style="left: 58.3%;"></b>
+          </div>
+          <p class="referencia">Referências: 45% e 35 s</p>
+          <p class="comparacao">↑ Aproximações: +10% vs. semana anterior</p>
+        </div>
+
+        <div class="cardPonto">
+          <h3>Ponto C · Limpeza</h3>
+          <p>Detergente · 1.053 aproximações</p>
+          <p class="status amarelo">Ponto de atenção</p>
+          <p>Permanências ≥ 3 s <strong>42,7%</strong></p>
+          <div class="barra">
+            <span class="amarelo" style="width: 71.2%;"></span>
+            <b style="left: 75%;"></b>
+          </div>
+          <p>Permanência média <strong>35 s</strong></p>
+          <div class="barra">
+            <span class="verde" style="width: 58.3%;"></span>
+            <b style="left: 58.3%;"></b>
+          </div>
+          <p class="referencia">Referências: 45% e 35 s</p>
+          <p class="comparacao queda">↓ Aproximações: -10% vs. semana anterior</p>
+        </div>
+
+        <div class="cardPonto">
+          <h3>Ponto D · Hortifruti</h3>
+          <p>725 aproximações</p>
+          <p class="status vermelho">Abaixo das referências</p>
+          <p>Permanências ≥ 3 s <strong>34,5%</strong></p>
+          <div class="barra">
+            <span class="amarelo" style="width: 57.5%;"></span>
+            <b style="left: 75%;"></b>
+          </div>
+          <p>Permanência média <strong>31 s</strong></p>
+          <div class="barra">
+            <span class="amarelo" style="width: 51.7%;"></span>
+            <b style="left: 58.3%;"></b>
+          </div>
+          <p class="referencia">Referências: 45% e 35 s</p>
+          <p class="comparacao queda">↓ Aproximações: -9,4% vs. semana anterior</p>
+        </div>
+      </div>
     </div>
-<script>
-    var graficoHorario = new Chart(document.getElementById('myChart1'), {
-        type: 'bar',
-        data: {
-            labels: ['08h', '09h', '10h', '11h', '12h', '13h', '14h', '15h', '16h', '17h', '18h', '19h', '20h', '21h'],
-            datasets: [{
-                label: 'Aproximações',
-                data: [165, 325, 495, 665, 855, 821, 735, 635, 555, 535, 455, 405, 315, 185],
-                backgroundColor: '#169cf4',
-                borderRadius: 4
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
-            scales: {
-                y: { beginAtZero: true, max: 1000, title: { display: true, text: 'Quantidade' } }
-            }
-        }
-    });
 
-    var graficoPermanencia = new Chart(document.getElementById('myChar2'), {
-        type: 'doughnut',
-        data: {
-            labels: ['Menos de 30 segundos', 'Entre 30 e 60 segundos', 'Entre 60 e 180 segundos', 'Mais de 180 segundos'],
-            datasets: [{
-                data: [850, 1025, 2021, 3250],
-                backgroundColor: ['#ff6252', '#ff992b', '#ffda33', '#20c66c'],
-                borderWidth: 0
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            cutout: '58%',
-            plugins: {
-                legend: { position: 'right', labels: { usePointStyle: true, padding: 18 } }
-            }
-        }
-    });
 
-    var graficoHistorico = new Chart(document.getElementById('myChart3'), {
-        type: 'line',
-        data: {
-            labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
-            datasets: [{
-                label: 'Aproximações confirmadas',
-                data: [32, 41, 38, 56, 62, 78, 85],
-                borderColor: '#169cf4',
-                backgroundColor: '#169cf426',
-                fill: true,
-                pointRadius: 4
-            }, {
-                label: 'Permanências prolongadas',
-                data: [12, 17, 14, 22, 27, 35, 40],
-                borderColor: '#20c66c',
-                backgroundColor: '#20c66c26',
-                fill: true,
-                pointRadius: 4
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: { legend: { position: 'bottom', labels: { usePointStyle: true } } },
-            scales: {
-                y: { beginAtZero: true, max: 100, title: { display: true, text: 'Quantidade' } }
-            }
-        }
-    });
+    <script>
+      // Gráfico semanal. A segunda série desenha a linha de referência.
+      const ctx1 = document.getElementById("myChart1");
 
-    var graficoSetores = new Chart(document.getElementById('myChar4'), {
-        type: 'bar',
+      new Chart(ctx1, {
+        type: "bar",
+        plugins: [ChartDataLabels],
         data: {
-            labels: ['Bebidas', 'Alimentos', 'Limpeza', 'Higiene', 'Congelados'],
-            datasets: [{
-                label: 'Aproximações',
-                data: [2140, 1730, 1220, 860, 470],
-                backgroundColor: ['#20c66c', '#ffda33', '#ff992b', '#169cf4', '#ff6252'],
-                borderRadius: 4
-            }]
+          labels: ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"],
+          datasets: [
+            {
+              label: "Aproximações",
+              data: [1000, 1100, 1200, 1300, 1400, 1500, 1500],
+              backgroundColor: "#1688F0",
+              borderRadius: 3,
+              order: 2
+            },
+            {
+              type: "line",
+              label: "Referência: 1.200 por dia",
+              data: [1200, 1200, 1200, 1200, 1200, 1200, 1200],
+              borderColor: "#F5A623",
+              borderWidth: 2,
+              borderDash: [6, 4],
+              pointRadius: 0,
+              datalabels: { display: false },
+              order: 1
+            }
+          ]
         },
         options: {
-            indexAxis: 'y',
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
-            scales: { x: { beginAtZero: true } }
+          responsive: true,
+          maintainAspectRatio: false,
+          layout: { padding: { top: 20 } },
+          plugins: {
+            legend: { display: false },
+            datalabels: {
+              anchor: "end",
+              align: "top",
+              color: "#1688F0",
+              font: { weight: "bold" },
+              formatter: function(valor) {
+                return valor.toLocaleString("pt-BR");
+              }
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              max: 1600,
+              ticks: {
+                stepSize: 400,
+                callback: function(valor) {
+                  return valor.toLocaleString("pt-BR");
+                }
+              }
+            }
+          }
         }
-    });
-    function atualizar() {
-        document.getElementById('div_msg').innerHTML = 'Os gráficos usam dados de exemplo. O filtro por setor depende da conexão com o banco de dados.';
-    }
-</script>
-</body>
+      });
+
+      // Gráfico de pizza: percentuais dentro das fatias e legenda no HTML.
+      const ctx2 = document.getElementById("myChart2");
+
+      new Chart(ctx2, {
+        type: "pie",
+        plugins: [ChartDataLabels],
+        data: {
+          labels: [
+            "08h – 12h",
+            "12h – 16h",
+            "16h – 20h"
+          ],
+          datasets: [
+            {
+              data: [2700, 3600, 2700],
+              backgroundColor: ["#1688F0", "#318B2F", "#88C9FF"],
+              borderColor: "white",
+              borderWidth: 2
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            datalabels: {
+              color: ["white", "white", "#071957"],
+              font: { weight: "bold", size: 14 },
+              formatter: function(valor) {
+                return (valor / 9000 * 100) + "%";
+              }
+            }
+          }
+        }
+      });
+    </script>
+  </body>
 </html>
