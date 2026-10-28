@@ -1,0 +1,45 @@
+INFOCONNECT — VERSÃO SIMPLIFICADA
+
+Extraia o ZIP e abra dashboard.html. Mantenha style.css e dashboard.js
+na mesma pasta. Os dados são demonstrativos, sem conexão com a API.
+
+ALTERAÇÕES SOLICITADAS
+- Removida a faixa inferior "Insights e pontos de atenção" inteira.
+- Removido o subtítulo "Recorte de 4 pontos: 4.960...".
+- Removidos os subtítulos de produto e quantidade abaixo de cada ponto.
+- Removida a legenda "Referências: 45% e 35 s" de cada ponto.
+- Ponto D renomeado de Higiene para Hortifruti; mantidos os números.
+- Setores: Bebidas, Mercearia, Limpeza e Hortifruti.
+- Removidas as abas Semana, Horários e Zonas quentes e suas análises extras.
+- Removida a faixa azul transparente do gráfico semanal e sua legenda.
+- Removido o seletor Por horário / Por permanência e a análise alternativa.
+- Restaurados os títulos curtos do último exemplo enviado.
+
+MANTIDO
+- Cores, navbar, organização e quatro indicadores superiores.
+- Dois gráficos fixos: barras de segunda a domingo e pizza por horário.
+- Linha pontilhada da referência diária, valores e cores dos gráficos.
+- Indicadores e comparações semanais, barras dos pontos e seus marcadores.
+- Filtro superior por setor e ajudas (?) dos gráficos.
+- Notas curtas dentro dos gráficos e rodapé de dados fictícios.
+- Chart.js 4.4.8 e os gráficos SVG de apoio para abrir sem internet.
+- Página index sem alterações.
+
+OBSERVAÇÕES
+A linha diária continua com referência de 1.200 aproximações no geral.
+Os marcadores dos pontos continuam representando 45% e 35 segundos;
+apenas a legenda repetitiva foi retirada. Os valores podem ser editados
+no início de dashboard.js. Permanência >= 3 s é o critério do projeto,
+não uma confirmação de interesse ou compra.
+
+Os quatro pontos somam 4.960 das 9.000 aproximações; representam um recorte,
+embora o subtítulo tenha sido removido conforme solicitado. A pizza mantém
+a distribuição horária de todas as 9.000 aproximações no filtro geral.
+No filtro de setor, os dados são do ponto monitorado, não de todo o setor.
+
+Hortifruti é uma categoria usada em supermercados como Carrefour:
+https://mercado.carrefour.com.br/colecao/18181/score-desc/categoria/mercearia
+
+Se houver outro style.css no seu projeto, use uma pasta separada para testar.
+Ao integrar, evite substituir o CSS das demais páginas. Os links da navbar
+dependem das páginas do seu projeto, que não estão neste ZIP.
