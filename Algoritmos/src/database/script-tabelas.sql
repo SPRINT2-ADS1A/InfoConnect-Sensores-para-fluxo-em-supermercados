@@ -1,250 +1,324 @@
--- Versao executavel do SQL do Grupo01. O arquivo DataBase_Grupo01.sql
--- preserva o original integral. Correcao minima: Supermercado -> supermercado
--- (MySQL em Linux diferencia maiusculas), e email unico para login.
--- =========================================================
--- GRUPO 01 --
--- =========================================================
+	CREATE USER 'infoconnect_app'@'localhost'
+		IDENTIFIED BY 'app123@';
 
-CREATE DATABASE IF NOT EXISTS infoconnect;
-USE infoconnect;
+	GRANT SELECT, INSERT ON infoconnect.*
+		TO 'infoconnect_app'@'localhost';
 
-CREATE TABLE cliente (
-    idcliente INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(45) NOT NULL,
-    cpf CHAR(11) UNIQUE NOT NULL,
-    email VARCHAR(45) NOT NULL,
-    telefone VARCHAR(45),
-    CONSTRAINT chkEmailCliente
-        CHECK (email LIKE '%@%.%')
-);
+	FLUSH PRIVILEGES;
 
-CREATE TABLE endereco (
-    idEndereco INT PRIMARY KEY AUTO_INCREMENT,
-    estado VARCHAR(45),
-    cidade VARCHAR(45) NOT NULL,
-    logradouro VARCHAR(45) NOT NULL,
-    numero VARCHAR(45),
-    cep VARCHAR(45)
-);
+	CREATE DATABASE IF NOT EXISTS infoconnect;
 
-CREATE TABLE supermercado (
-    idSupermercado INT PRIMARY KEY AUTO_INCREMENT,
-    nomeFantasia VARCHAR(50) NOT NULL,
-    cnpj CHAR(18) UNIQUE NOT NULL,
-    fkCliente INT NOT NULL,
-    fkEndereco INT NOT NULL UNIQUE,
-    CONSTRAINT fkClienteSupermercado
-        FOREIGN KEY (fkCliente)
-        REFERENCES cliente(idcliente),
-    CONSTRAINT fkEnderecoSupermercado
-        FOREIGN KEY (fkEndereco)
-        REFERENCES endereco(idEndereco)
-);
+	USE infoconnect;
 
-CREATE TABLE setor (
-    idSetor INT PRIMARY KEY AUTO_INCREMENT,
-    setor VARCHAR(45) NOT NULL,
-    gondola VARCHAR(45),
-    fkSupermercado INT NOT NULL,
-    CONSTRAINT fkSupermercadoSetor
-        FOREIGN KEY (fkSupermercado)
-        REFERENCES supermercado(idSupermercado)
-);
+	-- endereco: localizacao fisica de cada loja.
+	-- Mantem a ordem original das tabelas, mesmo com referencias cruzadas.
+	SET FOREIGN_KEY_CHECKS = 0;
 
-CREATE TABLE sensor (
-    idsensor INT PRIMARY KEY AUTO_INCREMENT,
-    tipoSensor VARCHAR(10),
-    dtInstalacao DATE,
-    statuss VARCHAR(15) NOT NULL,
-    ultimaManutencao DATE,
-    fkSetor INT NOT NULL,
-    CONSTRAINT chkStatusSensor
-        CHECK (statuss IN ('Ativo', 'Inativo', 'Em manutenção')),
-    CONSTRAINT fkSetorSensor
-        FOREIGN KEY (fkSetor)
-        REFERENCES setor(idSetor)
-);
+	CREATE TABLE endereco (
+		idEndereco INT PRIMARY KEY AUTO_INCREMENT,
+		uf CHAR(2) NOT NULL,
+		cidade VARCHAR(100) NOT NULL,
+		logradouro VARCHAR(200) NOT NULL,
+		numero VARCHAR(20),
+		cep CHAR(8)
+	);
 
-CREATE TABLE registro (
-    idmonitoramento INT NOT NULL AUTO_INCREMENT,
-    dataHora DATETIME(3) NOT NULL,
-    distanciaCm FLOAT NOT NULL,
-    aproximacao TINYINT NOT NULL,
-    fkSensor INT NOT NULL,
-    PRIMARY KEY (idmonitoramento, fkSensor),
-    CONSTRAINT chkAproximacao
-        CHECK (aproximacao IN (0, 1)),
-    CONSTRAINT fkSensorRegistro
-        FOREIGN KEY (fkSensor)
-        REFERENCES sensor(idsensor)
-);
+	-- supermercado: um cliente pode contratar varias lojas.
+	CREATE TABLE supermercado (
+		idSupermercado INT PRIMARY KEY AUTO_INCREMENT,
+		nomeFantasia VARCHAR(120) NOT NULL,
+		cnpj CHAR(14) UNIQUE NOT NULL,
+		emailInstitucional VARCHAR(150) NOT NULL,
+        telefoneContato CHAR(11),
+		fkCliente INT,
+		fkEndereco INT,
+		CONSTRAINT fk_supermercado_cliente FOREIGN KEY (fkCliente)
+			REFERENCES cliente(idCliente),
+		CONSTRAINT fk_supermercado_endereco FOREIGN KEY (fkEndereco)
+			REFERENCES endereco(idEndereco)
+	);
 
-CREATE TABLE Usuario (
-    idUsuario INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(45) NOT NULL,
-    cargo VARCHAR(45),
-    email VARCHAR(45) NOT NULL UNIQUE,
-    senha VARCHAR(100) NOT NULL,
-    fkSupermercado INT NOT NULL,
-    CONSTRAINT chkEmailUsuario
-        CHECK (email LIKE '%@%.%'),
-    CONSTRAINT fkSupermercadoUsuario
-        FOREIGN KEY (fkSupermercado)
-        REFERENCES supermercado(idSupermercado)
-);
+	-- usuario: funcionario que acessa o painel de um supermercado.
+	CREATE TABLE cliente(
+		idCliente INT PRIMARY KEY AUTO_INCREMENT,
+		email VARCHAR(150) UNIQUE,
+		senha VARCHAR(100),
+        nome VARCHAR(100) NOT NULL,
+        cpf CHAR(11),
 
-INSERT INTO cliente (nome, cpf, email, telefone) VALUES
-('João Silva', '12345678901', 'joao.silva@gmail.com', '11987654321'),
-('Maria Oliveira', '23456789012', 'maria.oliveira@gmail.com', '11976543210'),
-('Pedro Santos', '34567890123', 'pedro.santos@gmail.com', '11965432109'),
-('Ana Costa', '45678901234', 'ana.costa@gmail.com', '11954321098'),
-('Lucas Martins', '56789012345', 'lucas.martins@gmail.com', '11943210987'),
-('Juliana Souza', '67890123456', 'juliana.souza@gmail.com', '11932109876'),
-('Rafael Almeida', '78901234567', 'rafael.almeida@gmail.com', '11921098765'),
-('Camila Ferreira', '89012345678', 'camila.ferreira@gmail.com', '11910987654'),
-('Bruno Rocha', '90123456789', 'bruno.rocha@gmail.com', '11999887766'),
-('Fernanda Lima', '01234567890', 'fernanda.lima@gmail.com', '11988776655');
+		fkSupermercado INT,
+		CONSTRAINT fk_usuario_supermercado FOREIGN KEY (fkSupermercado)
+			REFERENCES supermercado(idSupermercado)
+	);
 
-INSERT INTO endereco (estado, cidade, logradouro, numero, cep) VALUES
-('SP', 'São Paulo', 'Rua das Flores', '100', '01001000'),
-('SP', 'Campinas', 'Avenida Brasil', '250', '13010000'),
-('RJ', 'Rio de Janeiro', 'Rua Central', '80', '20010000'),
-('MG', 'Belo Horizonte', 'Rua Principal', '45', '30110000'),
-('PR', 'Curitiba', 'Avenida Paraná', '500', '80010000'),
-('RS', 'Porto Alegre', 'Rua Primavera', '120', '90010000'),
-('BA', 'Salvador', 'Avenida Bahia', '300', '40010000'),
-('DF', 'Brasília', 'Rua Central', '15', '70010000'),
-('PE', 'Recife', 'Avenida Recife', '200', '50010000'),
-('CE', 'Fortaleza', 'Rua São Lucas', '70', '60010000');
+	-- setor: cada linha identifica a gondola monitorada dentro da loja.
+	CREATE TABLE setor (
+		idSetor INT PRIMARY KEY AUTO_INCREMENT,
+		nomeSetor VARCHAR(80),
+		gondola VARCHAR(80),
+		fkSupermercado INT,
+		CONSTRAINT fk_setor_supermercado FOREIGN KEY (fkSupermercado)
+			REFERENCES supermercado(idSupermercado)
+	);
 
-INSERT INTO supermercado (nomeFantasia, cnpj, fkCliente, fkEndereco) VALUES
-('Supermercado Pague Menos', '12.345.678/0001-90', 1, 1),
-('Mercado São José', '23.456.789/0001-81', 2, 2),
-('Supermercado Boa Esperança', '34.567.890/0001-72', 3, 3),
-('Mercadinho do Bairro', '45.678.901/0001-63', 4, 4),
-('Supermercado Avenida', '56.789.012/0001-54', 5, 5),
-('Mercado Primavera', '67.890.123/0001-45', 6, 6),
-('Supermercado Estrela', '78.901.234/0001-36', 7, 7),
-('Mercado Central', '89.012.345/0001-27', 8, 8),
-('Supermercado Nova Era', '90.123.456/0001-18', 9, 9),
-('Mercadinho São Lucas', '01.234.567/0001-09', 10, 10);
+	-- sensor: 
+	CREATE TABLE sensor (
+		idSensor INT PRIMARY KEY AUTO_INCREMENT,
+		tipoSensor VARCHAR(30) DEFAULT 'HC-SR04',
+		dtInstalacao DATE,
+		status ENUM('ativo', 'inativo', 'manutencao') DEFAULT 'ativo',
+		ultimaManutencao DATE,
+		fkSetor INT ,
+		CONSTRAINT fk_sensor_setor FOREIGN KEY (fkSetor)
+			REFERENCES setor(idSetor),
+		CONSTRAINT chk_sensor_manutencao CHECK (
+			ultimaManutencao IS NULL OR ultimaManutencao >= dtInstalacao
+		)
+	);
 
-INSERT INTO setor (setor, gondola, fkSupermercado) VALUES
-('Bebidas', 'Gôndola 01', 1),
-('Limpeza', 'Gôndola 02', 1),
-('Alimentos', 'Gôndola 03', 2),
-('Higiene', 'Gôndola 04', 2),
-('Bebidas', 'Gôndola 05', 3),
-('Congelados', 'Gôndola 06', 4),
-('Mercearia', 'Gôndola 07', 5),
-('Limpeza', 'Gôndola 08', 6),
-('Alimentos', 'Gôndola 09', 7),
-('Bebidas', 'Gôndola 10', 8),
-('Higiene', 'Gôndola 11', 9),
-('Mercearia', 'Gôndola 12', 10);
+	-- registro: apenas os cinco campos solicitados.
+	-- prolongada = 1 somente UMA VEZ, na leitura que encerra uma
+	-- permanencia valida e completa com duracao de pelo menos 3 segundos.
+	-- prolongada = 0 nas demais leituras.
+	-- Caso o campo valha 1 em cada leitura da mesma permanencia, os
+	-- SELECTs contarao leituras em vez de permanencias.
+	-- A logica de 3 leituras consecutivas e histerese ocorre na coleta.
+	CREATE TABLE registro (
+		idRegistro BIGINT NOT NULL AUTO_INCREMENT,
+		dataHora DATETIME(3) NOT NULL,
+		distanciaCm DECIMAL(6,2),
+		prolongada TINYINT,
+		fkSensor INT NOT NULL,
+		PRIMARY KEY (idRegistro),
+		CONSTRAINT fk_registro_sensor FOREIGN KEY (fkSensor)
+			REFERENCES sensor(idSensor),
+		CONSTRAINT chk_registro_prolongada CHECK (prolongada IN (0, 1))
+	);
 
-INSERT INTO sensor (tipoSensor, dtInstalacao, statuss, ultimaManutencao, fkSetor) VALUES
-('HC-SR04', '2025-01-10', 'Ativo', '2025-08-10', 1),
-('HC-SR04', '2025-01-15', 'Ativo', '2025-07-15', 1),
-('HC-SR04', '2025-02-05', 'Inativo', '2025-08-05', 2),
-('HC-SR04', '2025-02-18', 'Ativo', '2025-08-18', 3),
-('HC-SR04', '2025-03-12', 'Em manutenção', '2025-09-01', 4),
-('HC-SR04', '2025-04-20', 'Ativo', '2025-08-20', 5),
-('HC-SR04', '2025-05-08', 'Ativo', '2025-08-08', 6),
-('HC-SR04', '2025-06-14', 'Inativo', '2025-07-14', 7),
-('HC-SR04', '2025-07-25', 'Ativo', '2025-08-25', 8),
-('HC-SR04', '2025-08-03', 'Em manutenção', '2025-09-03', 9),
-('HC-SR04', '2025-08-10', 'Ativo', '2025-09-10', 10),
-('HC-SR04', '2025-08-15', 'Ativo', '2025-09-15', 11);
+	-- Volta a verificar as chaves antes de inserir os dados.
+	SET FOREIGN_KEY_CHECKS = 1;
 
-INSERT INTO registro (dataHora, distanciaCm, aproximacao, fkSensor) VALUES
-('2026-09-01 08:00:00.000', 120.0, 0, 1),
-('2026-09-01 08:00:00.100', 75.0, 0, 1),
-('2026-09-01 08:00:00.200', 70.0, 0, 1),
-('2026-09-01 08:00:00.300', 65.0, 1, 1),
-('2026-09-01 08:00:00.400', 60.0, 1, 1),
-('2026-09-01 08:00:00.500', 85.0, 1, 1),
-('2026-09-01 08:00:00.600', 110.0, 1, 1),
-('2026-09-01 08:00:00.700', 115.0, 1, 1),
-('2026-09-01 08:00:00.800', 120.0, 0, 1),
-('2026-09-01 09:00:00.000', 125.0, 0, 2),
-('2026-09-01 09:00:00.100', 78.0, 0, 2),
-('2026-09-01 09:00:00.200', 72.0, 0, 2),
-('2026-09-01 09:00:00.300', 68.0, 1, 2),
-('2026-09-01 09:00:00.400', 62.0, 1, 2),
-('2026-09-01 09:00:00.500', 95.0, 1, 2),
-('2026-09-01 09:00:00.600', 110.0, 1, 2),
-('2026-09-01 09:00:00.700', 120.0, 0, 2);
+	-- ================================================================
+	-- USUARIO DO BANCO: somente SELECT e INSERT
+	-- ================================================================
+	-- Execute como administrador, pois CREATE USER e GRANT exigem privilegios.
+	-- ATENCAO: substitua a senha demonstrativa ANTES de utilizar o script.
+	-- localhost permite conexao local; outro host requer configuracao explicita.
+	-- Se a conta ja existir, CREATE USER falhara em vez de manter
+	-- silenciosamente privilegios adicionais de uma conta anterior.
 
-SELECT * FROM cliente;
 
-SELECT
-    CONCAT(
-        'Cliente: ', nome,
-        ' | CPF: ', cpf,
-        ' | Email: ', email,
-        ' | Telefone: ', telefone
-    ) AS 'Dados do Cliente'
-FROM cliente;
 
-SELECT * FROM supermercado;
+	INSERT INTO cliente (nome, email, senha) VALUES
+		('Ana Ribeiro', 'ana.ribeiro@infoconnect.test', 'senha123'),
+		('Bruno Martins', 'bruno.martins@infoconnect.test', 'senha123'),
+		('Carla Ferreira', 'carla.ferreira@infoconnect.test', 'senha123');
 
-SELECT
-    s.nomeFantasia AS 'Supermercado',
-    s.cnpj AS 'CNPJ',
-    c.nome AS 'Cliente responsável',
-    e.cidade AS 'Cidade',
-    e.estado AS 'Estado',
-    e.logradouro AS 'Logradouro',
-    e.numero AS 'Número'
-FROM supermercado s
- JOIN cliente c
-    ON s.fkCliente = c.idcliente
- JOIN endereco e
-    ON s.fkEndereco = e.idEndereco;
+	INSERT INTO endereco (uf, cidade, logradouro, numero, cep) VALUES
+		('SP', 'Sao Paulo', 'Rua Exemplo das Lojas', '120', '01001000'),
+		('SP', 'Sao Paulo', 'Avenida Ficticia do Mercado', '855', '04002000'),
+		('SP', 'Campinas', 'Rua Demonstracao', '42', '13010000');
 
-SELECT * FROM setor;
-SELECT * FROM sensor;
+	INSERT INTO supermercado
+		(nomeFantasia, cnpj, emailInstitucional, fkCliente, fkEndereco) VALUES
+		('Mercado Aurora', '12345678000195', 'contato@aurora.test', 1, 1),
+		('Supermercado Horizonte', '98765432000100', 'contato@horizonte.test', 2, 2),
+		('Mercado Bairro Bom', '11222333000181', 'contato@bairro-bom.test', 3, 3);
 
-SELECT
-    se.idsensor AS 'ID Sensor',
-    se.tipoSensor AS 'Tipo de Sensor',
-    se.statuss AS 'Status',
-    st.setor AS 'Setor',
-    st.gondola AS 'Gôndola',
-    sp.nomeFantasia AS 'Supermercado'
-FROM sensor se
- JOIN setor st
-    ON se.fkSetor = st.idSetor
- JOIN supermercado sp
-    ON st.fkSupermercado = sp.idSupermercado;
+	INSERT INTO cliente (nome, email, senha, fkSupermercado) VALUES
+		('Mariana Silva', 'mariana@aurora.test', 'senha1234', 1),
+		('Pedro Almeida', 'pedro@aurora.test', 'senha1234', 1),
+		('Luiza Costa', 'luiza@horizonte.test', 'senha1234', 2),
+		('Rafael Souza', 'rafael@bairro-bom.test', 'senha1234', 3);
 
-SELECT * FROM registro;
+	INSERT INTO setor (nomeSetor, gondola, fkSupermercado) VALUES
+		('Bebidas', 'B1', 1),
+		('Higiene', 'H1', 1),
+		('Mercearia', 'M1', 1),
+		('Bebidas', 'B2', 2),
+		('Laticinios', 'L1', 2),
+		('Hortifruti', 'HF1', 3);
 
-SELECT
-    r.dataHora AS 'Data e Hora',
-    r.distanciaCm AS 'Distância (cm)',
-    CASE
-        WHEN r.aproximacao = 1 THEN 'Sim'
-        ELSE 'Não'
-    END AS 'Aproximação',
-    r.fkSensor AS 'Sensor'
-FROM registro r
-ORDER BY r.fkSensor, r.dataHora;
+	INSERT INTO sensor
+		(tipoSensor, dtInstalacao, status, ultimaManutencao, fkSetor) VALUES
+		('HC-SR04', '2026-09-30', 'ativo', '2026-10-20', 1),
+		('HC-SR04', '2026-09-30', 'ativo', NULL, 2),
+		('HC-SR04', '2026-10-01', 'ativo', '2026-10-19', 3),
+		('HC-SR04', '2026-10-02', 'manutencao', '2026-10-27', 4),
+		('HC-SR04', '2026-10-02', 'ativo', NULL, 5),
+		('HC-SR04', '2026-10-03', 'ativo', '2026-10-18', 6);
 
-SELECT
-    sp.nomeFantasia AS supermercado,
-    st.setor,
-    st.gondola,
-    se.idsensor,
-    r.dataHora,
-    r.distanciaCm,
-    r.aproximacao
-FROM registro r
- JOIN sensor se
-    ON r.fkSensor = se.idsensor
- JOIN setor st
-    ON se.fkSetor = st.idSetor
- JOIN supermercado sp
-    ON st.fkSupermercado = sp.idSupermercado
-ORDER BY r.dataHora;
+	-- Leitura final de uma permanencia concluida recebe prolongada = 1.
+	-- Valores NULL simulam leitura sem distancia, sem contar permanencia.
+	INSERT INTO registro (dataHora, distanciaCm, prolongada, fkSensor) VALUES
+		-- sensor 1: duas permanencias prolongadas.
+		('2026-10-27 09:00:00.000', 120.00, 0, 1),
+		('2026-10-27 09:00:01.000',  55.00, 0, 1),
+		('2026-10-27 09:00:02.000',  48.00, 0, 1),
+		('2026-10-27 09:00:03.000',  47.00, 0, 1),
+		('2026-10-27 09:00:04.000', 115.00, 1, 1),
+		('2026-10-27 10:30:00.000', 140.00, 0, 1),
+		('2026-10-27 10:30:01.000',  68.00, 0, 1),
+		('2026-10-27 10:30:03.000',  61.00, 0, 1),
+		('2026-10-27 10:30:05.000', 125.00, 1, 1),
+
+		-- sensor 2: uma permanencia prolongada e leituras comuns.
+		('2026-10-27 09:05:00.000', 150.00, 0, 2),
+		('2026-10-27 09:05:01.000',  70.00, 0, 2),
+		('2026-10-27 09:05:02.000',  59.00, 0, 2),
+		('2026-10-27 09:05:03.000',  58.00, 0, 2),
+		('2026-10-27 09:05:05.000', 130.00, 1, 2),
+		('2026-10-27 11:10:00.000', 115.00, 0, 2),
+		('2026-10-27 11:10:01.000',  95.00, 0, 2),
+		('2026-10-27 11:10:02.000', NULL,   0, 2),
+
+		-- sensor 3: duas permanencias prolongadas.
+		('2026-10-26 14:20:00.000', 108.00, 0, 3),
+		('2026-10-26 14:20:01.000',  72.00, 0, 3),
+		('2026-10-26 14:20:04.000', 119.00, 1, 3),
+		('2026-10-27 16:42:00.000', 125.00, 0, 3),
+		('2026-10-27 16:42:01.000',  63.00, 0, 3),
+		('2026-10-27 16:42:02.000',  60.00, 0, 3),
+		('2026-10-27 16:42:05.000', 122.00, 1, 3),
+
+		-- sensor 4: registrou antes de entrar em manutencao.
+		('2026-10-26 11:10:00.000', 145.00, 0, 4),
+		('2026-10-26 11:10:01.000',  75.00, 0, 4),
+		('2026-10-26 11:10:05.000', 140.00, 1, 4),
+		('2026-10-27 13:15:00.000', NULL,   0, 4),
+
+		-- sensor 5: duas permanencias prolongadas.
+		('2026-10-27 08:40:00.000', 135.00, 0, 5),
+		('2026-10-27 08:40:01.000',  58.00, 0, 5),
+		('2026-10-27 08:40:05.000', 128.00, 1, 5),
+		('2026-10-27 12:25:00.000', 123.00, 0, 5),
+		('2026-10-27 12:25:01.000',  65.00, 0, 5),
+		('2026-10-27 12:25:02.000',  53.00, 0, 5),
+		('2026-10-27 12:25:05.000', 133.00, 1, 5),
+
+		-- sensor 6: uma permanencia prolongada.
+		('2026-10-27 10:50:00.000', 149.00, 0, 6),
+		('2026-10-27 10:50:01.000',  61.00, 0, 6),
+		('2026-10-27 10:50:04.000', 110.00, 1, 6),
+		('2026-10-27 15:30:00.000', 134.00, 0, 6),
+		('2026-10-27 15:30:01.000',  88.00, 0, 6),
+		('2026-10-27 15:30:02.000',  93.00, 0, 6);
+
+	-- ================================================================
+	-- CONSULTAS PARA O DASHBOARD
+	-- ================================================================
+
+	-- select para listar os clientes que contrataram o sistema.
+	SELECT idCliente, nome, email
+	FROM cliente
+	ORDER BY nome;
+
+	-- select para mostrar as lojas e os respectivos clientes responsaveis.
+	SELECT
+		sm.nomeFantasia AS supermercado,
+		c.nome AS clienteResponsavel,
+		e.cidade,
+		e.uf
+	FROM supermercado AS sm
+	JOIN cliente AS c ON sm.fkCliente = c.idCliente
+	JOIN endereco AS e ON sm.fkEndereco = e.idEndereco
+	ORDER BY sm.nomeFantasia;
+
+	-- select para listar cada sensor, seu status, sua loja e sua gondola.
+	SELECT
+		se.idSensor,
+		se.tipoSensor,
+		se.status,
+		st.nomeSetor,
+		st.gondola,
+		sm.nomeFantasia AS supermercado
+	FROM sensor AS se
+	JOIN setor AS st ON se.fkSetor = st.idSetor
+	JOIN supermercado AS sm ON st.fkSupermercado = sm.idSupermercado
+	ORDER BY sm.nomeFantasia, st.nomeSetor;
+
+	-- select para contar quantas permanencias prolongadas cada sensor detectou.
+	-- Cada permanencia concluida deve ter apenas um registro com prolongada = 1.
+	SELECT
+		se.idSensor,
+		se.status,
+		COALESCE(SUM(r.prolongada), 0) AS totalProlongadas
+	FROM sensor AS se
+	LEFT JOIN registro AS r ON se.idSensor = r.fkSensor
+	GROUP BY se.idSensor, se.status
+	ORDER BY totalProlongadas DESC;
+
+	-- select para contar permanencias prolongadas por setor e por gondola.
+	SELECT
+		st.nomeSetor,
+		st.gondola,
+		sm.nomeFantasia AS supermercado,
+		SUM(r.prolongada) AS totalProlongadas
+	FROM registro AS r
+	JOIN sensor AS se ON r.fkSensor = se.idSensor
+	JOIN setor AS st ON se.fkSetor = st.idSetor
+	JOIN supermercado AS sm ON st.fkSupermercado = sm.idSupermercado
+	GROUP BY st.idSetor, st.nomeSetor, st.gondola, sm.nomeFantasia
+	ORDER BY totalProlongadas DESC;
+
+	-- select para calcular a distancia media por sensor, ignorando leituras nulas.
+	SELECT
+		fkSensor,
+		ROUND(AVG(distanciaCm), 2) AS distanciaMediaCm
+	FROM registro
+	WHERE distanciaCm IS NOT NULL
+	GROUP BY fkSensor
+	ORDER BY fkSensor;
+
+	-- select para contar permanencias prolongadas em cada hora do dia.
+	SELECT
+		DATE_FORMAT(dataHora, '%Y-%m-%d %H:00:00') AS hora,
+		SUM(prolongada) AS totalProlongadas
+	FROM registro
+	GROUP BY DATE_FORMAT(dataHora, '%Y-%m-%d %H:00:00')
+	ORDER BY hora;
+
+	-- select para descobrir a ultima leitura recebida de cada sensor.
+	SELECT
+		se.idSensor,
+		se.status,
+		MAX(r.dataHora) AS ultimaLeitura
+	FROM sensor AS se
+	LEFT JOIN registro AS r ON r.fkSensor = se.idSensor
+	GROUP BY se.idSensor, se.status
+	ORDER BY se.idSensor;
+
+	-- select para identificar sensores ativos sem leitura ha mais de 2 segundos.
+	-- Em um banco apenas com dados antigos ficticios, todos os sensores ativos
+	-- aparecerao como sem comunicacao: o resultado real depende da coleta ativa.
+	SELECT
+		se.idSensor,
+		MAX(r.dataHora) AS ultimaLeitura
+	FROM sensor AS se
+	LEFT JOIN registro AS r ON r.fkSensor = se.idSensor
+	WHERE se.status = 'ativo'
+	GROUP BY se.idSensor
+	HAVING ultimaLeitura IS NULL
+	   OR TIMESTAMPDIFF(MICROSECOND, ultimaLeitura, NOW(3)) > 2000000;
+
+	-- select para contar permanencias prolongadas por supermercado.
+	SELECT
+		sm.nomeFantasia AS supermercado,
+		SUM(r.prolongada) AS totalProlongadas
+	FROM supermercado AS sm
+	JOIN setor AS st ON st.fkSupermercado = sm.idSupermercado
+	JOIN sensor AS se ON se.fkSetor = st.idSetor
+	JOIN registro AS r ON r.fkSensor = se.idSensor
+	GROUP BY sm.idSupermercado, sm.nomeFantasia
+	ORDER BY totalProlongadas DESC;
+
+	-- select para ver apenas as leituras de um sensor especifico, em ordem.
+	SELECT *
+	FROM registro
+	WHERE fkSensor = 1
+	ORDER BY dataHora;
+
+	-- LIMITACAO DOCUMENTADA:
+	-- Sem colunas de estado e validade, nao e possivel obter com SELECTs
+	-- simples o numero exato de entradas ou a duracao de cada permanencia.
+	-- A coluna prolongada apenas sinaliza eventos prolongados concluídos.
