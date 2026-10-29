@@ -1,5 +1,5 @@
 	CREATE USER 'infoconnect_app'@'localhost'
-		IDENTIFIED BY 'app123@';
+		IDENTIFIED BY 'Arduino123@';
 
 	GRANT SELECT, INSERT ON infoconnect.*
 		TO 'infoconnect_app'@'localhost';
