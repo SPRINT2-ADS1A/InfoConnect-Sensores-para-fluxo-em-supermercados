@@ -7,58 +7,91 @@ body {
 
 header {
     background-color: white;
-    height: 80px;
+    min-height: 92px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 40px;
-    border-bottom: 1px solid #e5e5e5;
+    padding: 0 60px;
+    box-sizing: border-box;
     color: #222222;
-}
-nav {
-    display: flex;
-    gap: 30px;
-    font-size: 16px;
-}
-
-.nav-bar:hover {
-    cursor: pointer;
-}
-
-.icones {
-    display: flex;
-    gap: 30px;
-}
-
-.icones:hover {
-    cursor: pointer;
 }
 
 .logo-container {
     display: flex;
     align-items: center;
-    gap: 12px;
-}
-
-.logo {
-    font-family: "Playfair Display", serif;
-    font-size: 26px;
-    font-weight: bold;
-    color: #387D2D;
-}
-
-.logo label {
-    color:#444444;
-    font-weight: 500;
 }
 
 .logoimagem {
-    height: 60px;
-    width: auto;
-} 
+    display: block;
+    width: 320px;
+    max-width: 100%;
+    height: auto;
+}
 
-.logo:hover {
+.nav-bar {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-bar ul {
+    display: flex;
+    align-items: center;
+    gap: 38px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-bar a {
+    color: #222222;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.nav-bar a:hover {
+    color: #485C11;
+}
+
+.icones {
+    display: flex;
+    align-items: center;
+    gap: 38px;
+    font-size: 20px;
+}
+
+.icones i {
     cursor: pointer;
+}
+
+@media (max-width: 900px) {
+    header {
+        padding: 16px 24px;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .logoimagem {
+        width: 240px;
+    }
+
+    .icones {
+        margin-left: auto;
+    }
+
+    .nav-bar {
+        order: 3;
+        flex-basis: 100%;
+    }
+
+    .nav-bar ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 24px;
+    }
+
+    .nav-bar a {
+        font-size: 16px;
+    }
 }
 
 /* Cabeçalho da dashboard */
