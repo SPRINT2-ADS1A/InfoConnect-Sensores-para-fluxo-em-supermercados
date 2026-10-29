@@ -2,6 +2,8 @@
 -- GRUPO 01 --
 -- =========================================================
 
+
+
 CREATE DATABASE infoconnect;
 USE infoconnect;
 
@@ -64,13 +66,10 @@ CREATE TABLE sensor (
 
 CREATE TABLE registro (
     idmonitoramento INT NOT NULL AUTO_INCREMENT,
-    dataHora DATETIME(3) NOT NULL,
+    dataHora DATETIME default current_timestamp,
     distanciaCm FLOAT NOT NULL,
-    aproximacao TINYINT NOT NULL,
     fkSensor INT NOT NULL,
     PRIMARY KEY (idmonitoramento, fkSensor),
-    CONSTRAINT chkAproximacao
-        CHECK (aproximacao IN (0, 1)),
     CONSTRAINT fkSensorRegistro
         FOREIGN KEY (fkSensor)
         REFERENCES sensor(idsensor)
@@ -89,6 +88,8 @@ CREATE TABLE Usuario (
         FOREIGN KEY (fkSupermercado)
         REFERENCES Supermercado(idSupermercado)
 );
+
+SELECT * FROM registro;
 
 INSERT INTO cliente (nome, cpf, email, telefone) VALUES
 ('João Silva', '12345678901', 'joao.silva@gmail.com', '11987654321'),
@@ -154,24 +155,6 @@ INSERT INTO sensor (tipoSensor, dtInstalacao, statuss, ultimaManutencao, fkSetor
 ('HC-SR04', '2025-08-10', 'Ativo', '2025-09-10', 10),
 ('HC-SR04', '2025-08-15', 'Ativo', '2025-09-15', 11);
 
-INSERT INTO registro (dataHora, distanciaCm, aproximacao, fkSensor) VALUES
-('2026-09-01 08:00:00.000', 120.0, 0, 1),
-('2026-09-01 08:00:00.100', 75.0, 0, 1),
-('2026-09-01 08:00:00.200', 70.0, 0, 1),
-('2026-09-01 08:00:00.300', 65.0, 1, 1),
-('2026-09-01 08:00:00.400', 60.0, 1, 1),
-('2026-09-01 08:00:00.500', 85.0, 1, 1),
-('2026-09-01 08:00:00.600', 110.0, 1, 1),
-('2026-09-01 08:00:00.700', 115.0, 1, 1),
-('2026-09-01 08:00:00.800', 120.0, 0, 1),
-('2026-09-01 09:00:00.000', 125.0, 0, 2),
-('2026-09-01 09:00:00.100', 78.0, 0, 2),
-('2026-09-01 09:00:00.200', 72.0, 0, 2),
-('2026-09-01 09:00:00.300', 68.0, 1, 2),
-('2026-09-01 09:00:00.400', 62.0, 1, 2),
-('2026-09-01 09:00:00.500', 95.0, 1, 2),
-('2026-09-01 09:00:00.600', 110.0, 1, 2),
-('2026-09-01 09:00:00.700', 120.0, 0, 2);
 
 SELECT * FROM cliente;
 

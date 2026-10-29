@@ -21,7 +21,7 @@ const serial = async (
             host: 'localhost',
             user: 'user_insert',
             password: '1234',
-            database: 'infoconnectsensores',
+            database: 'infoconnect',
             port: 3306
         }
     ).promise();
