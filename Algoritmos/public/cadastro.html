@@ -4,313 +4,230 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>InfoConnect - Cadastro</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;700&display=swap"
-      rel="stylesheet"
-    />
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./css/style-cadastro.css" />
-
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    />
   </head>
   <body>
     <header>
       <a href="./index.html">
-      <img src="img/logoCompleta.png" class="img" /> 
-    </a>
+        <img src="img/logoCompleta.png" class="img" alt="InfoConnect" />
+      </a>
     </header>
 
     <main>
       <div class="card">
         <div class="cabecalho_card">
           <h2 class="titulo_card">Cadastrar Estabelecimento</h2>
-          <p class="subtitulo_card">
-            Cadastre a empresa e o usuário administrador
-          </p>
+          <p class="subtitulo_card">Cadastre a empresa e o usuário administrador</p>
         </div>
 
-        <form id="form_cadastro" onsubmit="return cadastrar()">
-          <!-- Dados da Empresa -->
+        <form id="form_cadastro" novalidate onsubmit="cadastrar(); return false;">
+          <!-- Dados da tabela Supermercado. -->
           <div class="secao_formulario">
             <h3 class="titulo_secao">Dados da Empresa (Supermercado)</h3>
 
             <div class="linha_dupla">
               <div class="grupo_input">
                 <label for="input_nomeFantasia">Nome Fantasia</label>
-                <input
-                  type="text"
-                  id="input_nomeFantasia"
-                  placeholder="Ex: Mercado São José"
-                />
+                <input type="text" id="input_nomeFantasia" placeholder="Ex.: Mercado São José" maxlength="50" autocomplete="organization" />
               </div>
               <div class="grupo_input">
                 <label for="input_cnpj">CNPJ</label>
-                <input
-                  type="text"
-                  id="input_cnpj"
-                  placeholder="00.000.000/0001-00"
-                />
+                <input type="text" id="input_cnpj" placeholder="00.000.000/0001-00" maxlength="18" />
               </div>
             </div>
+          </div>
 
-            <div class="linha_dupla">
-              <div class="grupo_input">
-                <label for="input_responsavel"
-                  >Responsável Técnico/Gestor</label
-                >
-                <input
-                  type="text"
-                  id="input_responsavel"
-                  placeholder="Nome completo"
-                />
-              </div>
-              <div class="grupo_input">
-                <label for="input_telefone">Telefone (com DDD)</label>
-                <input
-                  type="text"
-                  id="input_telefone"
-                  placeholder="11987654321"
-                />
-              </div>
-            </div>
-
-
-            <div class="grupo_input">
-              <label for="input_cpf">CPF do Responsavel</label>
-              <input type="text" id="input_cpf" placeholder="000.000.000-00" maxlength="14" />
-            </div>
-
-            <div class="grupo_input">
-              <label for="input_emailEmpresa">E-mail Institucional</label>
-              <input
-                type="text"
-                id="input_emailEmpresa"
-                placeholder="contato@empresa.com"
-              />
-            </div>
+          
+          <!-- Dados da tabela endereco. -->
+          <div class="secao_formulario">
+            <h3 class="titulo_secao">Endereço do Supermercado</h3>
 
             <div class="linha_tripla">
+              <div class="grupo_input linha_cep">
+                <label for="input_cep">CEP</label>
+                <input type="text" id="input_cep" placeholder="00000-000" maxlength="9" inputmode="numeric" autocomplete="postal-code" />
+              </div>
               <div class="grupo_input linha_uf">
-                <label for="input_uf">UF</label>
-                <input
-                  type="text"
-                  id="input_uf"
-                  placeholder="SP"
-                  maxlength="2"
-                />
+                <label for="input_uf">Estado (UF)</label>
+                <input type="text" id="input_uf" placeholder="SP" maxlength="2" autocomplete="address-level1" />
               </div>
               <div class="grupo_input linha_cidade">
                 <label for="input_cidade">Cidade</label>
-                <input type="text" id="input_cidade" placeholder="São Paulo" />
+                <input type="text" id="input_cidade" placeholder="São Paulo" maxlength="45" autocomplete="address-level2" />
               </div>
+            </div>
+
+            <div class="linha_endereco">
               <div class="grupo_input linha_logradouro">
                 <label for="input_logradouro">Logradouro</label>
-                <input
-                  type="text"
-                  id="input_logradouro"
-                  placeholder="Rua / Av"
-                />
+                <input type="text" id="input_logradouro" placeholder="Rua / Avenida" maxlength="45" autocomplete="address-line1" />
+              </div>
+              <div class="grupo_input linha_numero">
+                <label for="input_numero">Número</label>
+                <input type="text" id="input_numero" placeholder="Ex.: 123" maxlength="45" />
               </div>
             </div>
           </div>
-          <!-- Dados do Usuário -->
+<!-- Dados da tabela cliente. -->
           <div class="secao_formulario">
-            <h3 class="titulo_secao">Dados do Usuário Administrador</h3>
+            <h3 class="titulo_secao">Dados do Cliente (Administrador)</h3>
 
             <div class="linha_dupla">
               <div class="grupo_input">
-                <label for="input_nomeUsuario">Nome de Usuário</label>
-                <input
-                  type="text"
-                  id="input_nomeUsuario"
-                  placeholder="Ex: gestor.saojose"
-                />
+                <label for="input_nome">Nome completo</label>
+                <input type="text" id="input_nome" placeholder="Nome do responsável" maxlength="45" autocomplete="name" />
               </div>
               <div class="grupo_input">
-                <label for="input_cargo">Cargo</label>
-                <input type="text" id="input_cargo" placeholder="Ex: Gerente" />
+                <label for="input_cpf">CPF</label>
+                <input type="text" id="input_cpf" placeholder="000.000.000-00" maxlength="14" inputmode="numeric" />
               </div>
             </div>
 
             <div class="linha_dupla">
               <div class="grupo_input">
-                <label for="input_senha">Senha</label>
-                <input
-                  type="password"
-                  id="input_senha"
-                  placeholder="••••••••"
-                />
+                <label for="input_telefone">Telefone (com DDD)</label>
+                <input type="tel" id="input_telefone" placeholder="(11) 99999-9999" maxlength="45" autocomplete="tel" />
               </div>
               <div class="grupo_input">
-                <label for="input_confirmarSenha">Confirmar Senha</label>
-                <input
-                  type="password"
-                  id="input_confirmarSenha"
-                  placeholder="••••••••"
-                />
+                <label for="input_email">E-mail</label>
+                <input type="email" id="input_email" placeholder="nome@exemplo.com" maxlength="45" autocomplete="email" />
               </div>
+            </div>
+
+            <div class="grupo_input">
+              <label for="input_senha">Senha</label>
+              <input type="password" id="input_senha" placeholder="••••••••" maxlength="72" autocomplete="new-password" />
             </div>
           </div>
 
-          <br />
-
-          <button
-            type="button"
-            onclick="cadastrar()"
-            class="botao_cadastrar"
-          >
-            Finalizar Cadastro
-          </button>
-          <button
-            type="button"
-            onclick="window.location.href = 'login.html'"
-            class="btn-voltar-login"
-          >
-            Já tem conta? Voltar ao Login
-          </button>
+          <button type="submit" id="botao_cadastrar" class="botao_cadastrar">Finalizar Cadastro</button>
+          <button type="button" onclick="window.location.href = 'login.html'" class="btn-voltar-login">Já tem conta? Voltar ao Login</button>
         </form>
 
-        <!-- div erro/sucesso -->
-        <div id="div_mensagem" class="msg_erro"></div>
+        <div id="div_mensagem" class="msg_erro" role="status" aria-live="polite"></div>
       </div>
     </main>
-  <script>
-// Cadastro do InfoConnect - seguindo o estilo do Web Data Viz / AquaTech.
-function cadastrar() {
-    // 1. Pega os valores dos inputs HTML.
-    var nomeFantasiaVar = input_nomeFantasia.value;
-    var cnpjVar = input_cnpj.value;
-    var responsavelVar = input_responsavel.value;
-    var cpfVar = input_cpf.value;
-    var telefoneVar = input_telefone.value;
-    var emailVar = input_emailEmpresa.value;
-    var ufVar = input_uf.value;
-    var cidadeVar = input_cidade.value;
-    var logradouroVar = input_logradouro.value;
 
-    var nomeVar = input_nomeUsuario.value;
-    var cargoVar = input_cargo.value;
-    var senhaVar = input_senha.value;
-    var confirmacaoSenhaVar = input_confirmarSenha.value;
-
-    // 2. Esconde qualquer mensagem de uma tentativa anterior.
-    var mensagem = "";
-    div_mensagem.innerHTML = "";
-    div_mensagem.style.display = "none";
-
-    // 3. Verifica se faltou preencher alguma informação obrigatória.
-    if (
-        nomeFantasiaVar.trim() == "" ||
-        cnpjVar.trim() == "" ||
-        responsavelVar.trim() == "" ||
-        cpfVar.trim() == "" ||
-        telefoneVar.trim() == "" ||
-        emailVar.trim() == "" ||
-        ufVar.trim() == "" ||
-        cidadeVar.trim() == "" ||
-        logradouroVar.trim() == "" ||
-        nomeVar.trim() == "" ||
-        cargoVar.trim() == "" ||
-        senhaVar == "" ||
-        confirmacaoSenhaVar == ""
-    ) {
-        mensagem = "Preencha todos os campos!";
-        div_mensagem.innerHTML = mensagem;
-        div_mensagem.className = "msg_erro";
+    <script>
+      function mostrarMensagem(mensagem, sucesso) {
+        div_mensagem.textContent = mensagem;
+        div_mensagem.className = sucesso ? "msg_sucesso" : "msg_erro";
         div_mensagem.style.display = "block";
-        return false; // Para por aqui: não chega ao fetch.
-    }
+      }
 
-    // 4. Verifica se as duas senhas são iguais.
-    if (senhaVar != confirmacaoSenhaVar) {
-        mensagem = "As senhas não coincidem!";
-        div_mensagem.innerHTML = mensagem;
-        div_mensagem.className = "msg_erro";
-        div_mensagem.style.display = "block";
-        return false;
-    }
+      function cadastrar() {
+        var nomeFantasiaVar = input_nomeFantasia.value.trim();
+        var cnpjVar = input_cnpj.value.trim();
+        var nomeVar = input_nome.value.trim();
+        var cpfVar = input_cpf.value.trim();
+        var telefoneVar = input_telefone.value.trim();
+        var emailVar = input_email.value.trim();
+        var senhaVar = input_senha.value;
+        var cepVar = input_cep.value.trim();
+        var ufVar = input_uf.value.trim().toUpperCase();
+        var cidadeVar = input_cidade.value.trim();
+        var logradouroVar = input_logradouro.value.trim();
+        var numeroVar = input_numero.value.trim();
 
-    if (senhaVar.length < 8 || senhaVar.length > 72) {
-        mensagem = "A senha precisa ter entre 8 e 72 caracteres!";
-        div_mensagem.innerHTML = mensagem;
-        div_mensagem.className = "msg_erro";
-        div_mensagem.style.display = "block";
-        return false;
-    }
+        div_mensagem.textContent = "";
+        div_mensagem.style.display = "none";
 
-    // 5. Remove os pontos, traços e barras do /CNPJ.
-    var cnpjNumeros = cnpjVar.replace(/\D/g, "");
-    var cpfNumeros = cpfVar.replace(/\D/g, "");
+        if (nomeFantasiaVar == "" || cnpjVar == "" || nomeVar == "" ||
+            cpfVar == "" || telefoneVar == "" || emailVar == "" ||
+            senhaVar.trim() == "" || cepVar == "" || ufVar == "" ||
+            cidadeVar == "" || logradouroVar == "" || numeroVar == "") {
+          mostrarMensagem("Preencha todos os campos!", false);
+          return false;
+        }
 
-    if (cnpjNumeros.length != 14) {
-        mensagem = "O CNPJ precisa ter 14 números!";
-        div_mensagem.innerHTML = mensagem;
-        div_mensagem.className = "msg_erro";
-        div_mensagem.style.display = "block";
-        return false;
-    }
+        // Mantém a verificação de formato dos documentos do código original.
+        var cnpjNumeros = cnpjVar.replace(/\D/g, "");
+        var cpfNumeros = cpfVar.replace(/\D/g, "");
+        var telefoneNumeros = telefoneVar.replace(/\D/g, "");
+        var cepNumeros = cepVar.replace(/\D/g, "");
 
-    if (cpfNumeros.length != 11) {
-        div_mensagem.innerHTML = "O CPF precisa ter 11 numeros!";
-        div_mensagem.className = "msg_erro";
-        div_mensagem.style.display = "block";
-        return false;
-    }
+        if (cnpjNumeros.length != 14) {
+          mostrarMensagem("O CNPJ precisa ter 14 números!", false);
+          return false;
+        }
+        if (cpfNumeros.length != 11) {
+          mostrarMensagem("O CPF precisa ter 11 números!", false);
+          return false;
+        }
+        if (telefoneNumeros.length != 10 && telefoneNumeros.length != 11) {
+          mostrarMensagem("Informe o telefone com DDD: 10 ou 11 números.", false);
+          return false;
+        }
+        if (!input_email.checkValidity()) {
+          mostrarMensagem("Informe um e-mail válido!", false);
+          return false;
+        }
+        if (senhaVar.length < 8 || senhaVar.length > 72) {
+          mostrarMensagem("A senha precisa ter entre 8 e 72 caracteres!", false);
+          return false;
+        }
+        if (cepNumeros.length != 8) {
+          mostrarMensagem("O CEP precisa ter 8 números!", false);
+          return false;
+        }
+        if (!/^[A-Z]{2}$/.test(ufVar)) {
+          mostrarMensagem("Informe a sigla do estado com duas letras, como SP.", false);
+          return false;
+        }
 
-    fetch("/usuarios/cadastrar", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            nomeServer: nomeVar,
-            emailServer: emailVar,
-            senhaServer: senhaVar,
-            cargoServer: cargoVar,
+        // A rota já existia no cadastro enviado. O backend deve receber os novos campos.
+        if (window.location.protocol == "file:") {
+          mostrarMensagem("Para enviar o cadastro, abra esta página pelo servidor do seu projeto.", false);
+          return false;
+        }
+        if (botao_cadastrar.disabled) {
+          return false;
+        }
+
+        botao_cadastrar.disabled = true;
+        botao_cadastrar.textContent = "Cadastrando...";
+
+        fetch("/usuarios/cadastrar", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
             nomeFantasiaServer: nomeFantasiaVar,
             cnpjServer: cnpjNumeros,
-            responsavelServer: responsavelVar,
+            nomeServer: nomeVar,
             cpfServer: cpfNumeros,
-            telefoneServer: telefoneVar,
+            telefoneServer: telefoneNumeros,
+            emailServer: emailVar,
+            senhaServer: senhaVar,
+            cepServer: cepNumeros,
             ufServer: ufVar,
             cidadeServer: cidadeVar,
-            logradouroServer: logradouroVar
+            logradouroServer: logradouroVar,
+            numeroServer: numeroVar
+          })
         })
-    })
-    .then(function (resposta) {
-        // 7. Verifica se o backend confirmou o cadastro.
-        if (resposta.ok) {
-            mensagem = "Cadastro realizado com sucesso! Indo para o login...";
-            div_mensagem.innerHTML = mensagem;
-            div_mensagem.className = "msg_sucesso";
-            div_mensagem.style.display = "block";
-
+        .then(function (resposta) {
+          if (resposta.ok) {
+            mostrarMensagem("Cadastro realizado com sucesso! Indo para o login...", true);
             setTimeout(function () {
-                window.location = "login.html";
+              window.location.href = "login.html";
             }, 2000);
-        } else {
-            // Lê a mensagem de erro enviada pelo backend
+          } else {
             return resposta.text().then(function (textoErro) {
-                throw new Error(textoErro || "Erro HTTP: " + resposta.status);
+              throw new Error(textoErro || "Não foi possível cadastrar. Erro HTTP: " + resposta.status);
             });
-        }
-    })
-    .catch(function (erro) {
-        console.log("#ERRO:", erro);
-        div_mensagem.innerHTML = erro.message || "Não foi possível realizar o cadastro.";
-        div_mensagem.className = "msg_erro";
-        div_mensagem.style.display = "block";
-    });
+          }
+        })
+        .catch(function (erro) {
+          mostrarMensagem(erro.message || "Não foi possível realizar o cadastro.", false);
+          botao_cadastrar.disabled = false;
+          botao_cadastrar.textContent = "Finalizar Cadastro";
+        });
 
-    // Impede o envio tradicional do formulário HTML.
-    return false;
-}
-  </script>
+        return false;
+      }
+    </script>
   </body>
 </html>

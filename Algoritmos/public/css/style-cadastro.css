@@ -210,17 +210,6 @@ header {
     color: #222222;
 }
 
-.btn-esqueci-senha {
-    height: 40px;
-    border: 2px solid white;
-    border-radius: 8px;
-    background-color: transparent;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-
 .btn-cadastrar-login {
     height: 40px;
     border: 2px solid white;
@@ -359,8 +348,13 @@ header {
     width: 40%;
 }
 
-.linha_logradouro {
-    width: 40%;
+.linha_endereco {
+    display: flex;
+    justify-content: space-between;
+}
+
+.linha_endereco .grupo_input {
+    width: 48%;
 }
 
 .botao_cadastrar {
@@ -418,4 +412,3 @@ header {
     border: 1px solid #b2f5ea;
     display: none;
 }
-
