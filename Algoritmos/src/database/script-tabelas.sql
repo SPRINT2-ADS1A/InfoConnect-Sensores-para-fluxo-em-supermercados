@@ -10,7 +10,8 @@
 
 	USE infoconnect;
 
-
+	-- desligar o check de FK para facilitar inserts
+	SET FOREIGN_KEY_CHECKS = 0;
 
 	-- endereco: localizacao fisica de cada loja.
 
@@ -28,7 +29,6 @@
 		idSupermercado INT PRIMARY KEY AUTO_INCREMENT,
 		nomeFantasia VARCHAR(120),
 		cnpj CHAR(14) UNIQUE,
-		emailInstitucional VARCHAR(150),
         telefoneContato CHAR(11),
 		fkCliente INT,
 		fkEndereco INT,
@@ -45,7 +45,6 @@
 		senha VARCHAR(100),
         nome VARCHAR(100),
         cpf CHAR(11),
-
 		fkSupermercado INT,
 		CONSTRAINT fk_usuario_supermercado FOREIGN KEY (fkSupermercado)
 			REFERENCES supermercado(idSupermercado)
@@ -82,7 +81,6 @@
 		dataHora DATETIME DEFAULT CURRENT_TIMESTAMP,
 		distanciaCm DECIMAL(6,2),
 		fkSensor INT,
-		PRIMARY KEY (idRegistro),
 		CONSTRAINT fk_registro_sensor FOREIGN KEY (fkSensor)
 			REFERENCES sensor(idSensor),
 		CONSTRAINT chk_registro_prolongada CHECK (prolongada IN (0, 1))
@@ -91,203 +89,134 @@
 
 
 
-	INSERT INTO cliente (nome, email, senha) VALUES
-		('Ana Ribeiro', 'ana.ribeiro@infoconnect.test', 'senha123'),
-		('Bruno Martins', 'bruno.martins@infoconnect.test', 'senha123'),
-		('Carla Ferreira', 'carla.ferreira@infoconnect.test', 'senha123');
 
-	INSERT INTO endereco (uf, cidade, logradouro, numero, cep) VALUES
-		('SP', 'Sao Paulo', 'Rua Exemplo das Lojas', '120', '01001000'),
-		('SP', 'Sao Paulo', 'Avenida Ficticia do Mercado', '855', '04002000'),
-		('SP', 'Campinas', 'Rua Demonstracao', '42', '13010000');
+-- inserts
 
-	INSERT INTO supermercado
-		(nomeFantasia, cnpj, emailInstitucional, fkCliente, fkEndereco) VALUES
-		('Mercado Aurora', '12345678000195', 'contato@aurora.test', 1, 1),
-		('Supermercado Horizonte', '98765432000100', 'contato@horizonte.test', 2, 2),
-		('Mercado Bairro Bom', '11222333000181', 'contato@bairro-bom.test', 3, 3);
+-- ENDERECO
+-- Cadastra os enderecos dos supermercados.
 
-	INSERT INTO cliente (nome, email, senha, fkSupermercado) VALUES
-		('Mariana Silva', 'mariana@aurora.test', 'senha1234', 1),
-		('Pedro Almeida', 'pedro@aurora.test', 'senha1234', 1),
-		('Luiza Costa', 'luiza@horizonte.test', 'senha1234', 2),
-		('Rafael Souza', 'rafael@bairro-bom.test', 'senha1234', 3);
+INSERT INTO endereco (uf, cidade, logradouro, numero, cep) VALUES
+('SP', 'São Paulo', 'Rua Augusta', '1500', '01305000'),
+('SP', 'São Paulo', 'Avenida Paulista', '800', '01310000'),
+('SP', 'Campinas', 'Rua das Flores', '250', '13010000');
 
-	INSERT INTO setor (nomeSetor, gondola, fkSupermercado) VALUES
-		('Bebidas', 'B1', 1),
-		('Higiene', 'H1', 1),
-		('Mercearia', 'M1', 1),
-		('Bebidas', 'B2', 2),
-		('Laticinios', 'L1', 2),
-		('Hortifruti', 'HF1', 3);
 
-	INSERT INTO sensor
-		(tipoSensor, dtInstalacao, status, ultimaManutencao, fkSetor) VALUES
-		('HC-SR04', '2026-09-30', 'ativo', '2026-10-20', 1),
-		('HC-SR04', '2026-09-30', 'ativo', NULL, 2),
-		('HC-SR04', '2026-10-01', 'ativo', '2026-10-19', 3),
-		('HC-SR04', '2026-10-02', 'manutencao', '2026-10-27', 4),
-		('HC-SR04', '2026-10-02', 'ativo', NULL, 5),
-		('HC-SR04', '2026-10-03', 'ativo', '2026-10-18', 6);
+-- CLIENTE
+-- Cadastra os clientes que possuem supermercados.
 
-	INSERT INTO registro (dataHora, distanciaCm, fkSensor) VALUES
-		-- sensor 1: duas permanencias prolongadas.
-		('2026-10-27 09:00:00.000', 120.00, 1),
-		('2026-10-27 09:00:01.000',  55.00, 1),
-		('2026-10-27 09:00:02.000',  48.00, 1),
-		('2026-10-27 09:00:03.000',  47.00, 1),
-		('2026-10-27 09:00:04.000', 115.00, 1),
-		('2026-10-27 10:30:00.000', 140.00, 1),
-		('2026-10-27 10:30:01.000',  68.00, 1),
-		('2026-10-27 10:30:03.000',  61.00, 1),
-		('2026-10-27 10:30:05.000', 125.00, 1),
+INSERT INTO cliente (nome, email, senha, cpf) VALUES
+('Carlos Silva', 'carlos@gmail.com', '123456', '12345678901'),
+('Mariana Costa', 'mariana@gmail.com', '654321', '98765432100');
 
-		-- sensor 2: uma permanencia prolongada e leituras comuns.
-		('2026-10-27 09:05:00.000', 150.00, 2),
-		('2026-10-27 09:05:01.000',  70.00, 2),
-		('2026-10-27 09:05:02.000',  59.00, 2),
-		('2026-10-27 09:05:03.000',  58.00, 2),
-		('2026-10-27 09:05:05.000', 130.00, 2),
-		('2026-10-27 11:10:00.000', 115.00, 2),
-		('2026-10-27 11:10:01.000',  95.00, 2),
-		('2026-10-27 11:10:02.000', NULL,   2),
 
-		-- sensor 3: duas permanencias prolongadas.
-		('2026-10-26 14:20:00.000', 108.00, 3),
-		('2026-10-26 14:20:01.000',  72.00, 3),
-		('2026-10-26 14:20:04.000', 119.00, 3),
-		('2026-10-27 16:42:00.000', 125.00, 3),
-		('2026-10-27 16:42:01.000',  63.00, 3),
-		('2026-10-27 16:42:02.000',  60.00, 3),
-		('2026-10-27 16:42:05.000', 122.00, 3),
+-- SUPERMERCADO
+-- Cadastra os supermercados vinculados aos clientes.
 
-		-- sensor 4: registrou antes de entrar em manutencao.
-		('2026-10-26 11:10:00.000', 145.00, 4),
-		('2026-10-26 11:10:01.000',  75.00, 4),
-		('2026-10-26 11:10:05.000', 140.00, 4),
-		('2026-10-27 13:15:00.000', NULL,   4),
+INSERT INTO supermercado (nomeFantasia, cnpj, telefoneContato, fkCliente, fkEndereco) VALUES
+('Mercado Central', '12345678000190', '11987654321', 1, 1),
+('Super Bom', '98765432000110', '11976543210', 1, 2),
+('Mercado Popular', '45678912000155', '19988887777', 2, 3);
 
-		-- sensor 5: duas permanencias prolongadas.
-		('2026-10-27 08:40:00.000', 135.00,  5),
-		('2026-10-27 08:40:01.000',  58.00,  5),
-		('2026-10-27 08:40:05.000', 128.00,  5),
-		('2026-10-27 12:25:00.000', 123.00, 5),
-		('2026-10-27 12:25:01.000',  65.00,  5),
-		('2026-10-27 12:25:02.000',  53.00,  5),
-		('2026-10-27 12:25:05.000', 133.00,  5),
-		
-		-- sensor 6: uma permanencia prolongada.
-		('2026-10-27 10:50:00.000', 149.00, 0, 6),
-		('2026-10-27 10:50:01.000',  61.00, 0, 6),
-		('2026-10-27 10:50:04.000', 110.00, 1, 6),
-		('2026-10-27 15:30:00.000', 134.00, 0, 6),
-		('2026-10-27 15:30:01.000',  88.00, 0, 6),
-		('2026-10-27 15:30:02.000',  93.00, 0, 6);
 
-	-- ================================================================
-	-- CONSULTAS PARA O DASHBOARD0
-	-- ================================================================
+-- SETOR
+-- Cadastra os setores e gondolas monitoradas.
 
-	-- select para listar os clientes que contrataram o sistema.
-	SELECT idCliente, nome, email
-	FROM cliente
-	ORDER BY nome;
+INSERT INTO setor (nomeSetor, gondola, fkSupermercado) VALUES
+('Bebidas', 'Gondola A1', 1),
+('Limpeza', 'Gondola B1', 1),
+('Alimentos', 'Gondola C1', 2),
+('Higiene', 'Gondola D1', 3);
 
-	-- select para mostrar as lojas e os respectivos clientes responsaveis.
-	SELECT
-		sm.nomeFantasia AS supermercado,
-		c.nome AS clienteResponsavel,
-		e.cidade,
-		e.uf
-	FROM supermercado AS sm
-	JOIN cliente AS c ON sm.fkCliente = c.idCliente
-	JOIN endereco AS e ON sm.fkEndereco = e.idEndereco
-	ORDER BY sm.nomeFantasia;
 
-	-- select para listar cada sensor, seu status, sua loja e sua gondola.
-	SELECT
-		se.idSensor,
-		se.tipoSensor,
-		se.status,
-		st.nomeSetor,
-		st.gondola,
-		sm.nomeFantasia AS supermercado
-	FROM sensor AS se
-	JOIN setor AS st ON se.fkSetor = st.idSetor
-	JOIN supermercado AS sm ON st.fkSupermercado = sm.idSupermercado
-	ORDER BY sm.nomeFantasia, st.nomeSetor;
+-- SENSOR
+-- Cadastra os sensores instalados em cada setor.
 
-	-- select para contar quantas permanencias prolongadas cada sensor detectou.
-	-- Cada permanencia concluida deve ter apenas um registro com prolongada = 1.
-	SELECT
-		se.idSensor,
-		se.status,
-		COALESCE(SUM(r.prolongada), 0) AS totalProlongadas
-	FROM sensor AS se
-	LEFT JOIN registro AS r ON se.idSensor = r.fkSensor
-	GROUP BY se.idSensor, se.status
-	ORDER BY totalProlongadas DESC;
+INSERT INTO sensor (tipoSensor, dtInstalacao, status, ultimaManutencao, fkSetor) VALUES
+('HC-SR04', '2026-10-01', 'ativo', NULL, 1),
+('HC-SR04', '2026-10-02', 'ativo', NULL, 2),
+('HC-SR04', '2026-10-03', 'ativo', NULL, 3),
+('HC-SR04', '2026-10-04', 'manutencao', '2026-10-20', 4);
 
-	-- select para contar permanencias prolongadas por setor e por gondola.
-	SELECT
-		st.nomeSetor,
-		st.gondola,
-		sm.nomeFantasia AS supermercado,
-	FROM registro AS r
-	JOIN sensor AS se ON r.fkSensor = se.idSensor
-	JOIN setor AS st ON se.fkSetor = st.idSetor
-	JOIN supermercado AS sm ON st.fkSupermercado = sm.idSupermercado
-	ORDER BY totalProlongadas DESC;
 
-	-- select para calcular a distancia media por sensor, ignorando leituras nulas.
-	SELECT
-		fkSensor,
-	FROM registro
-	WHERE distanciaCm IS NOT NULL
-	GROUP BY fkSensor
-	ORDER BY fkSensor;
+-- REGISTRO
+-- Registra as distancias identificadas pelos sensores.
 
-	-- select para contar permanencias prolongadas em cada hora do dia.
-	SELECT
-		DATE_FORMAT(dataHora, '%Y-%m-%d %H:00:00') AS hora,
-	FROM registro
-	GROUP BY DATE_FORMAT(dataHora, '%Y-%m-%d %H:00:00')
-	ORDER BY hora;
+INSERT INTO registro (dataHora, distanciaCm, fkSensor) VALUES
+('2026-10-28 10:00:00', 150.00, 1),
+('2026-10-28 10:01:00', 80.00, 1),
+('2026-10-28 10:02:00', 45.00, 1),
+('2026-10-28 10:03:00', 120.00, 1),
 
-	-- select para descobrir a ultima leitura recebida de cada sensor.
-	SELECT
-		se.idSensor,
-		se.status,
-	FROM sensor AS se
-	ORDER BY se.idSensor;
+('2026-10-28 10:00:00', 200.00, 2),
+('2026-10-28 10:01:00', 90.00, 2),
+('2026-10-28 10:02:00', 35.00, 2),
 
-	-- select para identificar sensores ativos sem leitura ha mais de 2 segundos.
-	-- Em um banco apenas com dados antigos ficticios, todos os sensores ativos
-	-- aparecerao como sem comunicacao: o resultado real depende da coleta ativa.
-	SELECT
-		se.idSensor,
-		MAX(r.dataHora) AS ultimaLeitura
-	FROM sensor AS se
-	LEFT JOIN registro AS r ON r.fkSensor = se.idSensor
-	WHERE se.status = 'ativo'
-	   OR TIMESTAMPDIFF(MICROSECOND, ultimaLeitura, NOW(3)) > 2000000;
+('2026-10-28 10:00:00', 180.00, 3),
+('2026-10-28 10:01:00', 60.00, 3),
+('2026-10-28 10:02:00', 25.00, 3);
 
-	-- select para contar permanencias prolongadas por supermercado.
-	SELECT
-		sm.nomeFantasia AS supermercado,
-	FROM supermercado AS sm
-	JOIN setor AS st ON st.fkSupermercado = sm.idSupermercado
-	JOIN sensor AS se ON se.fkSetor = st.idSetor
-	JOIN registro AS r ON r.fkSensor = se.idSensor
-	ORDER BY totalProlongadas DESC;
 
-	-- select para ver apenas as leituras de um sensor especifico, em ordem.
-	SELECT *
-	FROM registro
-	WHERE fkSensor = 1
-	ORDER BY dataHora;
+-- reativa o check das FK
+SET FOREIGN_KEY_CHECKS = 1;
 
-	-- LIMITACAO DOCUMENTADA:
-	-- Sem colunas de estado e validade, nao e possivel obter com SELECTs
-	-- simples o numero exato de entradas ou a duracao de cada permanencia.
-	-- A coluna prolongada apenas sinaliza eventos prolongados concluídos.
+
+
+-- selects
+
+
+-- Aproximacoes por setor na semana.
+SELECT st.nomeSetor, st.gondola, r.dataHora, r.distanciaCm
+FROM registro r
+JOIN sensor s ON r.fkSensor = s.idSensor
+JOIN setor st ON s.fkSetor = st.idSetor
+WHERE r.distanciaCm < 90
+AND r.dataHora >= '2026-10-19'
+AND r.dataHora < '2026-10-26'
+ORDER BY r.dataHora;
+
+
+-- Aproximacoes nos pontos C e D.
+SELECT st.nomeSetor, st.gondola, r.dataHora, r.distanciaCm
+FROM registro r
+JOIN sensor s ON r.fkSensor = s.idSensor
+JOIN setor st ON s.fkSetor = st.idSetor
+WHERE r.distanciaCm < 90
+AND (st.idSetor = 3 OR st.idSetor = 4);
+
+
+-- Aproximacoes entre 12h e 16h de quarta-feira.
+SELECT st.nomeSetor, r.dataHora, r.distanciaCm
+FROM registro r
+JOIN sensor s ON r.fkSensor = s.idSensor
+JOIN setor st ON s.fkSetor = st.idSetor
+WHERE r.distanciaCm < 90
+AND r.dataHora >= '2026-10-21 12:00:00'
+AND r.dataHora < '2026-10-21 16:00:00';
+
+
+-- Enderecos cadastrados.
+SELECT * FROM endereco;
+
+
+-- Clientes cadastrados.
+SELECT idCliente, nome, email, cpf FROM cliente;
+
+
+-- Supermercados do cliente 1.
+SELECT * FROM supermercado
+WHERE fkCliente = 1;
+
+
+-- Setores do supermercado 1.
+SELECT * FROM setor
+WHERE fkSupermercado = 1;
+
+
+-- Sensores ativos.
+SELECT * FROM sensor
+WHERE status = 'ativo';
+
+
+-- Registros de aproximacao.
+SELECT * FROM registro
+WHERE distanciaCm < 90;
