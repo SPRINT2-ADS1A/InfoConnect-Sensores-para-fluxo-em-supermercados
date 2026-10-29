@@ -20,7 +20,7 @@ const serial = async (
         {
             host: 'localhost',
             user: 'infoconnect_app',
-            password: 'app123@',
+            password: 'Arduino123@',
             database: 'infoconnect',
             port: 3307
         }
