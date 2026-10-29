@@ -10,15 +10,15 @@
 
 	USE infoconnect;
 
+
+
 	-- endereco: localizacao fisica de cada loja.
-	-- Mantem a ordem original das tabelas, mesmo com referencias cruzadas.
-	SET FOREIGN_KEY_CHECKS = 0;
 
 	CREATE TABLE endereco (
 		idEndereco INT PRIMARY KEY AUTO_INCREMENT,
-		uf CHAR(2) NOT NULL,
-		cidade VARCHAR(100) NOT NULL,
-		logradouro VARCHAR(200) NOT NULL,
+		uf CHAR(2),
+		cidade VARCHAR(100),
+		logradouro VARCHAR(200),
 		numero VARCHAR(20),
 		cep CHAR(8)
 	);
@@ -26,9 +26,9 @@
 	-- supermercado: um cliente pode contratar varias lojas.
 	CREATE TABLE supermercado (
 		idSupermercado INT PRIMARY KEY AUTO_INCREMENT,
-		nomeFantasia VARCHAR(120) NOT NULL,
-		cnpj CHAR(14) UNIQUE NOT NULL,
-		emailInstitucional VARCHAR(150) NOT NULL,
+		nomeFantasia VARCHAR(120),
+		cnpj CHAR(14) UNIQUE,
+		emailInstitucional VARCHAR(150),
         telefoneContato CHAR(11),
 		fkCliente INT,
 		fkEndereco INT,
@@ -43,7 +43,7 @@
 		idCliente INT PRIMARY KEY AUTO_INCREMENT,
 		email VARCHAR(150) UNIQUE,
 		senha VARCHAR(100),
-        nome VARCHAR(100) NOT NULL,
+        nome VARCHAR(100),
         cpf CHAR(11),
 
 		fkSupermercado INT,
@@ -76,36 +76,18 @@
 		)
 	);
 
-	-- registro: apenas os cinco campos solicitados.
-	-- prolongada = 1 somente UMA VEZ, na leitura que encerra uma
-	-- permanencia valida e completa com duracao de pelo menos 3 segundos.
-	-- prolongada = 0 nas demais leituras.
-	-- Caso o campo valha 1 em cada leitura da mesma permanencia, os
-	-- SELECTs contarao leituras em vez de permanencias.
-	-- A logica de 3 leituras consecutivas e histerese ocorre na coleta.
+	-- registro: apenas os quatro campos solicitados.
 	CREATE TABLE registro (
-		idRegistro BIGINT NOT NULL AUTO_INCREMENT,
-		dataHora DATETIME(3) NOT NULL,
+		idRegistro INT PRIMARY KEY AUTO_INCREMENT,
+		dataHora DATETIME DEFAULT CURRENT_TIMESTAMP,
 		distanciaCm DECIMAL(6,2),
-		prolongada TINYINT,
-		fkSensor INT NOT NULL,
+		fkSensor INT,
 		PRIMARY KEY (idRegistro),
 		CONSTRAINT fk_registro_sensor FOREIGN KEY (fkSensor)
 			REFERENCES sensor(idSensor),
 		CONSTRAINT chk_registro_prolongada CHECK (prolongada IN (0, 1))
 	);
 
-	-- Volta a verificar as chaves antes de inserir os dados.
-	SET FOREIGN_KEY_CHECKS = 1;
-
-	-- ================================================================
-	-- USUARIO DO BANCO: somente SELECT e INSERT
-	-- ================================================================
-	-- Execute como administrador, pois CREATE USER e GRANT exigem privilegios.
-	-- ATENCAO: substitua a senha demonstrativa ANTES de utilizar o script.
-	-- localhost permite conexao local; outro host requer configuracao explicita.
-	-- Se a conta ja existir, CREATE USER falhara em vez de manter
-	-- silenciosamente privilegios adicionais de uma conta anterior.
 
 
 
@@ -148,54 +130,52 @@
 		('HC-SR04', '2026-10-02', 'ativo', NULL, 5),
 		('HC-SR04', '2026-10-03', 'ativo', '2026-10-18', 6);
 
-	-- Leitura final de uma permanencia concluida recebe prolongada = 1.
-	-- Valores NULL simulam leitura sem distancia, sem contar permanencia.
-	INSERT INTO registro (dataHora, distanciaCm, prolongada, fkSensor) VALUES
+	INSERT INTO registro (dataHora, distanciaCm, fkSensor) VALUES
 		-- sensor 1: duas permanencias prolongadas.
-		('2026-10-27 09:00:00.000', 120.00, 0, 1),
-		('2026-10-27 09:00:01.000',  55.00, 0, 1),
-		('2026-10-27 09:00:02.000',  48.00, 0, 1),
-		('2026-10-27 09:00:03.000',  47.00, 0, 1),
-		('2026-10-27 09:00:04.000', 115.00, 1, 1),
-		('2026-10-27 10:30:00.000', 140.00, 0, 1),
-		('2026-10-27 10:30:01.000',  68.00, 0, 1),
-		('2026-10-27 10:30:03.000',  61.00, 0, 1),
-		('2026-10-27 10:30:05.000', 125.00, 1, 1),
+		('2026-10-27 09:00:00.000', 120.00, 1),
+		('2026-10-27 09:00:01.000',  55.00, 1),
+		('2026-10-27 09:00:02.000',  48.00, 1),
+		('2026-10-27 09:00:03.000',  47.00, 1),
+		('2026-10-27 09:00:04.000', 115.00, 1),
+		('2026-10-27 10:30:00.000', 140.00, 1),
+		('2026-10-27 10:30:01.000',  68.00, 1),
+		('2026-10-27 10:30:03.000',  61.00, 1),
+		('2026-10-27 10:30:05.000', 125.00, 1),
 
 		-- sensor 2: uma permanencia prolongada e leituras comuns.
-		('2026-10-27 09:05:00.000', 150.00, 0, 2),
-		('2026-10-27 09:05:01.000',  70.00, 0, 2),
-		('2026-10-27 09:05:02.000',  59.00, 0, 2),
-		('2026-10-27 09:05:03.000',  58.00, 0, 2),
-		('2026-10-27 09:05:05.000', 130.00, 1, 2),
-		('2026-10-27 11:10:00.000', 115.00, 0, 2),
-		('2026-10-27 11:10:01.000',  95.00, 0, 2),
-		('2026-10-27 11:10:02.000', NULL,   0, 2),
+		('2026-10-27 09:05:00.000', 150.00, 2),
+		('2026-10-27 09:05:01.000',  70.00, 2),
+		('2026-10-27 09:05:02.000',  59.00, 2),
+		('2026-10-27 09:05:03.000',  58.00, 2),
+		('2026-10-27 09:05:05.000', 130.00, 2),
+		('2026-10-27 11:10:00.000', 115.00, 2),
+		('2026-10-27 11:10:01.000',  95.00, 2),
+		('2026-10-27 11:10:02.000', NULL,   2),
 
 		-- sensor 3: duas permanencias prolongadas.
-		('2026-10-26 14:20:00.000', 108.00, 0, 3),
-		('2026-10-26 14:20:01.000',  72.00, 0, 3),
-		('2026-10-26 14:20:04.000', 119.00, 1, 3),
-		('2026-10-27 16:42:00.000', 125.00, 0, 3),
-		('2026-10-27 16:42:01.000',  63.00, 0, 3),
-		('2026-10-27 16:42:02.000',  60.00, 0, 3),
-		('2026-10-27 16:42:05.000', 122.00, 1, 3),
+		('2026-10-26 14:20:00.000', 108.00, 3),
+		('2026-10-26 14:20:01.000',  72.00, 3),
+		('2026-10-26 14:20:04.000', 119.00, 3),
+		('2026-10-27 16:42:00.000', 125.00, 3),
+		('2026-10-27 16:42:01.000',  63.00, 3),
+		('2026-10-27 16:42:02.000',  60.00, 3),
+		('2026-10-27 16:42:05.000', 122.00, 3),
 
 		-- sensor 4: registrou antes de entrar em manutencao.
-		('2026-10-26 11:10:00.000', 145.00, 0, 4),
-		('2026-10-26 11:10:01.000',  75.00, 0, 4),
-		('2026-10-26 11:10:05.000', 140.00, 1, 4),
-		('2026-10-27 13:15:00.000', NULL,   0, 4),
+		('2026-10-26 11:10:00.000', 145.00, 4),
+		('2026-10-26 11:10:01.000',  75.00, 4),
+		('2026-10-26 11:10:05.000', 140.00, 4),
+		('2026-10-27 13:15:00.000', NULL,   4),
 
 		-- sensor 5: duas permanencias prolongadas.
-		('2026-10-27 08:40:00.000', 135.00, 0, 5),
-		('2026-10-27 08:40:01.000',  58.00, 0, 5),
-		('2026-10-27 08:40:05.000', 128.00, 1, 5),
-		('2026-10-27 12:25:00.000', 123.00, 0, 5),
-		('2026-10-27 12:25:01.000',  65.00, 0, 5),
-		('2026-10-27 12:25:02.000',  53.00, 0, 5),
-		('2026-10-27 12:25:05.000', 133.00, 1, 5),
-
+		('2026-10-27 08:40:00.000', 135.00,  5),
+		('2026-10-27 08:40:01.000',  58.00,  5),
+		('2026-10-27 08:40:05.000', 128.00,  5),
+		('2026-10-27 12:25:00.000', 123.00, 5),
+		('2026-10-27 12:25:01.000',  65.00,  5),
+		('2026-10-27 12:25:02.000',  53.00,  5),
+		('2026-10-27 12:25:05.000', 133.00,  5),
+		
 		-- sensor 6: uma permanencia prolongada.
 		('2026-10-27 10:50:00.000', 149.00, 0, 6),
 		('2026-10-27 10:50:01.000',  61.00, 0, 6),
@@ -205,7 +185,7 @@
 		('2026-10-27 15:30:02.000',  93.00, 0, 6);
 
 	-- ================================================================
-	-- CONSULTAS PARA O DASHBOARD
+	-- CONSULTAS PARA O DASHBOARD0
 	-- ================================================================
 
 	-- select para listar os clientes que contrataram o sistema.
@@ -253,18 +233,15 @@
 		st.nomeSetor,
 		st.gondola,
 		sm.nomeFantasia AS supermercado,
-		SUM(r.prolongada) AS totalProlongadas
 	FROM registro AS r
 	JOIN sensor AS se ON r.fkSensor = se.idSensor
 	JOIN setor AS st ON se.fkSetor = st.idSetor
 	JOIN supermercado AS sm ON st.fkSupermercado = sm.idSupermercado
-	GROUP BY st.idSetor, st.nomeSetor, st.gondola, sm.nomeFantasia
 	ORDER BY totalProlongadas DESC;
 
 	-- select para calcular a distancia media por sensor, ignorando leituras nulas.
 	SELECT
 		fkSensor,
-		ROUND(AVG(distanciaCm), 2) AS distanciaMediaCm
 	FROM registro
 	WHERE distanciaCm IS NOT NULL
 	GROUP BY fkSensor
@@ -273,7 +250,6 @@
 	-- select para contar permanencias prolongadas em cada hora do dia.
 	SELECT
 		DATE_FORMAT(dataHora, '%Y-%m-%d %H:00:00') AS hora,
-		SUM(prolongada) AS totalProlongadas
 	FROM registro
 	GROUP BY DATE_FORMAT(dataHora, '%Y-%m-%d %H:00:00')
 	ORDER BY hora;
@@ -282,10 +258,7 @@
 	SELECT
 		se.idSensor,
 		se.status,
-		MAX(r.dataHora) AS ultimaLeitura
 	FROM sensor AS se
-	LEFT JOIN registro AS r ON r.fkSensor = se.idSensor
-	GROUP BY se.idSensor, se.status
 	ORDER BY se.idSensor;
 
 	-- select para identificar sensores ativos sem leitura ha mais de 2 segundos.
@@ -297,19 +270,15 @@
 	FROM sensor AS se
 	LEFT JOIN registro AS r ON r.fkSensor = se.idSensor
 	WHERE se.status = 'ativo'
-	GROUP BY se.idSensor
-	HAVING ultimaLeitura IS NULL
 	   OR TIMESTAMPDIFF(MICROSECOND, ultimaLeitura, NOW(3)) > 2000000;
 
 	-- select para contar permanencias prolongadas por supermercado.
 	SELECT
 		sm.nomeFantasia AS supermercado,
-		SUM(r.prolongada) AS totalProlongadas
 	FROM supermercado AS sm
 	JOIN setor AS st ON st.fkSupermercado = sm.idSupermercado
 	JOIN sensor AS se ON se.fkSetor = st.idSetor
 	JOIN registro AS r ON r.fkSensor = se.idSensor
-	GROUP BY sm.idSupermercado, sm.nomeFantasia
 	ORDER BY totalProlongadas DESC;
 
 	-- select para ver apenas as leituras de um sensor especifico, em ordem.

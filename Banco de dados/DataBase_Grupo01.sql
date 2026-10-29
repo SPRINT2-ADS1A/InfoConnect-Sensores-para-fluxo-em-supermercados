@@ -12,6 +12,7 @@ CREATE TABLE cliente (
     nome VARCHAR(45) NOT NULL,
     cpf CHAR(11) UNIQUE NOT NULL,
     email VARCHAR(45) NOT NULL,
+    senha varchar (45),
     telefone VARCHAR(45),
     CONSTRAINT chkEmailCliente
         CHECK (email LIKE '%@%.%')
@@ -73,20 +74,6 @@ CREATE TABLE registro (
     CONSTRAINT fkSensorRegistro
         FOREIGN KEY (fkSensor)
         REFERENCES sensor(idsensor)
-);
-
-CREATE TABLE Usuario (
-    idUsuario INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(45) NOT NULL,
-    cargo VARCHAR(45),
-    email VARCHAR(45) NOT NULL,
-    senha VARCHAR(100) NOT NULL,
-    fkSupermercado INT NOT NULL,
-    CONSTRAINT chkEmailUsuario
-        CHECK (email LIKE '%@%.%'),
-    CONSTRAINT fkSupermercadoUsuario
-        FOREIGN KEY (fkSupermercado)
-        REFERENCES Supermercado(idSupermercado)
 );
 
 SELECT * FROM registro;
