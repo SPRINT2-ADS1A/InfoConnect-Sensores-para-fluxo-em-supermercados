@@ -18,7 +18,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 
     <title>Dashboard</title>
-  </head>
+  </head>   
 
   <body>
     <header>
@@ -52,7 +52,7 @@
 
     <!-- Os valores são fictícios, para demonstrar a dashboard. -->
     <div class="cards-kpi">
-      <div class="cardKPI">
+      <div class="cardKPI bom">
         <i class="fa-solid fa-users"></i>
         <h3>Aproximações na semana</h3>
         <h2>9.000</h2>
@@ -60,22 +60,22 @@
         <p>Meta: 8.400 · <b class="resultado-bom">atingida</b></p>
       </div>
 
-      <div class="cardKPI">
+      <div class="cardKPI info">
         <i class="fa-regular fa-clock"></i>
         <h3>Faixa de maior movimento</h3>
         <h2>12h às 16h</h2>
         <p>3.600 aproximações (40%). Comparação da mesma faixa.</p>
       </div>
 
-      <div class="cardKPI">
+      <div class="cardKPI ruim">
         <i class="fa-solid fa-chart-column"></i>
         <h3>Dias abaixo da referência</h3>
         <h2>2 de 7 dias</h2>
-        <p class="comparacao">Segunda e terça-feira</p>
+        <p class="resultado-ruim">Segunda e terça-feira</p>
         <p>Referência: 1.200/dia · <b class="resultado-ruim">investigar quedas</b></p>
       </div>
 
-      <div class="cardKPI">
+      <div class="cardKPI atencao">
         <i class="fa-solid fa-triangle-exclamation"></i>
         <h3>Pontos que precisam de atenção</h3>
         <h2>2 de 4</h2>
@@ -85,7 +85,6 @@
 
     <div class="cards">
       <div class="cardI">
-        <h3><span class="ajuda" title="Quantidade de aproximações por dia e referência gerencial diária.">?</span>Como o movimento variou na semana?</h3>
         <p>Quantas aproximações foram registradas por dia da semana?</p>
         <div class="grafico">
           <canvas id="myChart1" aria-label="Gráfico de aproximações por dia da semana" role="img"></canvas>
@@ -95,7 +94,6 @@
       </div>
 
       <div class="cardI">
-        <h3><span class="ajuda" title="Participação de cada faixa de horário no total de aproximações da semana.">?</span>Quando as aproximações se concentram?</h3>
         <p>Em quais faixas de horário ocorrem mais aproximações?</p>
         <div class="conteudo-grafico">
           <div class="grafico pizza">
@@ -198,9 +196,28 @@
       // Gráfico semanal. A segunda série desenha a linha de referência.
       const ctx1 = document.getElementById("myChart1");
 
+      // Desenha a linha tracejada de ponta a ponta, exatamente em y = 1200 (meta).
+      const linhaReferencia = {
+        id: "linhaReferencia",
+        afterDatasetsDraw: function(grafico) {
+          const area = grafico.chartArea;
+          const y = grafico.scales.y.getPixelForValue(1200);
+          const c = grafico.ctx;
+          c.save();
+          c.setLineDash([6, 4]);
+          c.lineWidth = 2;
+          c.strokeStyle = "#F5A623";
+          c.beginPath();
+          c.moveTo(area.left, y);
+          c.lineTo(area.right, y);
+          c.stroke();
+          c.restore();
+        }
+      };
+
       new Chart(ctx1, {
         type: "bar",
-        plugins: [ChartDataLabels],
+        plugins: [ChartDataLabels, linhaReferencia],
         data: {
           labels: ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"],
           datasets: [
@@ -210,17 +227,6 @@
               backgroundColor: "#1688F0",
               borderRadius: 3,
               order: 2
-            },
-            {
-              type: "line",
-              label: "Referência: 1.200 por dia",
-              data: [1200, 1200, 1200, 1200, 1200, 1200, 1200],
-              borderColor: "#F5A623",
-              borderWidth: 2,
-              borderDash: [6, 4],
-              pointRadius: 0,
-              datalabels: { display: false },
-              order: 1
             }
           ]
         },

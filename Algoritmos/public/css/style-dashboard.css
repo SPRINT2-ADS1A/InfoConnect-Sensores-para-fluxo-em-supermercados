@@ -112,8 +112,8 @@ nav {
 
 .cardKPI i {
     float: left;
-    color: #1688F0;
-    background-color: #E6F3FF;
+    color: #555555;
+    background-color: #F0EDE7;
     font-size: 24px;
     padding: 12px;
     border-radius: 50%;
@@ -121,13 +121,13 @@ nav {
 }
 
 .cardKPI h2 {
-    color: #1688F0;
+    color: #222222;
     font-size: 32px;
     margin: 10px 0 10px 60px;
 }
 
 .cardKPI h3 {
-    color: #071957;
+    color: #222222;
     font-size: 15px;
     min-height: 36px;
     margin: 0 0 0 60px;
@@ -141,11 +141,44 @@ nav {
 
 .cardKPI p {
     margin-left: 60px;
-    color: #6478AD;
+    color: #555555;
 }
 
 .cardKPI .comparacao, .cardPonto .comparacao {
     color: #1688F0;
+}
+
+/* Cores por situação nas KPIs: bom = verde, ruim = vermelho, atenção = âmbar */
+.cardKPI.bom i, .cardKPI.bom h2 {
+    color: #277A26;
+}
+.cardKPI.bom i {
+    background-color: #E8F3E5;
+}
+
+.cardKPI.ruim i, .cardKPI.ruim h2 {
+    color: #B71C1C;
+}
+.cardKPI.ruim i {
+    background-color: #FDECEA;
+}
+
+.cardKPI.atencao i, .cardKPI.atencao h2 {
+    color: #AD6800;
+}
+.cardKPI.atencao i {
+    background-color: #FFF3E1;
+}
+
+.cardKPI.info i, .cardKPI.info h2 {
+    color: #1688F0;
+}
+.cardKPI.info i {
+    background-color: #E6F3FF;
+}
+
+.cardKPI .resultado-ruim {
+    color: #B71C1C;
 }
 
 .cardPonto .queda {
@@ -344,5 +377,3 @@ footer {
     margin: 0 40px 20px;
     line-height: 1.5;
 }
-
-
