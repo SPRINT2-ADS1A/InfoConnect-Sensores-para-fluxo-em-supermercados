@@ -4,7 +4,7 @@ CREATE DATABASE IF NOT EXISTS infoconnect;
 USE infoconnect;
 
 
-CREATE USER IF NOT EXISTS 'infoconnect_app'@'%' IDENTIFIED BY 'app123@'
+CREATE USER IF NOT EXISTS 'infoconnect_app'@'%' IDENTIFIED BY 'Arduino123@'
 
 
 GRANT SELECT, INSERT ON infoconnect.* TO 'infoconnect_app'@'%';
