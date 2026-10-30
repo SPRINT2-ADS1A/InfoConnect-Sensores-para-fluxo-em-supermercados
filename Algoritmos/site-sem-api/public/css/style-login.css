@@ -1,0 +1,516 @@
+*{
+    margin: 0;
+    padding:  0;
+    box-sizing: border-box;
+}
+
+:root {
+    --verde-escuro: #485C11;
+    --verde-claro: #8E9C78;
+    --fundo: white;
+    --texto: black;
+}
+
+img {
+    width: 250px;
+    height: auto;
+}
+
+body {
+    background-image: url("../img/fundo.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    font-family: "Inter",sans-serif;
+    color: var(--texto);
+}
+
+/* body {
+    background-image: url("../img/fundo.jpg");
+    background-size: cover;
+    margin: 0;
+    font-family: Arial, sans-serif;
+} */
+
+main {
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    box-sizing: border-box;
+}
+
+header {
+    display: flex; /*coloca logo, menu e ícones lado a lado*/
+    align-items: center; /*alinha os três na vertical, pelo meio*/
+    gap: 32px;
+    padding: 18px 48px; /*dá espaço em cima e embaixo e nas laterais, p/ o conteúdo não colar na borda*/
+    background-color: white;
+    border-bottom: 1px solid #e2e8d9;
+    box-shadow: 0 4px 16px rgba(35, 51, 12, 0.06);
+}
+
+header > a img {
+    width: 210px;
+    display: block;
+}
+
+.logo{
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--verde-escuro);
+}
+
+.nav-bar{
+    flex:1; /*ocupa todo o espaço livre. Como sobra espaço depois dele, os ícones são empurrados p/ direita*/
+    margin-left: 0; /*mantém o menu perto da logo*/
+}
+
+.nav-bar a{
+    text-decoration: none; /*tira o sublinhado dos links*/
+    color: var(--verde-escuro);
+    font-size: 16px;
+    transition: opacity 0.2s;
+}
+
+.nav-bar a:hover {
+    opacity: 0.7;
+}
+
+.nav-bar ul {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+}
+
+.icones{
+    display: flex; /*coloca <li> lado a lado*/
+    gap: 12px; /*espaça um do outro*/
+    color: var(--verde-escuro);
+    cursor: pointer;
+}
+
+.icones i {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #dce5d0;
+    border-radius: 12px;
+    background-color: #fafcf7;
+}
+
+.caixa-login {
+    width: 860px;
+    max-width: 100%;
+    min-height: 460px;
+    background-color: white;
+    display: flex;
+    border: 1px solid #dde5d0;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 18px 45px rgba(30, 44, 12, 0.18);
+}
+
+.esquerda {
+    width: 50%;
+    background-color: white;
+    padding: 50px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.direita {
+    width: 50%;
+    background-color: var(--verde-escuro);
+    padding: 50px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+}
+
+.card-simulador {
+    background-color: white;
+    width: 100%;
+    max-width: 900px;
+    padding: 40px;
+    border-radius: 20px;
+    color: #222222;
+    box-sizing: border-box;
+}
+
+.card-simulador h3 {
+    color: #387D2D;
+    font-size: 20px;
+}
+
+.simulador {
+    text-align: center;
+    color: #222222;
+    font-size: 34px;
+    font-weight: 700;
+    margin: 0 0 30px 0;
+}
+
+.simulador::after {
+    content: "";
+    display: block;
+    width: 400px;
+    max-width: 80%;
+    height: 4px;
+    background-color: #387D2D;
+    margin: 10px auto 0;
+    border-radius: 4px;
+}
+
+.btn-calcular {
+    height: 40px;
+    background-color: #387D2D;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-calcular:hover {
+    background-color: #2d6624;
+}
+
+.esquerda h1 {
+    font-size: 34px;
+    font-weight: 700;
+    color: #222222;
+    margin: 0 0 15px 0;
+    line-height: 1.2;
+}
+
+.esquerda h1 span {
+    color: var(--verde-escuro);
+    font-family: "DM Serif Display", serif;
+    font-style: italic;
+    font-weight: 400;
+}
+
+.esquerda p {
+    font-size: 18px;
+    font-weight: 400;
+    color: #555f49;
+    line-height: 1.5;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.campo span {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.direita .campo span {
+    color: white;
+}
+
+.campo input {
+    height: 46px;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+    padding: 0 14px;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 14px;
+    color: #222222;
+    background-color: #fcfdf9;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.campo input:focus {
+    outline: none;
+    border-color: var(--verde-claro);
+    box-shadow: 0 0 0 3px rgba(196, 206, 136, 0.24);
+}
+
+.btn-entrar {
+    height: 46px;
+    border: none;
+    border-radius: 999px;
+    background-color: white;
+    font-family: inherit;
+    font-weight: bold;
+    cursor: pointer;
+    color: var(--verde-escuro);
+    transition: background-color 0.2s;
+}
+
+.btn-entrar:hover {
+    background-color: #edf3e3;
+}
+
+.btn-esqueci-senha {
+    height: 40px;
+    border: 2px solid white;
+    border-radius: 8px;
+    background-color: transparent;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-cadastrar-login {
+    height: 46px;
+    border: 2px solid white;
+    border-radius: 999px;
+    background-color: transparent;
+    color: white;
+    font-family: inherit;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-cadastrar-login:hover {
+    background-color: rgba(255, 255, 255, 0.099);
+}
+
+.btn-senha {
+    background: none;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    color: #222222;
+}
+
+.loginvalido {
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    font-style: italic;
+}
+
+.login_sucesso {
+    color: lightgreen;
+}
+
+.login_erro {
+    color: #ffb9b9;
+}
+
+.ou {
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+}
+
+/* css cadastro */
+
+.card {
+    background: white;
+    width: 100%;
+    max-width: 900px;
+    padding: 25px;
+    border-radius: 20px;
+    color: #387D2D;
+}
+
+.cabecalho_card {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+.titulo_card {
+    text-align: center;
+    color: #222222;
+    font-size: 34px;
+    font-weight: 700;
+    margin: 0 0 30px 0;
+}
+
+.subtitulo_card {
+    color: grey;
+}
+
+.titulo_card::after {
+    content: "";
+    display: block;
+    width: 450px;
+    max-width: 80%;
+    height: 4px;
+    background-color: #387D2D;
+    margin: 10px auto 0;
+    border-radius: 4px;
+}
+
+.secao_formulario {
+    border-bottom: 2px solid #287544;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.titulo_secao {
+    font-weight: bold;
+    font-size: 18px;
+    color: #034207;
+    margin-bottom: 12px;
+}
+
+.grupo_input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.grupo_input label {
+    font-size: 15px;
+    font-weight: bold;
+    color: #387D2D;
+}
+
+.grupo_input input {
+    padding: 8px 10px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    font-size: 13px;
+}
+
+.linha_dupla {
+    display: flex;
+    justify-content: space-between;
+}
+
+.linha_dupla .grupo_input {
+    width: 48%;
+}
+
+.linha_tripla {
+    display: flex;
+    justify-content: space-between;
+}
+
+.linha_uf {
+    width: 15%;
+}
+
+.linha_cidade {
+    width: 40%;
+}
+
+.linha_logradouro {
+    width: 40%;
+}
+
+.botao_cadastrar {
+    width: 100%;
+    padding: 10px;
+    background-color: #387D2D;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+.botao_cadastrar:hover {
+    background-color: #2d6624;
+}
+
+.btn-voltar-login {
+    width: 100%;
+    padding: 10px;
+    background-color: transparent;
+    color: #387D2D;
+    border: 1px solid #387d2db5;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+.btn-voltar-login:hover {
+    background-color: #f0f4f098;
+}
+
+.msg_erro {
+    background-color: #ffe6e6;
+    color: #d93025;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    margin-top: 12px;
+    border: 1px solid #f5c6cb;
+    display: none;
+}
+
+.msg_sucesso {
+    background-color: white;
+    color: #2b007a;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 13.6px;
+    margin-top: 12px;
+    border: 1px solid #b2f5ea;
+    display: none;
+}
+
+@media (max-width: 850px) {
+    header {
+        flex-wrap: wrap;
+        gap: 18px;
+        padding: 16px 24px;
+    }
+
+    .nav-bar {
+        order: 3;
+        flex-basis: 100%;
+    }
+
+    .icones {
+        margin-left: auto;
+    }
+
+    .caixa-login {
+        min-height: 430px;
+    }
+
+    .esquerda, .direita {
+        padding: 36px;
+    }
+}
+
+@media (max-width: 600px) {
+    header > a img {
+        width: 165px;
+    }
+
+    .caixa-login {
+        flex-direction: column;
+        border-radius: 22px;
+    }
+
+    .esquerda, .direita {
+        width: 100%;
+        padding: 30px 26px;
+    }
+
+    .esquerda h1 {
+        font-size: 30px;
+    }
+
+    main {
+        padding: 30px 16px;
+    }
+}

@@ -1,0 +1,387 @@
+body {
+    background-color: #FAF7F2;
+    background-size: cover;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: white;
+    min-height: 92px;
+    display: flex;
+    align-items: center;
+    padding: 0 60px;
+    box-sizing: border-box;
+    color: #222222;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logoimagem {
+    display: block;
+    width: 320px;
+    max-width: 100%;
+    height: auto;
+}
+
+.nav-bar {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-bar ul {
+    display: flex;
+    align-items: center;
+    gap: 38px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-bar a {
+    color: #222222;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.nav-bar a:hover {
+    color: #485C11;
+}
+
+.icones {
+    display: flex;
+    align-items: center;
+    gap: 38px;
+    font-size: 20px;
+}
+
+.icones i {
+    cursor: pointer;
+}
+
+@media (max-width: 900px) {
+    header {
+        padding: 16px 24px;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .logoimagem {
+        width: 240px;
+    }
+
+    .icones {
+        margin-left: auto;
+    }
+
+    .nav-bar {
+        order: 3;
+        flex-basis: 100%;
+    }
+
+    .nav-bar ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 24px;
+    }
+
+    .nav-bar a {
+        font-size: 16px;
+    }
+}
+
+/* Cabeçalho da dashboard */
+.cabecalho-dashboard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 30px 40px;
+    gap: 20px;
+}
+
+.titulo h1 {
+    color: #071957;
+    font-size: 32px;
+    margin: 0;
+}
+
+.titulo p {
+    color: #666666;
+    margin-bottom: 0;
+}
+
+.periodo {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+/* Os três grupos usam o mesmo alinhamento. */
+.cards-kpi, .cards, .pontos {
+    display: flex;
+    gap: 20px;
+}
+
+.cards-kpi, .cards {
+    margin: 0 40px 20px;
+}
+
+.cardKPI, .cardI, .cardPonto {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+    min-width: 0;
+}
+
+.cardKPI, .cardPonto {
+    width: 25%;
+}
+
+.cardKPI i {
+    float: left;
+    color: #555555;
+    background-color: #F0EDE7;
+    font-size: 24px;
+    padding: 12px;
+    border-radius: 50%;
+    margin-right: 12px;
+}
+
+.cardKPI h2 {
+    color: #222222;
+    font-size: 28px;
+    margin: 6px 0 6px 60px;
+}
+
+.cardKPI h3 {
+    color: #222222;
+    font-size: 14px;
+    min-height: 34px;
+    line-height: 1.3;
+    margin: 0 0 0 60px;
+}
+
+.cardKPI p, .cardPonto p {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #666666;
+}
+
+.cardKPI p {
+    margin: 4px 0 0 60px;
+    font-size: 12px;
+    line-height: 1.3;
+    color: #555555;
+}
+
+.cardKPI .comparacao, .cardPonto .comparacao {
+    color: #1688F0;
+}
+
+/* Cores por situação nas KPIs */
+.cardKPI.bom i, .cardKPI.bom h2 { color: #277A26; }
+.cardKPI.bom i { background-color: #E8F3E5; }
+
+.cardKPI.ruim i, .cardKPI.ruim h2 { color: #B71C1C; }
+.cardKPI.ruim i { background-color: #FDECEA; }
+
+.cardKPI.atencao i, .cardKPI.atencao h2 { color: #AD6800; }
+.cardKPI.atencao i { background-color: #FFF3E1; }
+
+.cardKPI.info i, .cardKPI.info h2 { color: #1688F0; }
+.cardKPI.info i { background-color: #E6F3FF; }
+
+.cardKPI .resultado-ruim { color: #B71C1C; }
+
+.cardPonto .queda {
+    color: #AD6800;
+}
+
+/* Gráficos */
+.cardI {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.cardI h3, .analise h2, .insights h3 {
+    color: #071957;
+    margin: 0;
+}
+
+.cardI p {
+    color: #666666;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.grafico {
+    width: 100%;
+    height: 270px;
+    margin-bottom: 8px;
+}
+
+.cardI .referencia, .cardPonto .referencia {
+    color: #996000;
+    font-size: 12px;
+}
+
+.cardI .insight {
+    background-color: #F7F7F4;
+    color: #526DA7;
+    padding: 14px;
+    border-radius: 8px;
+    margin-top: auto;
+    margin-bottom: 0;
+}
+
+
+/* Legendas e comentários dos gráficos */
+.cardI .legenda-referencia {
+    text-align: center;
+    color: #6478AD;
+    font-size: 12px;
+}
+
+.legenda-referencia span {
+    display: inline-block;
+    width: 36px;
+    border-top: 2px dashed #F5A623;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.conteudo-grafico {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin: 15px 0;
+    flex: 1;
+}
+
+.pizza {
+    width: 42%;
+}
+
+.legenda {
+    width: 58%;
+}
+
+.cardI .legenda p {
+    color: #6478AD;
+    font-size: 13px;
+    margin: 18px 0;
+}
+
+.legenda b {
+    color: #071957;
+    margin-right: 12px;
+}
+
+.bolinha {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.cardI .referencia-pizza {
+    background-color: #FFF3E1;
+    color: #A65A00;
+    padding: 12px;
+    border-left: 4px solid #F5A623;
+    border-radius: 8px;
+}
+
+.cardKPI .resultado-bom, .legenda .resultado-bom, .resultado-bom b {
+    color: #277A26;
+}
+
+.resultado-ruim {
+    color: #B71C1C;
+}
+
+/* Pontos de exposição */
+.analise, .insights {
+    background-color: white;
+    margin: 0 40px 20px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.analise > p, .insights p {
+    color: #666666;
+    font-size: 14px;
+}
+
+.cardPonto {
+    padding: 15px;
+    border: 1px solid #E5E5E5;
+}
+
+.cardPonto h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.cardPonto strong {
+    float: right;
+    color: #222222;
+}
+
+.cardPonto .status {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #222222;
+}
+
+/* A largura do preenchimento e a posição do traço estão no HTML. */
+.barra {
+    background-color: #F0EDE7;
+    height: 16px;
+    border-radius: 4px;
+    position: relative;
+}
+
+.barra span {
+    display: block;
+    height: 100%;
+    border-radius: 4px;
+}
+
+.barra b {
+    position: absolute;
+    top: -4px;
+    width: 2px;
+    height: 24px;
+    background-color: #333333;
+}
+
+.verde {
+    background-color: #87C779;
+}
+
+.amarelo {
+    background-color: #FFCD82;
+}
+
+.vermelho {
+    background-color: #FFBDBD;
+}
+
+footer {
+    color: #666666;
+    font-size: 12px;
+    margin: 0 40px 20px;
+    line-height: 1.5;
+}

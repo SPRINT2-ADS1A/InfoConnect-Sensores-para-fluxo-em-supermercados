@@ -1,0 +1,441 @@
+*{
+    margin: 0;
+    padding:  0;
+    box-sizing: border-box;
+}
+/* Precisa começar com -- para o navegador entender que é uma variável personalizada. */
+:root {
+    --verde-escuro: #485C11;
+    --verde-claro: #C4CE88;
+    --fundo: white;
+    --texto: black;
+    --borda: #DCE3CE;
+    --sombra: 0 12px 32px rgba(45, 62, 22, 0.09);
+}
+html { scroll-behavior: smooth; }
+
+body {
+    background-color: var(--fundo);
+    font-family: "Inter",sans-serif;
+    color: var(--texto);
+}
+
+.topo {
+    display: flex;
+    align-items: center; /*centraliza as duas colunas na vertical, uma em relação à outra*/
+    gap: 48px; /*abre um espaço entre a coluna do texto e da foto*/
+    padding: 80px 48px; /*afasta o conteúdo de cima e de baixo (80px) e das laterais (48px)*/
+    max-width: 1360px;
+    margin: 0 auto;
+}
+
+.topo-texto{
+    /* display,flex-direction:column: empilham o títulos e os botões, um embaixo do outro */
+    flex:1;
+    min-width: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* impede que os botões estiquem até a largura inteira */
+    justify-content: center; /* centraliza o conjunto na vertical, em relação à altura da foto */
+    gap: 24px; /* dá o espaço entre os itens */
+    padding-left: 0; /* remove o recuo antigo de 10vw para alinhar melhor */
+}
+.topo-imagem {
+    flex: 1;
+    min-width: 0;
+    padding: 8px;
+    background-color: white;
+    border: 1px solid var(--borda);
+    border-radius: 30px;
+    box-shadow: var(--sombra);
+}
+.topo-imagem img,
+.topo-imagem video {
+    width: 100%;
+    display: block;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 22px; /* mantém o formato retangular, com cantos arredondados */
+}
+
+.topo-imagem video { background-color: #E8EBDF; }
+h1 {
+    /* controla o título: font-size é o tamanho da letra,
+       font-weight deixa o traço fino e line-height aproxima as linhas */
+    font-size: clamp(38px, 4.3vw, 56px);
+    font-weight: 300;
+    line-height: 1.1;
+}
+h1 span,
+h2 span {
+    /* estilizam a palavra em destaque */
+    font-family: "DM Serif Display", serif;
+    font-style: italic;
+    color: var(--verde-escuro);
+}
+
+/* BOTÕES */
+
+.botao-verde {
+    background-color: var(--verde-escuro);
+    color: white;
+    border: 1px solid var(--verde-escuro);
+    border-radius: 12px; /* arredonda os cantos sem deixar o botão totalmente oval */
+    padding: 12px 28px; /* dá 12px em cima e embaixo e 28px dos lados */
+    font-size: 16px;
+    font-family: inherit; /* faz o botão usar a Inter */
+    cursor: pointer; /* troca o cursor por uma mãozinha */
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    box-shadow: 0 5px 14px rgba(72, 92, 17, 0.15);
+}
+.botao-contorno {
+    background-color: transparent;
+    color: var(--verde-escuro);
+    border: 1px solid currentColor;
+    border-radius: 12px;
+    padding: 12px 28px;
+    font-size: 16px;
+    font-family: inherit;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+}
+
+.botao-verde:hover { background-color: #384A0D; transform: translateY(-2px); }
+.botao-contorno:hover { background-color: rgba(72, 92, 17, 0.07); transform: translateY(-2px); }
+
+.topo-botoes {
+    /* mantém os três links separados e alinhados à esquerda */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    width: 100%;
+}
+.topo-botoes a {
+    width: 320px; /* todos os botões ficam com a mesma largura */
+    max-width: 100%;
+    min-height: 52px;
+    text-align: center;
+}
+.topo-botoes .botao-simulador {
+    background-color: #EAF0DC;
+    color: var(--verde-escuro);
+    border-color: #CBD7B4;
+    box-shadow: none;
+}
+.topo-botoes .botao-simulador:hover { background-color: var(--verde-claro); }
+
+
+/* HEADER */
+header {
+    display: flex; /* coloca logo, menu e ícones lado a lado */
+    align-items: center; /* alinha os três na vertical, pelo meio */
+    gap: 42px;
+    padding: 18px 24px; /* a logo fica próxima da ponta esquerda */
+    background-color: white;
+    border-bottom: 1px solid var(--borda);
+    box-shadow: 0 4px 20px rgba(45, 62, 22, 0.05);
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--verde-escuro);
+}
+img {
+    width: 250px;
+    height: auto;
+    max-width: 100%;
+}
+header > a { flex-shrink: 0; }
+header > a img { width: 205px; display: block; }
+
+.nav-bar {
+    flex: 1; /* ocupa o espaço livre e empurra os ícones para a direita */
+    margin-left: 0;
+}
+.nav-bar a {
+    text-decoration: none; /* tira o sublinhado dos links */
+    color: var(--texto);
+    font-size: 18px;
+    position: relative;
+    padding: 8px 0;
+}
+
+.nav-bar ul {
+    display: flex;
+    justify-content: flex-start; /* mantém a navegação alinhada à esquerda */
+    gap: 32px;
+    list-style: none;
+}
+
+/* A linha aparece embaixo de cada link quando o mouse passa */
+.nav-bar a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--verde-escuro);
+    transition: width 0.2s;
+}
+.nav-bar a:hover::after { width: 100%; }
+
+.icones {
+    display: flex; /* coloca os ícones lado a lado */
+    align-items: center;
+    gap: 12px; /* espaça um do outro */
+    color: var(--verde-escuro);
+    cursor: pointer;
+}
+.icones > i,
+.icones a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    color: inherit;
+    text-decoration: none;
+    background-color: white;
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    transition: 0.2s;
+}
+.icones > i:hover,
+.icones a:hover {
+    background-color: var(--verde-claro);
+}
+
+/* FAIXAS VERDES */
+
+.faixa {
+    /* É a caixa verde inteira */
+    background-color: var(--verde-claro);
+    background-image: linear-gradient(135deg, #DCE5B7, #C4CE88);
+    border: 1px solid #ADBD78;
+    border-radius: 30px; /* arredonda os cantos */
+    padding: 56px 40px; /* afasta o conteúdo das bordas */
+    margin: 48px auto; /* centraliza a faixa e mantém espaço em cima e embaixo */
+    max-width: 1240px;
+    text-align: center; /* centraliza os textos */
+    box-shadow: var(--sombra);
+}
+.faixa h2 {
+    /* estiliza o título só dentro da faixa */
+    font-size: 44px;
+    font-weight: 300; /* deixa fino o design */
+    color: var(--verde-escuro);
+}
+
+.faixa > p {
+    /* ">" significa "filho direto": pega só o "p" dentro da ".faixa" */
+    margin: 12px auto 0;
+    max-width: 700px;
+    font-size: 18px;
+    line-height: 1.5;
+}
+.itens {
+    /* linha dos itens */
+    display: flex; /* coloca os itens lado a lado */
+    justify-content: space-around;
+    gap: 24px;
+    margin: 32px auto 0; /* limita nas laterais e centraliza a caixa */
+    padding-top: 32px;
+    max-width: 1000px; /* limita a largura */
+    border-top: 1px solid var(--verde-escuro); /* linha de divisória estética */
+}
+.item {
+    flex: 1; /* divide o espaço igualmente entre eles */
+    min-width: 0;
+    display: flex;
+    flex-direction: column; /* empilha imagem, título e descrição */
+    align-items: center; /* centraliza os três */
+    gap: 12px;
+    padding: 24px 16px;
+    background-color: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    border-radius: 20px;
+    transition: 0.2s;
+}
+.item:hover {
+    background-color: white;
+    border-color: #B6C590;
+    box-shadow: var(--sombra);
+    transform: translateY(-4px);
+}
+
+.item img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 1px solid rgba(72, 92, 17, 0.15);
+    border-radius: 16px; /* quadrado com os cantos arredondados */
+}
+.item h3 {
+    font-size: 15px;
+    text-transform: uppercase; /* transforma o texto em maiúsculas sem mudar o HTML */
+    color: var(--verde-escuro);
+}
+.item p { font-size: 15px; line-height: 1.5; }
+
+/* SENSOR */
+
+.sensor h2 {
+    text-align: center; /* centraliza o título */
+    font-size: 44px;
+    font-weight: 400;
+    margin-bottom: 40px; /* afasta o título das colunas */
+}
+.sensor-colunas {
+    display: flex; /* coloca foto e texto lado a lado */
+    align-items: center; /* alinha os dois pelo meio, na vertical */
+    gap: 48px; /* afasta a foto do texto */
+}
+
+.sensor-imagem {
+    flex: 3;
+    min-width: 0;
+    padding: 8px;
+    background-color: white;
+    border: 1px solid var(--borda);
+    border-radius: 28px;
+    box-shadow: var(--sombra);
+}
+.sensor-imagem img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 20px; /* imagem retangular com cantos arredondados */
+    display: block;
+}
+.sensor-texto {
+    flex: 2;
+    min-width: 0;
+}
+.sensor-texto p {
+    /* somente o "p" dentro de sensor-texto recebe estas características */
+    font-size: 20px;
+    color: black;
+    font-weight: 300;
+    line-height: 1.6;
+    margin-bottom: 24px; /* separa o parágrafo do botão */
+}
+
+.sensor-texto .botao-verde {
+    width: auto;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+.sensor {
+    padding: 64px 48px; /* para a seção não colar nas bordas */
+    max-width: 1240px;
+    margin: 0 auto;
+}
+
+
+/* SOBRE NÓS */
+.sobre {
+    background-color: var(--verde-escuro);
+    border: 1px solid #344B12;
+    border-radius: 30px; /* arredonda os cantos */
+    margin: 56px auto 96px; /* cima, laterais e embaixo */
+    max-width: 1140px;
+    overflow: hidden;
+    box-shadow: 0 18px 40px rgba(35, 52, 11, 0.18);
+}
+.sobre h2 { text-transform: uppercase; color: #C6CFBB; }
+.sobre-colunas {
+    display: flex; /* coloca foto e texto lado a lado */
+    align-items: stretch; /* faz as duas colunas ocuparem a mesma altura */
+}
+
+.sobre-imagem {
+    flex: 1;
+    min-width: 0;
+    position: relative;
+    padding: 12px;
+}
+.sobre-imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 20px; /* mantém os cantos arredondados */
+}
+.sobre-texto {
+    flex: 1;
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 16px;
+}
+.sobre-texto h3,
+.sobre-texto p {
+    color: white;
+}
+
+.sobre-texto h3 { font-size: 24px; line-height: 1.3; }
+.sobre-texto p {
+    /* somente os parágrafos dentro de sobre-texto recebem estas características */
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+.sobre-texto .botao-contorno {
+    color: white;
+    border-color: rgba(255, 255, 255, 0.75);
+}
+.sobre-texto .botao-contorno:hover { background-color: rgba(255, 255, 255, 0.12); }
+
+
+/* RODAPÉ */
+footer {
+    background-color: var(--verde-escuro);
+    color: white;
+    font-size: 48px;
+    border-top: 3px solid var(--verde-claro);
+    border-radius: 30px 30px 0 0;
+    padding: 40px 48px 24px; /* retira o deslocamento antigo de 200px à esquerda */
+}
+
+footer h2 { font-size: 50px; }
+footer h3 { font-size: 48px; }
+
+footer ul {
+    display: flex;
+    justify-content: center;
+    gap: 64px;
+    list-style: none;
+    padding-bottom: 20px;
+    border-bottom: 1px solid white;
+}
+footer a {
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 300;
+}
+footer a:hover { color: var(--verde-claro); }
+footer p {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 300;
+    margin-top: 20px;
+}

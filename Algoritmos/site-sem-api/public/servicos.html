@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>InfoConnect</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <!-- Crossorigin permite o uso entre domínios. -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Carrega o CSS; O style.css tem que estar na mesma pasta. -->
+    <link rel="stylesheet" href="./css/style-servicos.css" />
+    <!-- Carrega a biblioteca de ícones -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <a href="./index.html">
+      <img src="img/logoCompleta.png" class="img" /> 
+    </a>
+
+      <!-- Agrupa os links de navegação. -->
+      <nav class="nav-bar">
+        <!-- Cria uma lista sem numeração. -->
+        <ul>
+          <!-- Li é um item; a cria o link; ./index.html leva à página inicial. -->
+          <li><a href="./index.html">Home</a></li>
+          <!-- index.html#sobre abre o index e rola até a seção com id sobre. -->
+          <li><a href="./index.html#sobre">Sobre</a></li>
+          <!-- Leva à própria página de serviços. -->
+          <li><a href="./servicos.html">Serviços</a></li>
+          <!-- Leva à página do simulador financeiro. -->
+          <li><a href="./simulador.html">Simulador</a></li>
+          <li><a href="./dashboard.html">Dashboard</a></li>
+        </ul>
+      </nav>
+      <div class="icones">
+        <!-- As classes do Font Awesome desenham a lupa. -->
+        <!-- O a deixa o ícone clicável e leva à página de login. -->
+        <!-- As classes do i desenham o ícone de usuário. -->
+        <a href="./login.html"><i class="fa-regular fa-user"></i></a>
+      </div>
+    </header>
+    <main>
+      <section class="topo">
+        <div class="topo-texto">
+          <h1>
+            Transforme <span>dados de fluxo</span> em<br />
+            <span>vantagem competitiva</span><br />
+            para seu negócio.
+          </h1>
+          <p>
+            Monitore o comportamento do seu consumidor nas prateleiras<br />
+            com tecnologia acessível.
+          </p>
+          <!-- Class define a aparencia -->
+            
+          <a href="./simulador.html" class="botao-verde">Acessar simulador financeiro</a>
+        </div>
+      </section>
+      <section class="sensor" id="sobre">
+        <h2>Como o <b>Info</b>Connect funciona?</h2>
+        <!-- class="sensor" dá um nome para o css estilizar essa seção -->
+        <div class="sensor-colunas">
+          <div class="sensor-imagem">
+            <img
+              class="prateleira"
+              src="img/prateleira.jpg"
+              alt="Prateleira de supermercado"
+            />
+            <img
+              class="arduino"
+              src="img/arduino.jpg"
+              alt="Placa com microcontrolador Arduino"
+            />
+            <img
+              class="notebook"
+              src="img/notebook.jpg"
+              alt="Notebook com painel de dados"
+            />
+          </div>
+          <div class="sensor-texto">
+            <p>
+              <b>Sensores de proximidade</b> instalados na gôndola captam quando
+              um cliente se aproxima ou interage com o produto — sem câmeras e
+              sem nenhum traço identificável da pessoa. Uma
+              <b>placa com microcontrolador</b> processa esses dados,
+              transformando o movimento em informação: quantas pessoas pararam,
+              por quanto tempo e se houve contato com o item. O resultado chega
+              a um <b>painel</b> simples, com o comportamento agregado por
+              produto —
+              <b
+                ><i
+                  >sem biometria, sem reconhecimento facial, dentro da LGPD.</i
+                ></b
+              >
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="servicos" id="servicos">
+        <h2>Nossos <span>serviços</span></h2>
+        <p>
+          Três frentes de monitoramento integradas na mesma solução para
+          entender o comportamento do consumidor no ponto de venda.
+        </p>
+      </section>
+      <div class="lista-servicos">
+        <section class="servico-01">
+          <div class="servico-texto">
+            <h2>1. Fluxo de aproximação</h2>
+            <p>
+              Cada vez que um cliente se aproxima de uma gôndola, ele deixa um
+              sinal — mesmo sem tocar em nada.
+              <br />
+              O InfoConnect capta esse movimento por meio de sensores simples,
+              sem câmeras e sem reconhecimento de imagem, transformando o que
+              antes era invisível em um dado real sobre o que desperta o
+              interesse do consumidor dentro da loja.
+            </p>
+          </div>
+
+          <div class="servico-imagem">
+            <img src="img/mercado1.png" alt="Gôndolas de supermercado" />
+          </div>
+        </section>
+
+        <section class="servico-02">
+          <div class="servico-imagem">
+            <img src="img/mercado2.png" alt="Cliente escolhendo produtos" />
+          </div>
+
+          <div class="servico-texto">
+            <h2>2. Tempo de atenção</h2>
+            <p>
+              Não basta saber que o cliente parou — é preciso entender por
+              quanto tempo ele ficou ali, avaliando, comparando, decidindo. Esse
+              tempo de permanência revela o que realmente prende a atenção na
+              prateleira, uma informação que os dados de venda tradicionais
+              nunca conseguem mostrar sozinhos.
+            </p>
+          </div>
+        </section>
+
+        <section class="servico-01">
+          <div class="servico-texto">
+            <h2>3. Integração física</h2>
+            <p>
+              Cada gesto do cliente diante da gôndola indica intenção de compra.
+              Sensores conectados a um Arduino detectam a aproximação e a
+              permanência em frente a cada produto, e enviam os registros para a
+              API, que os guarda no banco de dados. Com esse histórico, o
+              supermercado descobre quais produtos atraem mais atenção, em quais
+              horários o fluxo é maior e como a disposição das mercadorias
+              influencia a compra.
+            </p>
+          </div>
+
+          <div class="servico-imagem">
+            <img
+              src="img/mercado3.png"
+              alt="Cliente em frente às prateleiras"
+            />
+          </div>
+        </section>
+      </div>
+      <section class="decide" id=".">
+        <h2>Feito para quem <b>decide</b></h2>
+      </section>
+
+      <div class="clientes">
+
+        <section>
+          <div class="clientes-texto">
+            <h1><span>Varejista</span></h1>
+            <p>
+            Você sabe o que vende, mas não o que chama atenção antes da compra.
+            </p>
+            <br>
+
+            <h1><span>Trade Marketing</span></h1>
+          
+            <p>
+            Prove o impacto de uma campanha com dado de comportamento.
+          </p> <br>
+           <h1><span>Indústria e marca</span></h1>
+            <p>
+           Seu produto pode sumir da prateleira sem você saber.
+          </p>
+        </section>
+          <br><br>
+          </div>
+          
+
+      <section class="perguntas">
+        <h2><b>Perguntas frequentes</b></h2> <br>
+        <p>
+          <h3>1.Quanto custa implantar?</h3>
+           <br>
+          Preencha o formulário de interesse e nossa equipe entrará em contato para entender 
+          o tamanho da sua operação e apresentar o plano mais adequado — sem compromisso.
+<br><br>
+          <h3>2.Vocês captam rosto?</h3>
+           <br>
+          Não. Só padrões agregados, dentro da LGPD.
+<br><br>
+          <h3>3.Funciona em qualquer loja?</h3>
+           <br>
+          Em qualquer ponto de venda com energia e wi-fi.
+        </p>
+      </section>
+
+<div class="solicitacao">
+
+        <section>
+          <div class="solicitacao-texto">
+            <h1>
+              Pronto para ver o que sua prateleira
+              <span>Não está contando?</span>
+            </h1> <br><br>
+            <button class="botao-verde" style="padding: 24px 56px; font-size: 25px;"  >Solicitar cotação</button>
+        </section>
+          <br><br>
+          </div>
+      
+    </main>
+        <footer>
+      <nav>
+        <ul>
+          <li><a href="./index.html#sobre">Sobre nós</a></li>
+          <li><a href="./servicos.html">Serviços</a></li>
+          <li><a href="./suporte.html">Suporte</a></li>
+        </ul>
+      </nav>
+      <p>Copyright © 2026 - InfoConnect. Todos os direitos reservados.</p>
+    </footer>
+  </body>
+</html>

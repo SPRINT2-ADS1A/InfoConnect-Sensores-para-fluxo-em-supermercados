@@ -1,0 +1,603 @@
+/* ==========================================================================
+   1. RESET
+   ========================================================================== */
+
+* {
+    margin: 0; /* Remove o espaço externo padrão. */
+    padding: 0; /* Remove o espaço interno padrão. */
+    box-sizing: border-box; /* Inclui bordas e padding no tamanho definido. */
+}
+
+/* ==========================================================================
+   2. VARIÁVEIS
+   ========================================================================== */
+
+/* :root guarda as variáveis usadas na página inteira. */
+:root {
+    --verde-escuro: #485C11; /* Cor principal: títulos, botões e destaques. */
+    --verde-claro: #8E9C78; /* Verde suave (reserva; não usado no momento). */
+    --fundo: white; /* Fundo padrão da página. */
+    --fundo-claro: #EDF3F1; /* Fundo das seções topo e sensor. */
+    --texto: black; /* Cor padrão do texto. */
+}
+
+img {
+    width: 250px;
+    height: auto;
+}
+
+/* ==========================================================================
+   3. BASE (body e tipografia)
+   ========================================================================== */
+
+body {
+    background-color: var(--fundo); /* Define a cor do fundo. */
+    font-family: "Inter", sans-serif; /* Usa Inter; sans-serif é a fonte alternativa. */
+    color: var(--texto); /* Define a cor do texto; var() usa uma variável. */
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 56px; /* Define o tamanho das letras. */
+    font-weight: 300; /* Define a espessura: 300 é fino; 700 é negrito. */
+    line-height: 1.1; /* Define a distância entre as linhas do texto. */
+}
+
+h1 span,
+h2 span {
+    font-family: "DM Serif Display", serif; /* Fonte de destaque; serif é a alternativa. */
+    font-style: italic; /* Aplica itálico ao texto. */
+    color: var(--verde-escuro); /* Define a cor do texto; var() usa uma variável. */
+}
+
+/* ==========================================================================
+   4. COMPONENTES REUTILIZÁVEIS
+   ========================================================================== */
+
+.botao-verde {
+    padding: 12px 28px; /* Espaço interno: cima/baixo e esquerda/direita. */
+    border: none; /* Define a borda; none remove a borda. */
+    border-radius: 999px; /* Arredonda os cantos. */
+    background-color: var(--verde-escuro); /* Define a cor do fundo. */
+    color: white; /* Define a cor do texto. */
+    font-family: inherit; /* Escolhe a fonte; inherit usa a fonte do elemento pai. */
+    font-size: 16px; /* Define o tamanho das letras. */
+    cursor: pointer; /* Pointer mostra a mãozinha ao passar o mouse. */
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.botao-verde:hover {
+    background-color: #36470C;
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   5. CABEÇALHO
+   ========================================================================== */
+
+header {
+    display: flex; /* Flex organiza os filhos em linha. */
+    align-items: center; /* Centraliza os filhos na vertical. */
+    padding: 18px 48px; /* Espaço interno: cima/baixo e esquerda/direita. */
+    background-color: white; /* Define a cor do fundo. */
+    gap: 28px;
+    border-bottom: 1px solid #E5E9E0;
+    box-shadow: 0 3px 12px rgba(35, 51, 12, 0.05);
+}
+
+header > a img {
+    width: 210px;
+    display: block;
+}
+
+.logo {
+    font-size: 20px; /* Define o tamanho das letras. */
+    font-weight: 700; /* Define a espessura: 300 é fino; 700 é negrito. */
+    color: var(--verde-escuro); /* Define a cor do texto; var() usa uma variável. */
+}
+
+.nav-bar {
+    flex: 1; /* Ocupa o espaço livre disponível na linha flex. */
+    margin-left: 0; /* Mantém os links à esquerda, próximos da logo. */
+}
+
+.nav-bar ul {
+    display: flex; /* Flex coloca os itens lado a lado. */
+    gap: 32px; /* Define o espaço entre os elementos do flex. */
+    list-style: none; /* None remove as bolinhas da lista. */
+}
+
+.nav-bar a {
+    font-size: 16px; /* Define o tamanho das letras. */
+    color: var(--texto); /* Define a cor do texto; var() usa uma variável. */
+    text-decoration: none; /* None retira o sublinhado dos links. */
+}
+
+.nav-bar a:hover {
+    color: var(--verde-escuro);
+}
+
+.icones {
+    display: flex; /* Flex coloca os ícones lado a lado. */
+    gap: 20px; /* Define o espaço entre os elementos do flex. */
+    color: gray; /* Define a cor dos ícones. */
+    cursor: pointer; /* Pointer mostra a mãozinha ao passar o mouse. */
+}
+
+/* ==========================================================================
+   6. TOPO (hero)
+   ========================================================================== */
+
+.topo {
+    padding: 64px 48px 56px; /* Espaço interno: cima, laterais e baixo. */
+    background-color: var(--fundo-claro); /* Define a cor do fundo. */
+}
+
+.topo-texto {
+    display: flex; /* Flex organiza os filhos. */
+    flex-direction: column; /* Column coloca os elementos um abaixo do outro. */
+    align-items: center; /* Centraliza os filhos na horizontal. */
+    gap: 16px; /* Define o espaço entre os elementos do flex. */
+    text-align: center; /* Centraliza o texto. */
+}
+
+.topo-texto h1 {
+    max-width: 1000px; /* Limita a largura máxima do elemento. */
+}
+
+.topo-texto p {
+    font-size: 18px; /* Define o tamanho das letras. */
+    font-weight: 300; /* Define a espessura: 300 é fino; 700 é negrito. */
+    font-style: italic; /* Aplica itálico ao texto. */
+    line-height: 1.2; /* Define a distância entre as linhas do texto. */
+}
+
+.topo-texto .botao-verde {
+    width: 280px; /* Define a largura do botão. */
+}
+
+/* ==========================================================================
+   7. SEÇÃO SENSOR ("Como o InfoConnect funciona?")
+   ========================================================================== */
+
+.sensor {
+    background-color: var(--fundo-claro); /* Define a cor do fundo. */
+}
+
+.sensor h2 {
+    padding: 48px; /* Espaço interno igual nos quatro lados. */
+    border-radius: 0 0 30px 30px; /* Arredonda somente os dois cantos inferiores. */
+    background-color: white; /* Define a cor do fundo. */
+    font-size: 44px; /* Define o tamanho das letras. */
+    font-weight: 300; /* Define a espessura: 300 é fino; 700 é negrito. */
+    text-align: center; /* Centraliza o texto. */
+}
+
+.sensor h2 b,
+.sensor-texto b {
+    color: var(--verde-escuro); /* Define a cor do texto; var() usa uma variável. */
+}
+
+.sensor-colunas {
+    display: flex; /* Flex coloca imagens e texto lado a lado. */
+    align-items: center; /* Centraliza as imagens e o texto na vertical. */
+    gap: 40px; /* Define o espaço entre os elementos do flex. */
+    max-width: 1000px; /* Limita a largura máxima do elemento. */
+    margin: 0 auto; /* Espaço externo; auto centraliza nas laterais. */
+    padding: 26px 30px 40px 0; /* Espaço interno: cima, direita, baixo e esquerda. */
+    background-color: var(--fundo-claro); /* Define a cor do fundo. */
+}
+
+.sensor-imagem {
+    flex: 0 0 51%; /* Não cresce nem encolhe; ocupa 51% da largura da linha. */
+    min-width: 0; /* Permite que a coluna encolha sem forçar a largura do conteúdo. */
+}
+
+.sensor-imagem img {
+    display: block; /* Block remove o espaço extra abaixo da imagem. */
+    object-fit: cover; /* Cover preenche a imagem sem deformar, podendo cortar as bordas. */
+    object-position: center;
+    height: auto;
+    border: 1px solid #DBE3D6;
+    box-shadow: 0 6px 16px rgba(35, 51, 12, 0.09);
+}
+
+.prateleira {
+    width: 88%; /* Define a largura; porcentagens usam a largura do elemento pai. */
+    aspect-ratio: 2.15; /* Mantém o formato retangular sem ocupar tanta altura. */
+    margin-left: 12%; /* Define o espaço externo à esquerda. */
+    border-radius: 24px; /* Arredonda os cantos. */
+}
+
+.arduino {
+    width: 76%; /* Define a largura; porcentagens usam a largura do elemento pai. */
+    aspect-ratio: 2.15; /* Mantém a proporção semelhante à das outras fotos. */
+    margin-top: 12px; /* Define o espaço externo acima do elemento. */
+    border-radius: 24px; /* Arredonda os cantos. */
+}
+
+.notebook {
+    width: 88%; /* Define a largura; porcentagens usam a largura do elemento pai. */
+    aspect-ratio: 2.15; /* Mantém a proporção semelhante à das outras fotos. */
+    margin-top: 12px; /* Define o espaço externo acima do elemento. */
+    margin-left: 12%; /* Define o espaço externo à esquerda. */
+    border-radius: 24px; /* Arredonda os cantos. */
+}
+
+.sensor-texto {
+    flex: 1; /* Ocupa o espaço livre disponível na linha flex. */
+    min-width: 0; /* Permite que a coluna encolha sem forçar a largura do conteúdo. */
+    padding: 16px 0 0; /* Espaço interno: cima, laterais e baixo. */
+}
+
+.sensor-texto p {
+    font-size: 22px; /* Define o tamanho das letras. */
+    font-weight: 300; /* Define a espessura: 300 é fino; 700 é negrito. */
+    line-height: 1.55; /* Define a distância entre as linhas do texto. */
+    text-align: left; /* Alinha o texto à esquerda. */
+}
+
+.sensor-texto b {
+    font-weight: 700; /* Define a espessura: 300 é fino; 700 é negrito. */
+}
+
+/* ==========================================================================
+   8. SEÇÃO SERVIÇOS (título e introdução)
+   ========================================================================== */
+
+.servicos {
+    padding: 48px 80px; /* Espaço interno: cima/baixo e esquerda/direita. */
+    border-radius: 30px 30px 0 0; /* Arredonda somente os dois cantos superiores. */
+    background-color: white; /* Define a cor do fundo. */
+}
+
+.servicos h2 {
+    font-size: 44px; /* Define o tamanho das letras. */
+    font-weight: 300; /* Define a espessura: 300 é fino; 700 é negrito. */
+}
+
+.servicos p {
+    margin-top: 8px; /* Define o espaço externo acima do elemento. */
+    font-size: 18px; /* Define o tamanho das letras. */
+    font-weight: 300; /* Define a espessura: 300 é fino; 700 é negrito. */
+}
+
+/* ==========================================================================
+   9. LISTA DE SERVIÇOS (blocos 01, 02 e 03)
+   ========================================================================== */
+
+.lista-servicos {
+    background-color: var(--fundo-claro); /* Define a cor do fundo. */
+}
+
+.servico-01,
+.servico-02 {
+    display: flex; /* Flex coloca texto e imagem lado a lado. */
+    align-items: center; /* Centraliza os filhos na vertical. */
+    justify-content: space-between; /* Distribui o espaço entre texto e imagem. */
+    gap: 40px; /* Separa o texto da imagem. */
+    max-width: 1000px; /* Limita a largura máxima do elemento. */
+    margin: 0 auto; /* Espaço externo; auto centraliza nas laterais. */
+    padding: 30px; /* Espaço interno igual nos quatro lados. */
+}
+
+.servico-texto {
+    width: 50%; /* Define a largura; porcentagens usam a largura do elemento pai. */
+}
+
+.servico-texto h2 {
+    margin-bottom: 14px; /* Define o espaço externo abaixo do elemento. */
+    font-size: 30px; /* Define o tamanho das letras. */
+    font-style: italic; /* Aplica itálico ao texto. */
+    color: var(--verde-escuro); /* Define a cor do texto; var() usa uma variável. */
+    
+}
+
+.servico-texto p {
+    font-size: 20px; /* Define o tamanho das letras. */
+    font-weight: 300; /* Define a espessura: 300 é fino; 700 é negrito. */
+    line-height: 1.6; /* Define a distância entre as linhas do texto. */
+}
+
+.servico-02 .servico-texto {
+    text-align: right; /* Alinha o texto à direita, como no segundo serviço do Figma. */
+}
+
+.servico-imagem {
+    width: 42%; /* Define a largura; porcentagens usam a largura do elemento pai. */
+}
+
+.servico-imagem img {
+    display: block; /* Block remove o espaço extra abaixo da imagem. */
+    width: 100%; /* Ocupa toda a largura da coluna. */
+    height: auto; /* A altura acompanha a largura da coluna. */
+    aspect-ratio: 1 / 1; /* Deixa as três fotos dos serviços em quadrados iguais. */
+    border-radius: 24px; /* Arredonda os cantos. */
+    object-fit: cover; /* Cover preenche a imagem sem deformar, podendo cortar as bordas. */
+    object-position: center;
+    border: 1px solid #DBE3D6;
+    box-shadow: 0 6px 18px rgba(35, 51, 12, 0.12); /* Sombra suave da imagem. */
+}
+
+/* ==========================================================================
+   10. RESPONSIVO (telas de até 700px)
+   ========================================================================== */
+
+/* Aplica estas regras somente em telas de até 700px. */
+@media (max-width: 700px) {
+
+    /* Cabeçalho */
+    header {
+        flex-wrap: wrap; /* Permite quebrar os itens em mais de uma linha. */
+        gap: 12px; /* Define o espaço entre os elementos do flex. */
+        padding: 12px; /* Espaço interno igual nos quatro lados. */
+    }
+
+    header > a img {
+        width: 170px;
+    }
+
+    .nav-bar {
+        margin-left: 0; /* Remove o espaço externo à esquerda. */
+        order: 3;
+        flex-basis: 100%;
+    }
+
+    .nav-bar ul {
+        gap: 12px; /* Define o espaço entre os elementos do flex. */
+    }
+
+    .nav-bar a {
+        font-size: 13px; /* Define o tamanho das letras. */
+    }
+
+    .icones {
+        gap: 12px; /* Define o espaço entre os elementos do flex. */
+        margin-left: auto;
+    }
+
+    /* Topo */
+    .topo {
+        padding: 40px 16px; /* Espaço interno: cima/baixo e esquerda/direita. */
+    }
+
+    h1 {
+        font-size: 32px; /* Define o tamanho das letras. */
+    }
+
+
+
+    /* Sensor */
+    .sensor h2 {
+        padding: 30px 12px; /* Espaço interno: cima/baixo e esquerda/direita. */
+        font-size: 26px; /* Define o tamanho das letras. */
+    }
+
+    .sensor-colunas {
+        gap: 12px; /* Define o espaço entre os elementos do flex. */
+        flex-direction: column;
+        padding: 24px; /* Espaço interno igual nos quatro lados. */
+    }
+
+    .sensor-imagem {
+        width: 100%;
+    }
+
+    .sensor-texto {
+        padding-top: 6px; /* Define o espaço interno acima do conteúdo. */
+    }
+
+    .sensor-texto p {
+        font-size: 17px; /* Mantém o texto legível no celular. */
+        line-height: 1.55; /* Define a distância entre as linhas do texto. */
+    }
+
+    .prateleira,
+    .arduino,
+    .notebook {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 12px;
+        aspect-ratio: 16 / 9;
+        border-radius: 20px; /* Arredonda os cantos. */
+    }
+
+    .prateleira {
+        margin-top: 0;
+    }
+
+    /* Serviços */
+    .servicos {
+        padding: 30px 20px; /* Espaço interno: cima/baixo e esquerda/direita. */
+    }
+
+    .servicos h2 {
+        font-size: 30px; /* Define o tamanho das letras. */
+    }
+
+    .servico-01,
+    .servico-02 {
+        gap: 16px; /* Separa o texto da imagem. */
+        flex-direction: column;
+        padding: 20px 12px; /* Espaço interno: cima/baixo e esquerda/direita. */
+    }
+
+    .servico-texto {
+        width: 100%; /* Ocupa toda a largura em telas menores. */
+    }
+
+    .servico-texto h2 {
+        font-size: 18px; /* Define o tamanho das letras. */
+    }
+
+    .servico-texto p {
+        font-size: 16px; /* Define o tamanho das letras. */
+    }
+
+    .servico-imagem {
+        width: 100%; /* Ocupa toda a largura em telas menores. */
+    }
+
+    .servico-imagem img {
+        height: auto; /* Mantém a proporção em telas menores. */
+        aspect-ratio: 16 / 10;
+        border-radius: 24px; /* Arredonda os cantos. */
+    }
+
+    .servico-02 .servico-texto {
+        order: 1;
+        text-align: left;
+    }
+
+    .servico-02 .servico-imagem {
+        order: 2;
+    }
+
+    .perguntas, .clientes, .solicitacao {
+        padding: 32px 24px;
+    }
+
+    footer ul {
+        flex-wrap: wrap;
+        gap: 24px;
+    }
+}
+
+.decide {
+    background-color: var(--fundo-claro); /* Define a cor do fundo. */
+}
+
+.decide h2 {
+    padding: 48px; /* Espaço interno igual nos quatro lados. */
+    border-radius: 0 0 30px 30px; /* Arredonda somente os dois cantos inferiores. */
+    background-color: white; /* Define a cor do fundo. */
+    font-size: 44px; /* Define o tamanho das letras. */
+    font-weight: 300; /* Define a espessura: 300 é fino; 700 é negrito. */
+    text-align: center; /* Centraliza o texto. */
+}
+
+.decide b {
+    color: var(--verde-escuro); /* Define a cor do texto; var() usa uma variável. */
+}
+
+.clientes {
+    padding: 64px 48px 48px; /* Espaço interno: cima, laterais e baixo. */
+    background-color: var(--fundo-claro); /* Define a cor do fundo. */
+}
+
+.clientes-texto {
+    display: flex; /* Flex organiza os filhos. */
+    flex-direction: column; /* Column coloca os elementos um abaixo do outro. */
+    align-items: center; /* Centraliza os filhos na horizontal. */
+    gap: 16px; /* Define o espaço entre os elementos do flex. */
+    text-align: center; /* Centraliza o texto. */
+}
+
+.clientes-texto h1 {
+    max-width: 1000px; /* Limita a largura máxima do elemento. */
+    font-size: 38px;
+}
+
+.clientes-texto p {
+    font-size: 18px; /* Define o tamanho das letras. */
+    font-weight: 300; /* Define a espessura: 300 é fino; 700 é negrito. */
+    font-style: italic; /* Aplica itálico ao texto. */
+    line-height: 1.2; /* Define a distância entre as linhas do texto. */
+}
+
+.perguntas {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 48px 80px; /* Mantém o seu padding original */
+    border-radius: 30px 30px 0 0;
+    background-color: white;
+}
+
+.perguntas h2 {
+    font-size: 44px;
+    font-weight: 300;
+    color: #485C11;
+}
+
+.perguntas p {
+    margin-top: 8px;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.perguntas h3 {
+    color: var(--verde-escuro);
+    font-size: 20px;
+    margin-top: 12px;
+}
+
+.solicitacao {
+    padding: 64px 48px 48px; /* Espaço interno: cima, laterais e baixo. */
+    background-color: var(--fundo-claro); /* Define a cor do fundo. */
+}
+
+.solicitacao-texto {
+    display: flex; /* Flex organiza os filhos. */
+    flex-direction: column; /* Column coloca os elementos um abaixo do outro. */
+    align-items: center; /* Centraliza os filhos na horizontal. */
+    gap: 16px; /* Define o espaço entre os elementos do flex. */
+    text-align: center; /* Centraliza o texto. */
+}
+
+.solicitacao-texto h1 {
+    max-width: 1000px; /* Limita a largura máxima do elemento. */
+}
+
+.solicitacao-texto p {
+    font-size: 18px; /* Define o tamanho das letras. */
+    font-weight: 300; /* Define a espessura: 300 é fino; 700 é negrito. */
+    font-style: italic; /* Aplica itálico ao texto. */
+    line-height: 1.2; /* Define a distância entre as linhas do texto.*/
+}
+
+footer {
+    background-color: var(--verde-escuro);
+    color: white;
+    font-size: 48px;
+    border-radius: 30px 30px 0 0;
+    padding: 40px 48px 24px;
+}
+
+footer h2 {
+    font-size: 50px;
+}
+
+footer h3 {
+    font-size: 48px;
+}
+footer ul {
+    display: flex;
+    justify-content: center;
+    gap: 64px;
+    list-style: none;
+    padding-bottom: 12px;
+    border-bottom: 1px solid white;
+}
+
+footer a {
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+footer p {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 300;
+    margin-top: 20px;
+}
+    
