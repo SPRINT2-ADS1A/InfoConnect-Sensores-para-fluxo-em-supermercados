@@ -1,3 +1,4 @@
+
 // var ambiente_processo = 'producao';
 var ambiente_processo = 'desenvolvimento';
 
@@ -20,6 +21,7 @@ var usuarioRouter = require("./src/routes/usuarios");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
+
 // A dashboard do grupo esta na pasta DASH, ao lado de public.
 app.use("/DASH", express.static(path.join(__dirname, "DASH")));
 
@@ -29,17 +31,19 @@ app.use("/usuarios", usuarioRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`
-    ##   ##  ######   #####             ####       ##     ######     ##              ##  ##    ####    ######  
-    ##   ##  ##       ##  ##            ## ##     ####      ##      ####             ##  ##     ##         ##  
-    ##   ##  ##       ##  ##            ##  ##   ##  ##     ##     ##  ##            ##  ##     ##        ##   
-    ## # ##  ####     #####    ######   ##  ##   ######     ##     ######   ######   ##  ##     ##       ##    
-    #######  ##       ##  ##            ##  ##   ##  ##     ##     ##  ##            ##  ##     ##      ##     
-    ### ###  ##       ##  ##            ## ##    ##  ##     ##     ##  ##             ####      ##     ##      
-    ##   ##  ######   #####             ####     ##  ##     ##     ##  ##              ##      ####    ######  
-    \n\n\n                                                                                                 
-    Servidor do seu site já está rodando! Acesse o caminho a seguir para visualizar .: http://${HOST_APP}:${PORTA_APP} :. \n\n
-    Você está rodando sua aplicação em ambiente de .:${process.env.AMBIENTE_PROCESSO}:. \n\n
-    \tSe .:desenvolvimento:. você está se conectando ao banco local. \n
-    \tSe .:producao:. você está se conectando ao banco remoto. \n\n
-    \t\tPara alterar o ambiente, comente ou descomente as linhas 1 ou 2 no arquivo 'app.js'\n\n`);
+    ##   ##  ######   #####             ####       ##     ######     ##              ##  ##    ####    ######
+    ##   ##  ##       ##  ##            ## ##     ####      ##      ####             ##  ##     ##         ##
+    ##   ##  ##       ##  ##            ##  ##   ##  ##     ##     ##  ##            ##  ##     ##        ##
+    ## # ##  ####     #####    ######   ##  ##   ######     ##     ######   ######   ##  ##     ##       ##
+    #######  ##       ##  ##            ##  ##   ##  ##     ##     ##  ##            ##  ##     ##      ##
+    ### ###  ##       ##  ##            ## ##    ##  ##     ##     ##  ##             ####      ##     ##
+    ##   ##  ######   #####             ####     ##  ##     ##     ##  ##              ##      ####    ######
+
+    Servidor do seu site já está rodando!
+    Acesse: http://${HOST_APP}:${PORTA_APP}
+
+    Ambiente: ${process.env.AMBIENTE_PROCESSO}
+
+    Para alterar o ambiente, comente ou descomente as linhas 1 ou 2 no arquivo 'app.js'
+    `);
 });

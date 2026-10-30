@@ -1,94 +1,80 @@
-	CREATE USER 'infoconnect_app'@'localhost'
-		IDENTIFIED BY 'Arduino123@';
+-- Execute este arquivo com um usuario administrador do MySQL.
+-- Ajuste a senha abaixo e depois configure a mesma senha no .env.dev.
+CREATE DATABASE IF NOT EXISTS infoconnect;
+USE infoconnect;
 
-	GRANT SELECT, INSERT ON infoconnect.*
-		TO 'infoconnect_app'@'localhost';
+CREATE USER IF NOT EXISTS 'infoconnect_app'@'localhost'
+    IDENTIFIED BY 'ALTERE_ESTA_SENHA';
+GRANT SELECT, INSERT ON infoconnect.* TO 'infoconnect_app'@'localhost';
+FLUSH PRIVILEGES;
 
-	FLUSH PRIVILEGES;
+-- endereco: localizacao de cada supermercado.
+CREATE TABLE endereco (
+    idEndereco INT PRIMARY KEY AUTO_INCREMENT,
+    uf CHAR(2),
+    cidade VARCHAR(100),
+    logradouro VARCHAR(200),
+    numero VARCHAR(20),
+    cep CHAR(8)
+);
 
-	CREATE DATABASE IF NOT EXISTS infoconnect;
+-- cliente: responsavel pela conta e pelo acesso ao painel.
+CREATE TABLE cliente (
+    idCliente INT PRIMARY KEY AUTO_INCREMENT,
+    email VARCHAR(150) UNIQUE,
+    senha VARCHAR(100),
+    nome VARCHAR(100),
+    cpf CHAR(11)
+);
 
-	USE infoconnect;
+-- supermercado: um cliente pode cadastrar mais de uma loja.
+CREATE TABLE supermercado (
+    idSupermercado INT PRIMARY KEY AUTO_INCREMENT,
+    nomeFantasia VARCHAR(120),
+    cnpj CHAR(14) UNIQUE,
+    telefoneContato CHAR(11),
+    fkCliente INT,
+    fkEndereco INT,
+    CONSTRAINT fk_supermercado_cliente FOREIGN KEY (fkCliente)
+        REFERENCES cliente(idCliente),
+    CONSTRAINT fk_supermercado_endereco FOREIGN KEY (fkEndereco)
+        REFERENCES endereco(idEndereco)
+);
 
-	-- desligar o check de FK para facilitar inserts
-	SET FOREIGN_KEY_CHECKS = 0;
+-- setor: identifica as gondolas monitoradas.
+CREATE TABLE setor (
+    idSetor INT PRIMARY KEY AUTO_INCREMENT,
+    nomeSetor VARCHAR(80),
+    gondola VARCHAR(80),
+    fkSupermercado INT,
+    CONSTRAINT fk_setor_supermercado FOREIGN KEY (fkSupermercado)
+        REFERENCES supermercado(idSupermercado)
+);
 
-	-- endereco: localizacao fisica de cada loja.
+-- sensor: identifica o aparelho instalado em cada setor.
+CREATE TABLE sensor (
+    idSensor INT PRIMARY KEY AUTO_INCREMENT,
+    tipoSensor VARCHAR(30) DEFAULT 'HC-SR04',
+    dtInstalacao DATE,
+    status ENUM('ativo', 'inativo', 'manutencao') DEFAULT 'ativo',
+    ultimaManutencao DATE,
+    fkSetor INT,
+    CONSTRAINT fk_sensor_setor FOREIGN KEY (fkSetor)
+        REFERENCES setor(idSetor),
+    CONSTRAINT chk_sensor_manutencao CHECK (
+        ultimaManutencao IS NULL OR ultimaManutencao >= dtInstalacao
+    )
+);
 
-	CREATE TABLE endereco (
-		idEndereco INT PRIMARY KEY AUTO_INCREMENT,
-		uf CHAR(2),
-		cidade VARCHAR(100),
-		logradouro VARCHAR(200),
-		numero VARCHAR(20),
-		cep CHAR(8)
-	);
-
-	-- supermercado: um cliente pode contratar varias lojas.
-	CREATE TABLE supermercado (
-		idSupermercado INT PRIMARY KEY AUTO_INCREMENT,
-		nomeFantasia VARCHAR(120),
-		cnpj CHAR(14) UNIQUE,
-        telefoneContato CHAR(11),
-		fkCliente INT,
-		fkEndereco INT,
-		CONSTRAINT fk_supermercado_cliente FOREIGN KEY (fkCliente)
-			REFERENCES cliente(idCliente),
-		CONSTRAINT fk_supermercado_endereco FOREIGN KEY (fkEndereco)
-			REFERENCES endereco(idEndereco)
-	);
-
-	-- usuario: funcionario que acessa o painel de um supermercado.
-	CREATE TABLE cliente(
-		idCliente INT PRIMARY KEY AUTO_INCREMENT,
-		email VARCHAR(150) UNIQUE,
-		senha VARCHAR(100),
-        nome VARCHAR(100),
-        cpf CHAR(11),
-		fkSupermercado INT,
-		CONSTRAINT fk_usuario_supermercado FOREIGN KEY (fkSupermercado)
-			REFERENCES supermercado(idSupermercado)
-	);
-
-	-- setor: cada linha identifica a gondola monitorada dentro da loja.
-	CREATE TABLE setor (
-		idSetor INT PRIMARY KEY AUTO_INCREMENT,
-		nomeSetor VARCHAR(80),
-		gondola VARCHAR(80),
-		fkSupermercado INT,
-		CONSTRAINT fk_setor_supermercado FOREIGN KEY (fkSupermercado)
-			REFERENCES supermercado(idSupermercado)
-	);
-
-	-- sensor: 
-	CREATE TABLE sensor (
-		idSensor INT PRIMARY KEY AUTO_INCREMENT,
-		tipoSensor VARCHAR(30) DEFAULT 'HC-SR04',
-		dtInstalacao DATE,
-		status ENUM('ativo', 'inativo', 'manutencao') DEFAULT 'ativo',
-		ultimaManutencao DATE,
-		fkSetor INT ,
-		CONSTRAINT fk_sensor_setor FOREIGN KEY (fkSetor)
-			REFERENCES setor(idSetor),
-		CONSTRAINT chk_sensor_manutencao CHECK (
-			ultimaManutencao IS NULL OR ultimaManutencao >= dtInstalacao
-		)
-	);
-
-	-- registro: apenas os quatro campos solicitados.
-	CREATE TABLE registro (
-		idRegistro INT PRIMARY KEY AUTO_INCREMENT,
-		dataHora DATETIME DEFAULT CURRENT_TIMESTAMP,
-		distanciaCm DECIMAL(6,2),
-		fkSensor INT,
-		CONSTRAINT fk_registro_sensor FOREIGN KEY (fkSensor)
-			REFERENCES sensor(idSensor),
-		CONSTRAINT chk_registro_prolongada CHECK (prolongada IN (0, 1))
-	);
-
-
-
-
+-- registro: uma leitura de distancia por sensor.
+CREATE TABLE registro (
+    idRegistro INT PRIMARY KEY AUTO_INCREMENT,
+    dataHora DATETIME DEFAULT CURRENT_TIMESTAMP,
+    distanciaCm DECIMAL(6,2),
+    fkSensor INT,
+    CONSTRAINT fk_registro_sensor FOREIGN KEY (fkSensor)
+        REFERENCES sensor(idSensor)
+);
 
 -- inserts
 
@@ -156,8 +142,7 @@ INSERT INTO registro (dataHora, distanciaCm, fkSensor) VALUES
 ('2026-10-28 10:02:00', 25.00, 3);
 
 
--- reativa o check das FK
-SET FOREIGN_KEY_CHECKS = 1;
+
 
 
 

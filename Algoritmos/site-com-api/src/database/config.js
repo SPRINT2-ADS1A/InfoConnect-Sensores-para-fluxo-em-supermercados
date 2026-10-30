@@ -1,41 +1,31 @@
 var mysql = require("mysql2");
 
-// CONEXÃO DO BANCO MYSQL SERVER
 var mySqlConfig = {
     host: process.env.DB_HOST,
     database: process.env.DB_DATABASE,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT
+    port: process.env.DB_PORT,
+    dateStrings: true // Mantem dataHora no horario do MySQL.
 };
 
+// Executa os SELECTs e INSERTs da aplicacao.
 function executar(instrucao, valores) {
-
-    if (process.env.AMBIENTE_PROCESSO !== "producao" && process.env.AMBIENTE_PROCESSO !== "desenvolvimento") {
-        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM .env OU dev.env OU app.js\n");
-        return Promise.reject("AMBIENTE NÃO CONFIGURADO EM .env");
-    }
-
     return new Promise(function (resolve, reject) {
         var conexao = mysql.createConnection(mySqlConfig);
-        conexao.connect();
-        // A lista de valores evita colocar dados do usuario diretamente na instrucao SQL.
         conexao.query(instrucao, valores || [], function (erro, resultados) {
             conexao.end();
             if (erro) {
                 reject(erro);
+            } else {
+                resolve(resultados);
             }
-            console.log(resultados);
-            resolve(resultados);
-        });
-        conexao.on('error', function (erro) {
-            return ("ERRO NO MySQL SERVER: ", erro.sqlMessage);
         });
     });
 }
 
-// Os quatro INSERTs do cadastro devem ser salvos juntos.
-// Se um falhar, o rollback desfaz os anteriores.
+// Mantida do projeto recebido para salvar os tres cadastros juntos.
+// Se algum INSERT falhar, os anteriores sao desfeitos.
 async function executarTransacao(operacao) {
     var conexao = mysql.createConnection(mySqlConfig).promise();
     try {
@@ -51,7 +41,4 @@ async function executarTransacao(operacao) {
     }
 }
 
-module.exports = {
-    executar,
-    executarTransacao
-};
+module.exports = { executar, executarTransacao };

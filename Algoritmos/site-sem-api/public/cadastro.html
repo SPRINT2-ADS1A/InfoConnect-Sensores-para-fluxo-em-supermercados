@@ -1,115 +1,308 @@
+
 <!doctype html>
 <html lang="pt-BR">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>InfoConnect - Cadastro</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./css/style-cadastro.css" />
-  </head>
-  <body>
+</head>
+
+<body>
+
     <header>
-      <a href="./index.html">
-        <img src="img/logoCompleta.png" class="img" alt="InfoConnect" />
-      </a>
+        <a href="./index.html">
+            <img src="img/logoCompleta.png" class="img" alt="InfoConnect" />
+        </a>
     </header>
 
     <main>
-      <div class="card">
-        <div class="cabecalho_card">
-          <h2 class="titulo_card">Cadastrar Estabelecimento</h2>
-          <p class="subtitulo_card">Cadastre a empresa e o usuário administrador</p>
+        <div class="card">
+
+            <div class="cabecalho_card">
+                <h2 class="titulo_card">Cadastrar Estabelecimento</h2>
+                <p class="subtitulo_card">Cadastre a empresa e o usuário administrador</p>
+            </div>
+
+            <form id="form_cadastro" novalidate onsubmit="cadastrar(); return false;">
+
+                <!-- Dados da tabela Supermercado -->
+                <div class="secao_formulario">
+                    <h3 class="titulo_secao">Dados da Empresa (Supermercado)</h3>
+
+                    <div class="linha_dupla">
+
+                        <div class="grupo_input">
+                            <label for="input_nomeFantasia">Nome Fantasia</label>
+                            <input type="text" id="input_nomeFantasia"
+                                placeholder="Ex.: Mercado São José"
+                                maxlength="50"
+                                value="Mercado São José" />
+                        </div>
+
+                        <div class="grupo_input">
+                            <label for="input_cnpj">CNPJ</label>
+                            <input type="text" id="input_cnpj"
+                                placeholder="00.000.000/0001-00"
+                                maxlength="18"
+                                value="12.345.678/0001-95" />
+                        </div>
+
+                    </div>
+
+                    <div class="grupo_input">
+                        <label for="input_telefoneContato">Telefone para contato</label>
+                        <input type="text" id="input_telefoneContato"
+                            placeholder="Ex.: 11 98424-8423"
+                            maxlength="50"
+                            value="11984248423" />
+                    </div>
+
+                </div>
+
+                <!-- Dados da tabela endereco -->
+                <div class="secao_formulario">
+                    <h3 class="titulo_secao">Endereço do Supermercado</h3>
+
+                    <div class="linha_tripla">
+
+                        <div class="grupo_input linha_cep">
+                            <label for="input_cep">CEP</label>
+                            <input type="text" id="input_cep"
+                                placeholder="00000-000"
+                                maxlength="9"
+                                value="01310-100" />
+                        </div>
+
+                        <div class="grupo_input linha_uf">
+                            <label for="input_uf">Estado (UF)</label>
+                            <input type="text" id="input_uf"
+                                placeholder="SP"
+                                maxlength="2"
+                                value="SP" />
+                        </div>
+
+                        <div class="grupo_input linha_cidade">
+                            <label for="input_cidade">Cidade</label>
+                            <input type="text" id="input_cidade"
+                                placeholder="São Paulo"
+                                maxlength="45"
+                                value="São Paulo" />
+                        </div>
+
+                    </div>
+
+                    <div class="linha_endereco">
+
+                        <div class="grupo_input linha_logradouro">
+                            <label for="input_logradouro">Logradouro</label>
+                            <input type="text" id="input_logradouro"
+                                placeholder="Rua / Avenida"
+                                maxlength="45"
+                                value="Avenida Paulista" />
+                        </div>
+
+                        <div class="grupo_input linha_numero">
+                            <label for="input_numero">Número</label>
+                            <input type="text" id="input_numero"
+                                placeholder="Ex.: 123"
+                                maxlength="45"
+                                value="123" />
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Dados da tabela cliente -->
+                <div class="secao_formulario">
+                    <h3 class="titulo_secao">Dados do Cliente (Administrador)</h3>
+
+                    <div class="linha_dupla">
+
+                        <div class="grupo_input">
+                            <label for="input_nome">Nome completo</label>
+                            <input type="text" id="input_nome"
+                                placeholder="Nome do responsável"
+                                maxlength="45"
+                                value="João Silva" />
+                        </div>
+
+                        <div class="grupo_input">
+                            <label for="input_cpf">CPF</label>
+                            <input type="text" id="input_cpf"
+                                placeholder="000.000.000-00"
+                                maxlength="14"
+                                value="123.456.789-09" />
+                        </div>
+
+                    </div>
+
+                    <div class="linha_dupla">
+
+                        <div class="grupo_input">
+                            <label for="input_email">E-mail</label>
+                            <input type="email" id="input_email"
+                                placeholder="nome@exemplo.com"
+                                maxlength="45"
+                                value="joao@email.com" />
+                        </div>
+
+                        <div class="grupo_input">
+                            <label for="input_senha">Senha</label>
+                            <input type="password" id="input_senha"
+                                placeholder="••••••••"
+                                maxlength="72"
+                                value="Senha123@" />
+                        </div>
+
+                    </div>
+                </div>
+
+                <button type="submit" id="botao_cadastrar" class="botao_cadastrar">
+                    Finalizar Cadastro
+                </button>
+
+                <button type="button"
+                    onclick="window.location.href = 'login.html'"
+                    class="btn-voltar-login">
+                    Já tem conta? Voltar ao Login
+                </button>
+
+            </form>
+
+            <div id="div_mensagem"
+                style="display: block; margin-top: 15px; font-weight: bold;">
+            </div>
+
         </div>
-
-        <form id="form_cadastro" novalidate onsubmit="cadastrar(); return false;">
-          <!-- Dados da tabela Supermercado. -->
-          <div class="secao_formulario">
-            <h3 class="titulo_secao">Dados da Empresa (Supermercado)</h3>
-
-            <div class="linha_dupla">
-              <div class="grupo_input">
-                <label for="input_nomeFantasia">Nome Fantasia</label>
-                <input type="text" id="input_nomeFantasia" placeholder="Ex.: Mercado São José" maxlength="50" autocomplete="organization" />
-              </div>
-              <div class="grupo_input">
-                <label for="input_cnpj">CNPJ</label>
-                <input type="text" id="input_cnpj" placeholder="00.000.000/0001-00" maxlength="18" />
-              </div>
-            </div>
-
-              <div class="grupo_input">
-                <label for="input_telefoneContato">Telefone para contato</label>
-                <input type="text" id="input_telefoneContato" placeholder="Ex.: 11 98424-8423" maxlength="50" autocomplete="organization" />
-              </div>
-            
-
-          
-          <!-- Dados da tabela endereco. -->
-          <div class="secao_formulario">
-            <h3 class="titulo_secao">Endereço do Supermercado</h3>
-
-            <div class="linha_tripla">
-              <div class="grupo_input linha_cep">
-                <label for="input_cep">CEP</label>
-                <input type="text" id="input_cep" placeholder="00000-000" maxlength="9" inputmode="numeric" autocomplete="postal-code" />
-              </div>
-              <div class="grupo_input linha_uf">
-                <label for="input_uf">Estado (UF)</label>
-                <input type="text" id="input_uf" placeholder="SP" maxlength="2" autocomplete="address-level1" />
-              </div>
-              <div class="grupo_input linha_cidade">
-                <label for="input_cidade">Cidade</label>
-                <input type="text" id="input_cidade" placeholder="São Paulo" maxlength="45" autocomplete="address-level2" />
-              </div>
-            </div>
-
-            <div class="linha_endereco">
-              <div class="grupo_input linha_logradouro">
-                <label for="input_logradouro">Logradouro</label>
-                <input type="text" id="input_logradouro" placeholder="Rua / Avenida" maxlength="45" autocomplete="address-line1" />
-              </div>
-              <div class="grupo_input linha_numero">
-                <label for="input_numero">Número</label>
-                <input type="text" id="input_numero" placeholder="Ex.: 123" maxlength="45" />
-              </div>
-            </div>
-          </div>
-<!-- Dados da tabela cliente. -->
-          <div class="secao_formulario">
-            <h3 class="titulo_secao">Dados do Cliente (Administrador)</h3>
-
-            <div class="linha_dupla">
-              <div class="grupo_input">
-                <label for="input_nome">Nome completo</label>
-                <input type="text" id="input_nome" placeholder="Nome do responsável" maxlength="45" autocomplete="name" />
-              </div>
-              <div class="grupo_input">
-                <label for="input_cpf">CPF</label>
-                <input type="text" id="input_cpf" placeholder="000.000.000-00" maxlength="14" inputmode="numeric" />
-              </div>
-            </div>
-
-            <div class="linha_dupla">
-              <div class="grupo_input">
-                <label for="input_email">E-mail</label>
-                <input type="email" id="input_email" placeholder="nome@exemplo.com" maxlength="45" autocomplete="email" />
-              </div>
-              
-              <div class="grupo_input">
-                <label for="input_senha">Senha</label>
-                <input type="password" id="input_senha" placeholder="••••••••" maxlength="72" autocomplete="new-password" />
-              </div>
-            </div>
-          </div>
-            
-          <button type="submit" id="botao_cadastrar" class="botao_cadastrar">Finalizar Cadastro</button>
-          <button type="button" onclick="window.location.href = 'login.html'" class="btn-voltar-login">Já tem conta? Voltar ao Login</button>
-        </form>
-
-        <div id="div_mensagem" class="msg_erro" role="status" aria-live="polite"></div>
-      </div>
     </main>
 
-    
+
+
+<script>
+    function cadastrar() {
+        // Dados do supermercado
+        var nomeFantasia = input_nomeFantasia.value;
+        var cnpj = input_cnpj.value;
+        var telefone = input_telefoneContato.value;
+
+        // Dados do endereço
+        var cep = input_cep.value;
+        var uf = input_uf.value;
+        var cidade = input_cidade.value;
+        var logradouro = input_logradouro.value;
+        var numero = input_numero.value;
+
+        // Dados do cliente
+        var nome = input_nome.value;
+        var cpf = input_cpf.value;
+        var email = input_email.value;
+        var senha = input_senha.value;
+
+        var mensagem = "";
+        var erro = true;
+
+        // Verificações da senha
+        var temMaiuscula = senha != senha.toLowerCase();
+        var temMinuscula = senha != senha.toUpperCase();
+
+        var temNumero = senha.includes("0") ||
+                        senha.includes("1") ||
+                        senha.includes("2") ||
+                        senha.includes("3") ||
+                        senha.includes("4") ||
+                        senha.includes("5") ||
+                        senha.includes("6") ||
+                        senha.includes("7") ||
+                        senha.includes("8") ||
+                        senha.includes("9");
+
+        var temEspecial = senha.includes("@") ||
+                          senha.includes("#") ||
+                          senha.includes("!") ||
+                          senha.includes("$") ||
+                          senha.includes("%") ||
+                          senha.includes("&") ||
+                          senha.includes("*");
+
+        // Campos vazios
+        if (nomeFantasia == "" || cnpj == "" || telefone == "" ||
+            cep == "" || uf == "" || cidade == "" ||
+            logradouro == "" || numero == "" ||
+            nome == "" || cpf == "" || email == "" || senha == "") {
+
+            mensagem = "Preencha todos os campos!";
+
+        // Supermercado
+        } else if (nomeFantasia.length < 3) {
+            mensagem = "O nome fantasia deve ter pelo menos 3 caracteres!";
+
+        } else if (cnpj.length != 18) {
+            mensagem = "O CNPJ deve conter 18 caracteres!";
+
+        } else if (telefone.length != 10 && telefone.length != 11) {
+            mensagem = "O telefone deve conter 10 ou 11 dígitos, sem pontuação!";
+
+        // Endereço
+        } else if (cep.length != 9) {
+            mensagem = "O CEP deve conter 9 caracteres!";
+
+        } else if (uf.length != 2) {
+            mensagem = "A UF deve conter 2 caracteres!";
+
+        } else if (cidade.length < 3) {
+            mensagem = "A cidade deve conter pelo menos 3 caracteres!";
+
+        } else if (logradouro.length < 5) {
+            mensagem = "O logradouro deve conter pelo menos 5 caracteres!";
+
+        // Cliente
+        } else if (nome.length < 5) {
+            mensagem = "O nome deve conter pelo menos 5 caracteres!";
+
+        } else if (cpf.length != 14) {
+            mensagem = "O CPF deve conter 14 caracteres!";
+
+        } else if (!email.includes("@") || !email.includes(".")) {
+            mensagem = "Digite um e-mail válido!";
+
+        // Força da senha
+        } else if (senha.length < 8) {
+            mensagem = "A senha deve conter pelo menos 8 caracteres!";
+
+        } else if (temMaiuscula == false) {
+            mensagem = "A senha deve conter uma letra maiúscula!";
+
+        } else if (temMinuscula == false) {
+            mensagem = "A senha deve conter uma letra minúscula!";
+
+        } else if (temNumero == false) {
+            mensagem = "A senha deve conter pelo menos um número!";
+
+        } else if (temEspecial == false) {
+            mensagem = "A senha deve conter um caractere especial!";
+
+        } else {
+            mensagem = "Cadastro realizado com sucesso!";
+            erro = false;
+        }
+
+        div_mensagem.innerHTML = mensagem;
+
+        if (erro == true) {
+            div_mensagem.style.color = "red";
+        } else {
+            div_mensagem.style.color = "green";
+        }
+    }
+</script>
+
+
+</body>
+</html>
+2

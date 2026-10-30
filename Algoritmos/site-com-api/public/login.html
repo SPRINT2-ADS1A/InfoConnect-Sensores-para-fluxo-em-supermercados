@@ -67,20 +67,37 @@
 </body>
 </html>
 <script>
-    let email = 'supermercado@email.com'
-    let senha = 'Market123'
-    
     function login() {
-        let entradaSenha = input_senha.value
-        let entradaEmail = input_email.value
+        var emailVar = input_email.value.trim();
+        var senhaVar = input_senha.value;
+        div_mensagem.innerHTML = "";
+        div_mensagem2.innerHTML = "";
 
-        if (senha == entradaSenha && email == entradaEmail) {
-            div_mensagem.innerHTML = `Login válido!`
-            div_mensagem2.innerHTML = ``
+        if (emailVar == "" || senhaVar == "") {
+            div_mensagem2.innerHTML = "Preencha o e-mail e a senha!";
         } else {
-            div_mensagem2.innerHTML = `E-mail ou senha inválidos!`
-            div_mensagem.innerHTML = ``
+            fetch("/usuarios/autenticar", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    emailServer: emailVar,
+                    senhaServer: senhaVar
+                })
+            }).then(function (resposta) {
+                if (resposta.ok) {
+                    return resposta.json();
+                } else {
+                    throw new Error("E-mail ou senha invalidos!");
+                }
+            }).then(function (usuario) {
+                // Mesmo armazenamento local simples usado nas aulas de Web Data Viz.
+                sessionStorage.ID_CLIENTE = usuario.id;
+                sessionStorage.NOME_USUARIO = usuario.nome;
+                div_mensagem.innerHTML = "Login valido!";
+                window.location.href = "dashboard.html";
+            }).catch(function (erro) {
+                div_mensagem2.innerHTML = erro.message;
+            });
         }
     }
-    
 </script>

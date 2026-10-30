@@ -44,261 +44,244 @@
 
     <div class="cabecalho-dashboard">
       <div class="titulo">
-        <h1>Movimento e permanência</h1>
-        <p>Entenda as aproximações e identifique oportunidades de análise.</p>
+        <h1>Aproximações no supermercado</h1>
+        <p>Leituras de sensores a menos de 90 cm das gôndolas.</p>
       </div>
-      <p class="periodo">19 a 25 de outubro de 2026 · Demonstração</p>
+      <div>
+        <label for="select_supermercado">Supermercado:</label>
+        <select id="select_supermercado" onchange="carregarDados()"></select>
+        <p class="periodo" id="texto_periodo">Carregando informações...</p>
+      </div>
     </div>
 
-    <!-- Os valores são fictícios, para demonstrar a dashboard. -->
     <div class="cards-kpi">
       <div class="cardKPI bom">
-        <i class="fa-solid fa-users"></i>
-        <h3>Aproximações na semana</h3>
-        <h2>9.000</h2>
-        <p class="resultado-bom">▲ 12,5% vs. semana anterior</p>
-        <p>Meta: 8.400 · <b class="resultado-bom">atingida</b></p>
+        <i class="fa-solid fa-chart-line"></i>
+        <h3>Leituras de aproximação</h3>
+        <h2 id="total_aproximacoes">—</h2>
+        <p>Distância registrada inferior a 90 cm</p>
       </div>
-
       <div class="cardKPI info">
         <i class="fa-regular fa-clock"></i>
-        <h3>Faixa de maior movimento</h3>
-        <h2>12h às 16h</h2>
-        <p>3.600 aproximações (40%). Comparação da mesma faixa.</p>
+        <h3>Faixa com mais leituras</h3>
+        <h2 id="faixa_maior">—</h2>
+        <p id="total_faixa">Sem dados</p>
       </div>
-
-      <div class="cardKPI ruim">
-        <i class="fa-solid fa-chart-column"></i>
-        <h3>Dias abaixo da referência</h3>
-        <h2>2 de 7 dias</h2>
-        <p class="resultado-ruim">Segunda e terça-feira</p>
-        <p>Referência: 1.200/dia · <b class="resultado-ruim">investigar quedas</b></p>
+      <div class="cardKPI info">
+        <i class="fa-solid fa-store"></i>
+        <h3>Setores cadastrados</h3>
+        <h2 id="total_setores">—</h2>
+        <p>Setores do supermercado selecionado</p>
       </div>
-
       <div class="cardKPI atencao">
-        <i class="fa-solid fa-triangle-exclamation"></i>
-        <h3>Pontos que precisam de atenção</h3>
-        <h2>2 de 4</h2>
-        <p>Ponto C · Limpeza e Ponto D · Hortifruti</p>
+        <i class="fa-solid fa-location-dot"></i>
+        <h3>Setores com aproximações</h3>
+        <h2 id="setores_ativos">—</h2>
+        <p>Setores com leituras no período</p>
       </div>
     </div>
 
     <div class="cards">
       <div class="cardI">
-        <h3>Como o movimento variou na semana?</h3>
-        <p>Quantas aproximações foram registradas por dia da semana?</p>
-        <div class="grafico">
-          <canvas id="myChart1" aria-label="Gráfico de aproximações por dia da semana" role="img"></canvas>
-        </div>
-        <p class="legenda-referencia"><span></span>Referência gerencial: 1.200 aproximações/dia</p>
-        <p class="insight">Avaliar reposição nos dias de maior movimento.</p>
+        <h3>Como as aproximações variaram nos últimos 7 dias?</h3>
+        <p>Número de leituras abaixo de 90 cm por dia.</p>
+        <div class="grafico"><canvas id="myChart1"></canvas></div>
+        <p class="legenda-referencia">Cada leitura é um registro, não um cliente único.</p>
       </div>
-
       <div class="cardI">
-        <h3>Quando as aproximações se concentram?</h3>
-        <p>Em quais faixas de horário ocorrem mais aproximações?</p>
+        <h3>Em quais horários elas aconteceram?</h3>
+        <p>Distribuição das leituras por faixa de horário.</p>
         <div class="conteudo-grafico">
-          <div class="grafico pizza">
-            <canvas id="myChart2" aria-label="08h–12h: 30%; 12h–16h: 40%; 16h–20h: 30%." role="img"></canvas>
-          </div>
-          <div class="legenda">
-            <p><span class="bolinha" style="background-color: #1688F0;"></span><b>08h – 12h</b> 2.700 aproximações (30%)</p>
-            <p><span class="bolinha" style="background-color: #318B2F;"></span><b>12h – 16h</b> 3.600 aproximações (40%)</p>
-            <p><span class="bolinha" style="background-color: #88C9FF;"></span><b>16h – 20h</b> 2.700 aproximações (30%)</p>
-            <p class="referencia-pizza">Referência de atenção: 3.000 aproximações/faixa.</p>
-            <p class="resultado-bom"><b>12h – 16h: acima da referência.</b></p>
-          </div>
+          <div class="grafico pizza"><canvas id="myChart2"></canvas></div>
+          <div class="legenda" id="legenda_horarios">Aguardando registros...</div>
         </div>
-        <p class="insight">Entre 12h – 16h, avaliar o planejamento da reposição.</p>
       </div>
     </div>
 
     <div class="analise">
-      <h2>Análise dos pontos de exposição</h2>
-      <p>Recorte de 4 pontos: 4.960 das 9.000 aproximações da semana.</p>
-
-      <!-- Cada barra vai de 0 a 60. O traço escuro indica a referência. -->
-      <div class="pontos">
-        <div class="cardPonto">
-          <h3>Ponto A · Bebidas</h3>
-          <p>1.796 aproximações</p>
-          <p class="status verde">Acima das referências</p>
-          <p>Permanências ≥ 3 s <strong>49,0%</strong></p>
-          <div class="barra">
-            <span class="verde" style="width: 81.7%;"></span>
-            <b style="left: 75%;"></b>
-          </div>
-          <p>Permanência média <strong>42 s</strong></p>
-          <div class="barra">
-            <span class="verde" style="width: 70%;"></span>
-            <b style="left: 58.3%;"></b>
-          </div>
-          <p class="referencia">Referências: 45% e 35 s</p>
-          <p class="comparacao">↑ Aproximações: +12,3% vs. semana anterior</p>
-        </div>
-
-        <div class="cardPonto">
-          <h3>Ponto B · Mercearia</h3>
-          <p>1.386 aproximações</p>
-          <p class="status verde">Acima das referências</p>
-          <p>Permanências ≥ 3 s <strong>46,9%</strong></p>
-          <div class="barra">
-            <span class="verde" style="width: 78.2%;"></span>
-            <b style="left: 75%;"></b>
-          </div>
-          <p>Permanência média <strong>39 s</strong></p>
-          <div class="barra">
-            <span class="verde" style="width: 65%;"></span>
-            <b style="left: 58.3%;"></b>
-          </div>
-          <p class="referencia">Referências: 45% e 35 s</p>
-          <p class="comparacao">↑ Aproximações: +10% vs. semana anterior</p>
-        </div>
-
-        <div class="cardPonto">
-          <h3>Ponto C · Limpeza</h3>
-          <p>1.053 aproximações</p>
-          <p class="status amarelo">Ponto de atenção</p>
-          <p>Permanências ≥ 3 s <strong>42,7%</strong></p>
-          <div class="barra">
-            <span class="amarelo" style="width: 71.2%;"></span>
-            <b style="left: 75%;"></b>
-          </div>
-          <p>Permanência média <strong>35 s</strong></p>
-          <div class="barra">
-            <span class="verde" style="width: 58.3%;"></span>
-            <b style="left: 58.3%;"></b>
-          </div>
-          <p class="referencia">Referências: 45% e 35 s</p>
-          <p class="comparacao queda">↓ Aproximações: -10% vs. semana anterior</p>
-        </div>
-
-        <div class="cardPonto">
-          <h3>Ponto D · Hortifruti</h3>
-          <p>725 aproximações</p>
-          <p class="status vermelho">Abaixo das referências</p>
-          <p>Permanências ≥ 3 s <strong>34,5%</strong></p>
-          <div class="barra">
-            <span class="amarelo" style="width: 57.5%;"></span>
-            <b style="left: 75%;"></b>
-          </div>
-          <p>Permanência média <strong>31 s</strong></p>
-          <div class="barra">
-            <span class="amarelo" style="width: 51.7%;"></span>
-            <b style="left: 58.3%;"></b>
-          </div>
-          <p class="referencia">Referências: 45% e 35 s</p>
-          <p class="comparacao queda">↓ Aproximações: -9,4% vs. semana anterior</p>
-        </div>
-      </div>
+      <h2>Aproximações por ponto de exposição</h2>
+      <p id="texto_pontos">Os dados são separados por setor e gôndola.</p>
+      <div class="pontos" id="div_pontos"></div>
+    </div>
+    <div class="analise">
+      <p id="div_aviso">Limite do protótipo: a tabela registra data/hora e distância. Não permite calcular permanência em segundos nem aproximação prolongada. Uma pessoa pode gerar várias leituras.</p>
     </div>
 
-
     <script>
-      // Gráfico semanal. A segunda série desenha a linha de referência.
-      const ctx1 = document.getElementById("myChart1");
+      var graficoDiario;
+      var graficoHorarios;
 
-      // Desenha a linha tracejada de ponta a ponta, exatamente em y = 1200 (meta).
-      const linhaReferencia = {
-        id: "linhaReferencia",
-        afterDatasetsDraw: function(grafico) {
-          const area = grafico.chartArea;
-          const y = grafico.scales.y.getPixelForValue(1200);
-          const c = grafico.ctx;
-          c.save();
-          c.setLineDash([6, 4]);
-          c.lineWidth = 2;
-          c.strokeStyle = "#F5A623";
-          c.beginPath();
-          c.moveTo(area.left, y);
-          c.lineTo(area.right, y);
-          c.stroke();
-          c.restore();
+      function dataSql(data) {
+        var ano = data.getFullYear();
+        var mes = String(data.getMonth() + 1).padStart(2, "0");
+        var dia = String(data.getDate()).padStart(2, "0");
+        return ano + "-" + mes + "-" + dia;
+      }
+
+      function iniciarDashboard() {
+        var idCliente = Number(sessionStorage.ID_CLIENTE);
+        if (idCliente <= 0) {
+          texto_periodo.textContent = "Faça login para consultar suas lojas.";
+          return;
         }
-      };
 
-      new Chart(ctx1, {
-        type: "bar",
-        plugins: [ChartDataLabels, linhaReferencia],
-        data: {
-          labels: ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"],
-          datasets: [
-            {
-              label: "Aproximações",
-              data: [1000, 1100, 1200, 1300, 1400, 1500, 1500],
-              backgroundColor: "#1688F0",
-              borderRadius: 3,
-              order: 2
+        fetch("/usuarios/supermercados/" + idCliente)
+          .then(function (resposta) {
+            if (!resposta.ok) { throw new Error("Erro ao carregar supermercados."); }
+            return resposta.json();
+          }).then(function (lojas) {
+            select_supermercado.innerHTML = "";
+            for (var i = 0; i < lojas.length; i++) {
+              var opcao = document.createElement("option");
+              opcao.value = lojas[i].idSupermercado;
+              opcao.textContent = lojas[i].nomeFantasia;
+              select_supermercado.appendChild(opcao);
             }
-          ]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          layout: { padding: { top: 20 } },
-          plugins: {
-            legend: { display: false },
-            datalabels: {
-              anchor: "end",
-              align: "top",
-              color: "#1688F0",
-              font: { weight: "bold" },
-              formatter: function(valor) {
-                return valor.toLocaleString("pt-BR");
-              }
+            if (lojas.length > 0) {
+              carregarDados();
+            } else {
+              texto_periodo.textContent = "Nenhum supermercado vinculado a esta conta.";
             }
+          }).catch(function (erro) {
+            texto_periodo.textContent = erro.message;
+          });
+      }
+
+      function carregarDados() {
+        var idSupermercado = Number(select_supermercado.value);
+        if (idSupermercado <= 0) { return; }
+        sessionStorage.ID_SUPERMERCADO = idSupermercado;
+
+        var hoje = new Date();
+        var inicio = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate() - 6);
+        var fim = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate() + 1);
+        texto_periodo.textContent = "Período: " + inicio.toLocaleDateString("pt-BR") + " a " + hoje.toLocaleDateString("pt-BR");
+
+        fetch("/medidas/setores/" + idSupermercado)
+          .then(function (resposta) {
+            if (!resposta.ok) { throw new Error("Erro ao carregar setores."); }
+            return resposta.json();
+          }).then(function (setores) {
+            var url = "/medidas/aproximacoes/" + idSupermercado +
+                      "?inicio=" + dataSql(inicio) + "&fim=" + dataSql(fim);
+            return fetch(url).then(function (resposta) {
+              if (!resposta.ok) { throw new Error("Erro ao carregar aproximacoes."); }
+              return resposta.json();
+            }).then(function (leituras) {
+              montarDashboard(setores, leituras, inicio);
+            });
+          }).catch(function (erro) {
+            texto_periodo.textContent = erro.message;
+          });
+      }
+
+      function montarDashboard(setores, leituras, inicio) {
+        var dias = [0, 0, 0, 0, 0, 0, 0];
+        var nomesDias = [];
+        var datasDias = [];
+        var horarios = [0, 0, 0, 0];
+        var nomesHorarios = ["08h–12h", "12h–16h", "16h–20h", "Outros horários"];
+        var pontos = [];
+
+        for (var i = 0; i < 7; i++) {
+          var data = new Date(inicio.getFullYear(), inicio.getMonth(), inicio.getDate() + i);
+          datasDias.push(dataSql(data));
+          nomesDias.push(data.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" }));
+        }
+        for (var i = 0; i < setores.length; i++) {
+          pontos.push({
+            idSetor: setores[i].idSetor,
+            nomeSetor: setores[i].nomeSetor,
+            gondola: setores[i].gondola,
+            total: 0
+          });
+        }
+        for (var i = 0; i < leituras.length; i++) {
+          var dataLeitura = leituras[i].dataHora.substring(0, 10);
+          var horaLeitura = Number(leituras[i].dataHora.substring(11, 13));
+
+          for (var d = 0; d < 7; d++) {
+            if (dataLeitura == datasDias[d]) { dias[d]++; }
+          }
+          if (horaLeitura >= 8 && horaLeitura < 12) { horarios[0]++; }
+          else if (horaLeitura >= 12 && horaLeitura < 16) { horarios[1]++; }
+          else if (horaLeitura >= 16 && horaLeitura < 20) { horarios[2]++; }
+          else { horarios[3]++; }
+
+          for (var p = 0; p < pontos.length; p++) {
+            if (leituras[i].idSetor == pontos[p].idSetor) { pontos[p].total++; }
+          }
+        }
+
+        total_aproximacoes.textContent = leituras.length.toLocaleString("pt-BR");
+        total_setores.textContent = setores.length;
+
+        var totalComLeitura = 0;
+        for (var p = 0; p < pontos.length; p++) {
+          if (pontos[p].total > 0) { totalComLeitura++; }
+        }
+        setores_ativos.textContent = totalComLeitura + " de " + setores.length;
+
+        var maiorHorario = 0;
+        for (var i = 1; i < horarios.length; i++) {
+          if (horarios[i] > horarios[maiorHorario]) { maiorHorario = i; }
+        }
+        if (leituras.length > 0) {
+          faixa_maior.textContent = nomesHorarios[maiorHorario];
+          total_faixa.textContent = horarios[maiorHorario] + " leituras nesse horário";
+        } else {
+          faixa_maior.textContent = "Sem leituras";
+          total_faixa.textContent = "Nenhuma aproximação no período";
+        }
+
+        if (graficoDiario) { graficoDiario.destroy(); }
+        if (graficoHorarios) { graficoHorarios.destroy(); }
+        graficoDiario = new Chart(document.getElementById("myChart1"), {
+          type: "bar",
+          data: {
+            labels: nomesDias,
+            datasets: [{ label: "Leituras de aproximação", data: dias, backgroundColor: "#318B2F" }]
           },
-          scales: {
-            y: {
-              beginAtZero: true,
-              max: 1600,
-              ticks: {
-                stepSize: 400,
-                callback: function(valor) {
-                  return valor.toLocaleString("pt-BR");
-                }
-              }
-            }
-          }
-        }
-      });
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { precision: 0 } } } }
+        });
+        graficoHorarios = new Chart(document.getElementById("myChart2"), {
+          type: "pie",
+          data: {
+            labels: nomesHorarios,
+            datasets: [{ data: horarios, backgroundColor: ["#1688F0", "#318B2F", "#88C9FF", "#F5A623"] }]
+          },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+        });
 
-      // Gráfico de pizza: percentuais dentro das fatias e legenda no HTML.
-      const ctx2 = document.getElementById("myChart2");
-
-      new Chart(ctx2, {
-        type: "pie",
-        plugins: [ChartDataLabels],
-        data: {
-          labels: [
-            "08h – 12h",
-            "12h – 16h",
-            "16h – 20h"
-          ],
-          datasets: [
-            {
-              data: [2700, 3600, 2700],
-              backgroundColor: ["#1688F0", "#318B2F", "#88C9FF"],
-              borderColor: "white",
-              borderWidth: 2
-            }
-          ]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: { display: false },
-            datalabels: {
-              color: ["white", "white", "#071957"],
-              font: { weight: "bold", size: 14 },
-              formatter: function(valor) {
-                return (valor / 9000 * 100) + "%";
-              }
-            }
-          }
+        legenda_horarios.innerHTML = "";
+        for (var i = 0; i < nomesHorarios.length; i++) {
+          var paragrafo = document.createElement("p");
+          paragrafo.textContent = nomesHorarios[i] + ": " + horarios[i] + " leituras";
+          legenda_horarios.appendChild(paragrafo);
         }
-      });
+
+        div_pontos.innerHTML = "";
+        texto_pontos.textContent = "Setores cadastrados: " + setores.length + ". Período selecionado: últimos 7 dias.";
+        for (var i = 0; i < pontos.length; i++) {
+          var cartao = document.createElement("div");
+          cartao.className = "cardPonto";
+          var titulo = document.createElement("h3");
+          titulo.textContent = pontos[i].nomeSetor;
+          var gondola = document.createElement("p");
+          gondola.textContent = "Gôndola: " + pontos[i].gondola;
+          var total = document.createElement("p");
+          total.textContent = pontos[i].total + " leituras abaixo de 90 cm";
+          var observacao = document.createElement("p");
+          observacao.textContent = "Não representa clientes únicos.";
+          cartao.appendChild(titulo);
+          cartao.appendChild(gondola);
+          cartao.appendChild(total);
+          cartao.appendChild(observacao);
+          div_pontos.appendChild(cartao);
+        }
+      }
+
+      iniciarDashboard();
     </script>
   </body>
 </html>
