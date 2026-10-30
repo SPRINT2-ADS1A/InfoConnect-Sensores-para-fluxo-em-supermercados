@@ -1,41 +1,143 @@
 <!doctype html>
-<html>
+<html lang="pt-BR">
 
 <head>
-    <title>Graphics</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>InfoConnect - Gráficos</title>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
 
-    <h1>Graphics</h1>
-    <div style="display: flex;">
-        <div style="width: 50%;">
-            <canvas id="sensorDistancia"></canvas>
+    <h1>InfoConnect - Distância dos sensores</h1>
+
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 25px;">
+        <div style="width: 65%;">
+            <h2>Sensor 1</h2>
+            <div style="position: relative; height: 280px;">
+                <canvas id="graficoSensor1"></canvas>
+            </div>
+        </div>
+
+        <div style="width: 65%;">
+            <h2>Sensor 2 — simulado</h2>
+            <div style="position: relative; height: 280px;">
+                <canvas id="graficoSensor2"></canvas>
+            </div>
+        </div>
+
+        <div style="width: 65%;">
+            <h2>Sensor 3 — simulado</h2>
+            <div style="position: relative; height: 280px;">
+                <canvas id="graficoSensor3"></canvas>
+            </div>
         </div>
     </div>
 
     <script>
-        var sensorDistancia = new Chart(document.getElementById('sensorDistancia').getContext('2d'), {
+        var sensor1 = new Chart('graficoSensor1', {
             type: 'line',
             data: {
+                labels: [],
                 datasets: [{
-                    label: 'Distância',
-                    borderColor: '#63B1BC',
-                    backgroundColor: '#0762C8'
+                    label: 'Distância — Sensor 1',
+                    data: [],
+                    borderColor: '#387D2D',
+                    backgroundColor: '#387D2D',
+                    tension: 0
                 }]
             },
             options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: false,
                 scales: {
                     x: {
-                        beginAtZero: true
+                        title: {
+                            display: true,
+                            text: 'Leitura'
+                        }
                     },
                     y: {
                         title: {
                             display: true,
-                            text: '(0-1)'
+                            text: 'Distância (cm)'
                         },
-                        beginAtZero: true
+                        beginAtZero: true,
+                        suggestedMax: 200
+                    }
+                }
+            }
+        });
+
+        var sensor2 = new Chart('graficoSensor2', {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Distância — Sensor 2 (simulado)',
+                    data: [],
+                    borderColor: '#0762C8',
+                    backgroundColor: '#0762C8',
+                    tension: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: false,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Leitura'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Distância (cm)'
+                        },
+                        beginAtZero: true,
+                        suggestedMax: 200
+                    }
+                }
+            }
+        });
+
+        var sensor3 = new Chart('graficoSensor3', {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Distância — Sensor 3 (simulado)',
+                    data: [],
+                    borderColor: '#C87920',
+                    backgroundColor: '#C87920',
+                    tension: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: false,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Leitura'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Distância (cm)'
+                        },
+                        beginAtZero: true,
+                        suggestedMax: 200
                     }
                 }
             }
@@ -43,41 +145,75 @@
 
         var paginacao = {};
         var tempo = {};
+        var buscandoDados = {};
 
-        function obterDados(grafico, endpoint) {
-            fetch('http://localhost:3300/sensores/' + endpoint)
-                .then(response => response.json())
-                .then(valores => {
-                    if (paginacao[endpoint] == null) {
-                        paginacao[endpoint] = 0;
-                    }
-                    if (tempo[endpoint] == null) {
-                        tempo[endpoint] = 0;
-                    }
+        function obterDados(grafico, endpoint, sensor, acrescimo) {
+            if (!buscandoDados[sensor]) {
+                buscandoDados[sensor] = true;
 
-                    var ultimaPaginacao = paginacao[endpoint];
-                    paginacao[endpoint] = valores.length;
-                    valores = valores.slice(ultimaPaginacao);
-
-                    valores.forEach((valor) => {
-                        if (grafico.data.labels.length == 10 && grafico.data.datasets[0].data.length == 10) {
-                            grafico.data.labels.shift();
-                            grafico.data.datasets[0].data.shift();
+                fetch('http://localhost:3300/sensores/' + endpoint)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Erro na resposta da API');
                         }
 
-                        grafico.data.labels.push(tempo[endpoint]++);
-                        grafico.data.datasets[0].data.push(parseFloat(valor));
+                        return response.json();
+                    })
+                    .then(valores => {
+                        // Cada gráfico tem sua própria paginação e contagem.
+                        if (paginacao[sensor] == null) {
+                            paginacao[sensor] = 0;
+                        }
+
+                        if (tempo[sensor] == null) {
+                            tempo[sensor] = 0;
+                        }
+
+                        if (valores.length < paginacao[sensor]) {
+                            paginacao[sensor] = 0;
+                            tempo[sensor] = 0;
+
+                            grafico.data.labels = [];
+                            grafico.data.datasets[0].data = [];
+                        }
+
+                        var ultimaPaginacao = paginacao[sensor];
+                        paginacao[sensor] = valores.length;
+                        valores = valores.slice(ultimaPaginacao);
+
+                        valores.forEach((valor) => {
+                            var distancia = parseFloat(valor);
+
+                            if (Number.isFinite(distancia) && distancia >= 0) {
+                                if (grafico.data.labels.length >= 10) {
+                                    grafico.data.labels.shift();
+                                    grafico.data.datasets[0].data.shift();
+                                }
+
+                                grafico.data.labels.push(tempo[sensor]++);
+                                grafico.data.datasets[0].data.push(
+                                    distancia + acrescimo
+                                );
+                            }
+                        });
+
                         grafico.update();
+                        buscandoDados[sensor] = false;
+                    })
+                    .catch(error => {
+                        console.error('Erro ao obter dados:', error);
+                        buscandoDados[sensor] = false;
                     });
-                })
-                .catch(error => console.error('Erro ao obter dados:', error));
+            }
         }
 
         setInterval(() => {
-            obterDados(sensorDistancia, 'digital');
+            obterDados(sensor1, 'digital', 'sensor1', 0);
+            obterDados(sensor2, 'digital', 'sensor2', 25);
+            obterDados(sensor3, 'digital', 'sensor3', 40);
         }, 1000);
-
     </script>
+
 </body>
 
 </html>
